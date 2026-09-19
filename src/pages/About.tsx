@@ -49,7 +49,7 @@ export function About() {
               ))}
             </div>
             <Link to="/contact" className="about__cta">
-              Work together →
+              Get in touch →
             </Link>
           </Reveal>
 

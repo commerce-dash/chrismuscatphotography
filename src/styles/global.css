@@ -1112,10 +1112,18 @@ button {
   font-size: clamp(3rem, 9vw, 7.5rem);
   line-height: 1.05;
   letter-spacing: -0.01em;
-  margin-bottom: clamp(56px, 9vw, 120px);
+  margin-bottom: clamp(16px, 3vw, 32px);
 }
 
 .contact__title em {
+  color: var(--ink-dim);
+}
+
+.contact__intro {
+  margin-bottom: clamp(56px, 9vw, 120px);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--ink-dim);
 }
 

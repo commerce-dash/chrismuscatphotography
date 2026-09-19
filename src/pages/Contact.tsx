@@ -10,7 +10,7 @@ import { Reveal } from '../components/Reveal';
 export function Contact() {
   usePageMeta({
     title: 'Contact',
-    description: `Commissions and enquiries — contact ${SITE.name}, photographer, ${SITE.location}.`,
+    description: `Licensing and media enquiries — contact ${SITE.name}, photographer, ${SITE.location}.`,
     path: '/contact',
   });
 
@@ -36,9 +36,13 @@ export function Contact() {
     <div className="contact">
       <Reveal>
         <h1 className="contact__title">
-          Let&rsquo;s create<br />
-          <em>something.</em>
+          Use my<br />
+          <em>photographs.</em>
         </h1>
+        <p className="contact__intro">
+          Licensing and media enquiries welcome — editorial, print and
+          commercial usage.
+        </p>
       </Reveal>
 
       <div className="contact__grid">
@@ -63,8 +67,8 @@ export function Contact() {
               <dd>{SITE.location}</dd>
             </div>
             <div>
-              <dt>Availability</dt>
-              <dd>Worldwide, by arrangement</dd>
+              <dt>Usage</dt>
+              <dd>Editorial &amp; media licensing</dd>
             </div>
           </dl>
         </Reveal>
@@ -80,15 +84,12 @@ export function Contact() {
               <input id="email" name="email" type="email" autoComplete="email" required />
             </div>
             <div className={field}>
-              <label htmlFor="type">Project Type</label>
-              <select id="type" name="type" defaultValue="Portraits">
-                <option>Urban</option>
-                <option>Travel</option>
-                <option>Portraits</option>
-                <option>Events</option>
-                <option>Animals</option>
-                <option>Landscapes</option>
-                <option>Commission</option>
+              <label htmlFor="type">Enquiry Type</label>
+              <select id="type" name="type" defaultValue="Editorial use">
+                <option>Editorial use</option>
+                <option>Print</option>
+                <option>Commercial licensing</option>
+                <option>Exhibition</option>
                 <option>Other</option>
               </select>
             </div>
