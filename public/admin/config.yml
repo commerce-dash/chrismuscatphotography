@@ -101,59 +101,6 @@ collections:
           - { label: Caption, name: caption, widget: string, required: false }
 
   # ------------------------------------------------------------------
-  - name: journal
-    label: Journal
-    label_singular: Article
-    folder: /content/journal
-    extension: json
-    format: json
-    create: true
-    delete: true
-    slug: '{{slug}}'
-    summary: '{{title}} — {{date}}'
-    sortable_fields: [date, title]
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Category, name: category, widget: string, hint: 'e.g. Process, Locations, Equipment, Travel, Behind the Scenes' }
-      - { label: Date, name: date, widget: datetime, format: 'YYYY-MM-DD', picker_utc: true }
-      - { label: Excerpt, name: excerpt, widget: text }
-      - { label: Hero Image, name: hero, widget: image }
-      - { label: Introduction, name: intro, widget: text }
-      - label: Body
-        name: body
-        widget: list
-        types:
-          - label: Paragraph
-            name: p
-            widget: object
-            fields: [{ label: Text, name: text, widget: text }]
-          - label: Heading
-            name: h2
-            widget: object
-            fields: [{ label: Text, name: text, widget: string }]
-          - label: Quote
-            name: quote
-            widget: object
-            fields:
-              - { label: Text, name: text, widget: text }
-              - { label: Attribution, name: attribution, widget: string, required: false }
-          - label: Image
-            name: image
-            widget: object
-            fields:
-              - { label: Image, name: src, widget: image }
-              - { label: Caption, name: caption, widget: string, required: false }
-      - label: Related Projects
-        name: relatedProjects
-        widget: relation
-        collection: projects
-        multiple: true
-        required: false
-        value_field: '{{slug}}'
-        search_fields: [title]
-        display_fields: [title]
-
-  # ------------------------------------------------------------------
   - name: settings
     label: Site Settings
     icon: settings
@@ -190,7 +137,6 @@ collections:
             widget: object
             fields:
               - { label: Show statement, name: showStatement, widget: boolean, default: true }
-              - { label: Show journal teaser, name: showJournal, widget: boolean, default: true }
           - label: Theme
             name: theme
             widget: object
@@ -208,7 +154,7 @@ collections:
             summary: '{{fields.label}}'
             fields:
               - { label: Label, name: label, widget: string }
-              - { label: Path, name: path, widget: string, hint: '/work, /about, /journal, /contact' }
+              - { label: Path, name: path, widget: string, hint: '/work, /about, /contact' }
 
       - name: about
         label: About Page

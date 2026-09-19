@@ -20,7 +20,6 @@ export interface HeroConfig {
 
 export interface HomeConfig {
   showStatement: boolean;
-  showJournal: boolean;
 }
 
 export interface ThemeConfig {
@@ -64,7 +63,7 @@ export const SITE = {
     align: 'left' as const,
     ...json.hero,
   },
-  home: { showStatement: true, showJournal: true, ...json.home },
+  home: { showStatement: true, ...json.home },
   theme: { serif: 'Fraunces' as ThemeConfig['serif'], ...json.theme },
   url: (
     (import.meta.env.VITE_SITE_URL as string | undefined) ??

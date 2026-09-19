@@ -1,7 +1,7 @@
 /**
- * Generates public/sitemap.xml and public/robots.txt from the project and
- * journal data. Runs automatically before `vite dev` and `vite build`, so new
- * projects are added to the sitemap as soon as they exist in src/data.
+ * Generates public/sitemap.xml and public/robots.txt from the project
+ * data. Runs automatically before `vite dev` and `vite build`, so new
+ * projects are added to the sitemap as soon as they exist in content/.
  */
 
 import { readdir, writeFile } from 'node:fs/promises';
@@ -19,16 +19,14 @@ const slugs = async (dir) => {
   return files.filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''));
 };
 
-const [projects, articles] = await Promise.all([slugs('projects'), slugs('journal')]);
+const projects = await slugs('projects');
 
 const routes = [
   '/',
   '/work',
   '/about',
-  '/journal',
   '/contact',
   ...projects.map((s) => `/work/${s}`),
-  ...articles.map((s) => `/journal/${s}`),
 ];
 
 const today = new Date().toISOString().slice(0, 10);

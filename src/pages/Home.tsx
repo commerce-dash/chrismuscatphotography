@@ -1,10 +1,8 @@
-import { articles } from '../data/journal';
 import { featuredProjects } from '../data/projects';
 import { Link } from '../lib/router';
 import { SITE } from '../lib/site';
 import { usePageMeta } from '../lib/usePageMeta';
 import { Hero } from '../components/Hero';
-import { OptimizedImage } from '../components/OptimizedImage';
 import { Reveal } from '../components/Reveal';
 import { WorkItem } from '../components/WorkItem';
 
@@ -21,7 +19,6 @@ export function Home() {
   });
 
   const featured = featuredProjects.slice(0, 5);
-  const notes = articles.slice(0, 2);
 
   return (
     <>
@@ -55,40 +52,6 @@ export function Home() {
             <p className="statement">{SITE.statement}</p>
           </Reveal>
         </section>
-      )}
-
-      {SITE.home.showJournal && (
-      <section className="section" aria-labelledby="journal-teaser">
-        <Reveal className="section__head">
-          <h2 id="journal-teaser" className="section__title">
-            The Journal
-          </h2>
-          <Link to="/journal" className="section__link">
-            All entries →
-          </Link>
-        </Reveal>
-
-        <div className="journal-teaser">
-          {notes.map((a, i) => (
-            <Reveal key={a.slug} delay={i * 80}>
-              <Link to={`/journal/${a.slug}`} className="journal-teaser__item" data-cursor="Read">
-                <OptimizedImage
-                  src={a.hero}
-                  alt={a.title}
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  className="journal-teaser__image"
-                />
-                <div className="journal-teaser__body">
-                  <p className="journal-teaser__meta">
-                    {a.category} · {new Date(a.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                  </p>
-                  <h3 className="journal-teaser__title">{a.title}</h3>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
       )}
     </>
   );

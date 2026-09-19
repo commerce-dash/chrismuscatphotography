@@ -49,13 +49,6 @@ const projects = {
   },
 };
 
-const journal = {
-  'chasing-the-light': [wide, portrait, landscape],
-  'notes-from-new-york': [wide, portrait, landscape],
-  'the-tools-i-carry': [wide, landscape],
-  'behind-silk-and-shadow': [wide, portrait, landscape],
-};
-
 const site = {
   hero: { w: 2400, h: 1500 },
   'about-portrait': portrait,
@@ -69,16 +62,6 @@ for (const [slug, def] of Object.entries(projects)) {
     entries.push({
       name: `projects/${slug}/${String(i + 1).padStart(2, '0')}`,
       seed: `${slug}-${i + 1}`,
-      ...size,
-    });
-  });
-}
-
-for (const [slug, sizes] of Object.entries(journal)) {
-  sizes.forEach((size, i) => {
-    entries.push({
-      name: `journal/${slug}/${i === 0 ? 'hero' : String(i).padStart(2, '0')}`,
-      seed: `journal-${slug}-${i}`,
       ...size,
     });
   });

@@ -14,8 +14,7 @@
     "align": "left"
   },
   "home": {
-    "showStatement": true,
-    "showJournal": true
+    "showStatement": true
   },
   "theme": {
     "serif": "Fraunces"
@@ -30,10 +29,7 @@
       "label": "About",
       "path": "/about"
     },
-    {
-      "label": "Journal",
-      "path": "/journal"
-    },
+
     {
       "label": "Contact",
       "path": "/contact"
