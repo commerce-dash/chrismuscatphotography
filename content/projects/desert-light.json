@@ -14,34 +14,11 @@
   ],
   "blocks": [
     {
-      "layout": "full",
-      "images": [
-        "/images/projects/desert-light/01-1600.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "offset",
-      "images": [
-        "/images/projects/desert-light/02-1600.webp",
-        "/images/projects/desert-light/03-1600.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "pair",
-      "images": [
-        "/images/projects/desert-light/04-1600.webp",
-        "/images/projects/desert-light/05-1600.webp"
-      ],
-      "caption": ""
-    },
-    {
       "layout": "feature",
       "images": [
-        "/images/projects/desert-light/06-1600.webp"
+        "/images/uploads/NIK_7833.jpg"
       ],
-      "caption": "Agafay, dusk"
+      "caption": ""
     }
   ]
 }
