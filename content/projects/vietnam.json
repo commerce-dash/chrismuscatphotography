@@ -1,0 +1,24 @@
+{
+  "title": "Vietnam",
+  "category": "Travel",
+  "year": 2007,
+  "location": "Vietnam",
+  "description": "czxc",
+  "coverImage": "/images/uploads/NIK_6095.jpg",
+  "featured": false,
+  "order": null,
+  "tags": [],
+  "blocks": [
+    {
+      "layout": "feature",
+      "images": [
+        "/images/uploads/NIK_6095.jpg",
+        "/images/uploads/NIK_6098.jpg",
+        "/images/uploads/NIK_6100.jpg",
+        "/images/uploads/NIK_6186.jpg",
+        "/images/uploads/NIK_6195.jpg"
+      ],
+      "caption": ""
+    }
+  ]
+}
