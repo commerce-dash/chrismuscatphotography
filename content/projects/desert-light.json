@@ -12,9 +12,10 @@
   ],
   "blocks": [
     {
-      "layout": "full",
+      "layout": "offset",
       "images": [
-        "/images/uploads/NIK_7833.jpg"
+        "/images/uploads/NIK_7833.jpg",
+        "/images/uploads/NIK_5867-1600.webp"
       ],
       "caption": ""
     }
