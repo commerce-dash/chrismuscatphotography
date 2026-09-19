@@ -50,15 +50,15 @@ export interface Project {
   tags: string[];
 }
 
-type ProjectJson = Omit<Project, 'id' | 'slug'>;
+type ProjectJson = Omit<Project, 'id' | 'slug'> & { slug?: string };
 
 const files = import.meta.glob('../../content/projects/*.json', { eager: true });
 
 export const projects: Project[] = Object.entries(files)
   .map(([path, mod]) => {
-    const slug = path.split('/').pop()!.replace(/\.json$/, '');
-    const data = (mod as { default: ProjectJson }).default;
-    return { id: slug, slug, ...data };
+    const fileSlug = path.split('/').pop()!.replace(/\.json$/, '');
+    const { slug: dataSlug, ...data } = (mod as { default: ProjectJson }).default;
+    return { id: fileSlug, slug: dataSlug || fileSlug, ...data };
   })
   .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 

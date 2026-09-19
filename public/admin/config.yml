@@ -65,6 +65,7 @@ collections:
     sortable_fields: [order, title, year]
     fields:
       - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, required: false, hint: 'URL segment — page lives at /work/<slug>. Use lowercase-hyphens. Blank = filename.' }
       - label: Category
         name: category
         widget: select

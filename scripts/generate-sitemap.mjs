@@ -4,7 +4,7 @@
  * projects are added to the sitemap as soon as they exist in content/.
  */
 
-import { readdir, writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -16,7 +16,19 @@ const siteUrl = (
 
 const slugs = async (dir) => {
   const files = await readdir(join(root, 'content', dir));
-  return files.filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''));
+  return Promise.all(
+    files
+      .filter((f) => f.endsWith('.json'))
+      .map(async (f) => {
+        const fileSlug = f.replace(/\.json$/, '');
+        try {
+          const json = JSON.parse(await readFile(join(root, 'content', dir, f), 'utf8'));
+          return json.slug || fileSlug;
+        } catch {
+          return fileSlug;
+        }
+      })
+  );
 };
 
 const projects = await slugs('projects');
