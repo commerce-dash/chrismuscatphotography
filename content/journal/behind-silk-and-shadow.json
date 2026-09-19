@@ -15,12 +15,18 @@
       "src": "/images/journal/behind-silk-and-shadow/01-1600.webp",
       "caption": "Matte silk against raw plaster"
     },
-    { "type": "h2", "text": "The pause between frames" },
+    {
+      "type": "h2",
+      "text": "The pause between frames"
+    },
     {
       "type": "p",
       "text": "We shot slowly — maybe forty frames a look. The model understood the brief instinctively: stillness is not the absence of movement but the presence of weight. The best frames were made in the pause after she settled, when the silk had finished falling."
     },
-    { "type": "image", "src": "/images/journal/behind-silk-and-shadow/02-1600.webp" }
+    {
+      "type": "image",
+      "src": "/images/journal/behind-silk-and-shadow/02-1600.webp"
+    }
   ],
-  "relatedProjects": ["silk-and-shadow"]
+  "relatedProjects": []
 }

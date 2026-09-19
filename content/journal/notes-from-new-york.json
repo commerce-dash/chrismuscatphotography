@@ -19,7 +19,10 @@
       "type": "p",
       "text": "The technical notes are boring, which is the point: a fast prime, a high tolerance for grain, and no tripod. A tripod is a claim on territory; a camera at chest height is a conversation. The moment you set up a tripod on a New York sidewalk, the photograph you came for leaves."
     },
-    { "type": "image", "src": "/images/journal/notes-from-new-york/02-1600.webp" }
+    {
+      "type": "image",
+      "src": "/images/journal/notes-from-new-york/02-1600.webp"
+    }
   ],
-  "relatedProjects": ["new-york-after-dark", "portraits-of-strangers"]
+  "relatedProjects": []
 }

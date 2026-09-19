@@ -15,7 +15,10 @@
       "src": "/images/journal/chasing-the-light/01-1600.webp",
       "caption": "Window light, borrowed studio, Lisbon"
     },
-    { "type": "h2", "text": "Arrive before you are needed" },
+    {
+      "type": "h2",
+      "text": "Arrive before you are needed"
+    },
     {
       "type": "p",
       "text": "The useful skill is not reading light — it is patience. I now arrive ninety minutes early to every location and spend the first hour not photographing at all. I watch where the sun will land, which walls hold shadow longest, where the floor goes bright. By the time the subject arrives, the room has already told me where to stand."
@@ -28,7 +31,10 @@
       "type": "p",
       "text": "None of this is romantic in practice. It means cold mornings and a lot of frames that fail. But the failures cost nothing, and the frames that work carry something a strobe cannot fake: the feeling that the photograph happened rather than was made."
     },
-    { "type": "image", "src": "/images/journal/chasing-the-light/02-1600.webp" }
+    {
+      "type": "image",
+      "src": "/images/journal/chasing-the-light/02-1600.webp"
+    }
   ],
-  "relatedProjects": ["the-quiet-hour", "new-york-after-dark"]
+  "relatedProjects": []
 }
