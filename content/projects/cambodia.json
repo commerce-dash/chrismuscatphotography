@@ -1,0 +1,22 @@
+{
+  "title": "Cambodia",
+  "category": "Travel",
+  "year": 2007,
+  "location": "Cambodia",
+  "description": "Ancient stone and warm dust — temples reclaimed by jungle, river towns, and quiet mornings along the Tonlé Sap.",
+  "coverImage": "/images/uploads/NIK_0619 (1).jpg",
+  "featured": true,
+  "order": null,
+  "tags": [
+    "Travel"
+  ],
+  "blocks": [
+    {
+      "layout": "feature",
+      "images": [
+        "/images/uploads/NIK_0619 (1).jpg"
+      ],
+      "caption": ""
+    }
+  ]
+}
