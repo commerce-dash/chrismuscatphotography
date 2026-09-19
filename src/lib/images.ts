@@ -1,5 +1,6 @@
 import metaJson from '../data/image-meta.json';
 import placeholderJson from '../data/placeholders.json';
+import altJson from '../../content/image-alt.json';
 
 /**
  * Image resolution layer.
@@ -30,6 +31,7 @@ export interface ImageMeta {
 
 const META = metaJson as Record<string, ImageMeta>;
 const PLACEHOLDERS = placeholderJson as Record<string, string>;
+const ALTS = (altJson as { alts?: Record<string, string> }).alts ?? {};
 
 const LOCAL_BASE = `${import.meta.env.BASE_URL}images/`;
 
@@ -57,6 +59,14 @@ export function imageMeta(src: string): ImageMeta | undefined {
 
 export function imagePlaceholder(src: string): string | undefined {
   return PLACEHOLDERS[resolveName(src)];
+}
+
+/**
+ * Reviewed alt text for a managed/CMS image (keyed by resolved name, e.g.
+ * 'uploads/NIK_7833'). Editable in the CMS under Site Settings → Image Alt Text.
+ */
+export function imageAlt(src: string): string | undefined {
+  return ALTS[resolveName(src)];
 }
 
 /** Single-file URL. Defaults to the largest available width. */

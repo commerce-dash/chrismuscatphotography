@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { nextProject, projectBySlug } from '../data/projects';
+import { imageAlt } from '../lib/images';
 import { Link } from '../lib/router';
 import { usePageMeta } from '../lib/usePageMeta';
 import { Lightbox } from '../components/Lightbox';
@@ -20,7 +21,10 @@ export function Project({ slug }: { slug: string }) {
     () =>
       project
         ? project.blocks.flatMap((b) =>
-            b.images.map((src) => ({ src, alt: `${project.title} — photograph` }))
+            b.images.map((src) => ({
+              src,
+              alt: imageAlt(src) ?? `${project.title} — photograph`,
+            }))
           )
         : [],
     [project]
@@ -71,7 +75,7 @@ export function Project({ slug }: { slug: string }) {
                   >
                     <OptimizedImage
                       src={src}
-                      alt={`${project.title} — photograph ${flatIndex + 1}`}
+                      alt={imageAlt(src) ?? `${project.title} — photograph ${flatIndex + 1}`}
                       sizes={
                         block.layout === 'full'
                           ? '100vw'

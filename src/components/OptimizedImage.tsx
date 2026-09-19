@@ -1,5 +1,6 @@
 import { ImgHTMLAttributes, useEffect, useRef, useState } from 'react';
 import {
+  imageAlt,
   imageAspect,
   imageMeta,
   imagePlaceholder,
@@ -14,7 +15,8 @@ interface OptimizedImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 
    * or a direct URL for one-off external assets.
    */
   src: string;
-  alt: string;
+  /** Falls back to the reviewed alt map (content/image-alt.json) when omitted. */
+  alt?: string;
   /** CSS sizes descriptor — required for correct srcset selection. */
   sizes?: string;
   /** Load eagerly + high priority (use for hero/LCP images only). */
@@ -41,6 +43,7 @@ export function OptimizedImage({
   const managed = isManagedImage(src);
   const meta = imageMeta(src);
   const placeholder = imagePlaceholder(src);
+  const resolvedAlt = alt ?? imageAlt(src) ?? '';
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -69,17 +72,19 @@ export function OptimizedImage({
         sizes={managed ? sizes : undefined}
         width={meta?.w}
         height={meta?.h}
-        alt={alt}
+        alt={resolvedAlt}
         loading={eager ? 'eager' : 'lazy'}
         fetchPriority={eager ? 'high' : 'auto'}
         decoding="async"
+        draggable={false}
+        onContextMenu={(e) => e.preventDefault()}
         onLoad={() => setLoaded(true)}
         onError={() => setFailed(true)}
         {...imgProps}
       />
       {failed && (
-        <span className="oi__fallback" role="img" aria-label={alt}>
-          {alt}
+        <span className="oi__fallback" role="img" aria-label={resolvedAlt}>
+          {resolvedAlt}
         </span>
       )}
     </div>

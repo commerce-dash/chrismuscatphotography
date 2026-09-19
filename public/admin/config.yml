@@ -156,6 +156,16 @@ collections:
               - { label: Label, name: label, widget: string }
               - { label: Path, name: path, widget: string, hint: '/work, /about, /contact' }
 
+      - name: image-alt
+        label: Image Alt Text
+        file: /content/image-alt.json
+        format: json
+        fields:
+          - label: Alt text by image
+            name: alts
+            widget: keyvalue
+            hint: 'Key = image name without extension (e.g. uploads/NIK_7833). Value = short description shown to screen readers.'
+
       - name: about
         label: About Page
         file: /content/about.json
