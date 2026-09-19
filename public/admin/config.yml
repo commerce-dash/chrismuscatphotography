@@ -31,6 +31,25 @@ site_url: https://chrismuscatphotography.com
 media_folder: /public/images/uploads
 public_folder: /images/uploads
 
+# Upload hygiene:
+#   slugify_filename — 'NIK_0619 (1).JPG' -> 'nik-0619-1.webp' (safe URLs)
+#   raster_image     — resize/re-encode in the browser BEFORE commit.
+#                      The GitHub backend commits each upload batch in one
+#                      GraphQL request; unmodified camera JPEGs (5-15MB each)
+#                      exceed its payload limit and the whole batch fails.
+#                      Capping at 2560px/q85 webp (~300-600KB) makes multi-file
+#                      uploads reliable; the build still emits the srcset sizes.
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2560
+          height: 2560
+
 collections:
   # ------------------------------------------------------------------
   - name: projects
