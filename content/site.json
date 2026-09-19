@@ -1,5 +1,5 @@
 {
-  "name": "Chris Muscat",
+  "name": "Chris Muscat Photography",
   "role": "Photographer",
   "location": "Boston",
   "locations": "Boston · MA, U.S.A.",
@@ -29,7 +29,6 @@
       "label": "About",
       "path": "/about"
     },
-
     {
       "label": "Contact",
       "path": "/contact"
