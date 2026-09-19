@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <!--
+      GitHub Pages SPA fallback.
+
+      GitHub serves this file for any unmatched path (e.g. refreshing
+      /repo/work/project-slug). We stash the attempted URL in sessionStorage
+      and redirect to the site root; index.html then restores the URL and the
+      client-side router renders the correct page.
+
+      PATH_SEGMENTS_TO_KEEP must match the deploy base path:
+        project site (username.github.io/repo-name/) -> 1
+        user/org site or custom domain               -> 0
+    -->
+    <script>
+      (function () {
+        var PATH_SEGMENTS_TO_KEEP = 1;
+        var parts = window.location.pathname.split('/');
+        var base = parts.slice(0, 1 + PATH_SEGMENTS_TO_KEEP).join('/') + '/';
+        try {
+          sessionStorage.setItem('redirect', window.location.href);
+        } catch (e) {
+          /* private mode — fall through to a plain redirect */
+        }
+        window.location.replace(window.location.origin + base);
+      })();
+    </script>
+    <meta http-equiv="refresh" content="2;url=/" />
+  </head>
+  <body></body>
+</html>

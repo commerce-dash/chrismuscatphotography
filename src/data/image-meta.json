@@ -1,0 +1,657 @@
+{
+  "projects/new-york-after-dark/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/new-york-after-dark/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/new-york-after-dark/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/new-york-after-dark/03": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/new-york-after-dark/04": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/new-york-after-dark/05": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/new-york-after-dark/06": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/silk-and-shadow/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/silk-and-shadow/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/silk-and-shadow/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/silk-and-shadow/03": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/silk-and-shadow/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/silk-and-shadow/05": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/silk-and-shadow/06": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/form-and-void/cover": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/form-and-void/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/form-and-void/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/form-and-void/03": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/form-and-void/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/form-and-void/05": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/form-and-void/06": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/the-quiet-hour/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/the-quiet-hour/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/the-quiet-hour/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/the-quiet-hour/03": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/the-quiet-hour/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/the-quiet-hour/05": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/the-quiet-hour/06": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/portraits-of-strangers/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/portraits-of-strangers/01": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/portraits-of-strangers/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/portraits-of-strangers/03": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/portraits-of-strangers/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/portraits-of-strangers/05": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/portraits-of-strangers/06": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/cover": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/02": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/03": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/terra-australis/04": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/05": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/terra-australis/06": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/sunday-morning/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/sunday-morning/01": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/sunday-morning/02": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/sunday-morning/03": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/sunday-morning/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/sunday-morning/05": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/sunday-morning/06": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/desert-light/cover": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/desert-light/01": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/desert-light/02": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/desert-light/03": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/desert-light/04": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "projects/desert-light/05": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "projects/desert-light/06": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/chasing-the-light/hero": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/chasing-the-light/01": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "journal/chasing-the-light/02": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/notes-from-new-york/hero": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/notes-from-new-york/01": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "journal/notes-from-new-york/02": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/the-tools-i-carry/hero": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/the-tools-i-carry/01": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/behind-silk-and-shadow/hero": {
+    "w": 2400,
+    "h": 1350,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "journal/behind-silk-and-shadow/01": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  },
+  "journal/behind-silk-and-shadow/02": {
+    "w": 2400,
+    "h": 1600,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "site/hero": {
+    "w": 2400,
+    "h": 1500,
+    "widths": [
+      800,
+      1200,
+      1600,
+      2400
+    ]
+  },
+  "site/about-portrait": {
+    "w": 1600,
+    "h": 2000,
+    "widths": [
+      800,
+      1200,
+      1600
+    ]
+  }
+}

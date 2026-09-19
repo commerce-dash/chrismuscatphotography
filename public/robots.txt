@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://commerce-dash.github.io/chrismuscatphotography/sitemap.xml

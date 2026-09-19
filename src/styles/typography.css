@@ -1,0 +1,26 @@
+/* ============================================================
+   Typography system
+   Serif (Fraunces): hero titles, project titles, editorial body.
+   Sans (Inter): navigation, metadata, labels, UI.
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 300;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Shared micro-label used across nav-adjacent metadata */
+.overline {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
