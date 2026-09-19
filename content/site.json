@@ -7,7 +7,7 @@
   "instagram": "https://instagram.com/chrismuscatphotography",
   "instagramHandle": "@chrismuscatphotography",
   "hero": {
-    "image": "/images/uploads/NIK_4832.jpg",
+    "image": "/images/uploads/2007_03_26_138-2400.webp",
     "overline": "Melbourne, Australia",
     "title": "Chris Muscat",
     "subtitle": "Selected Work",
@@ -28,10 +28,6 @@
     {
       "label": "About",
       "path": "/about"
-    },
-    {
-      "label": "Search",
-      "path": "/search"
     },
     {
       "label": "Contact",
