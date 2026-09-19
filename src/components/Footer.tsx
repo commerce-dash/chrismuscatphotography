@@ -10,10 +10,11 @@ export function Footer() {
         </Link>
 
         <nav className="footer__nav" aria-label="Footer">
-          <Link to="/work">Work</Link>
-          <Link to="/about">About</Link>
-          <Link to="/journal">Journal</Link>
-          <Link to="/contact">Contact</Link>
+          {SITE.nav.map((l) => (
+            <Link key={l.path} to={l.path}>
+              {l.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="footer__contact">

@@ -2,12 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, usePath } from '../lib/router';
 import { SITE } from '../lib/site';
 
-const LINKS = [
-  { to: '/work', label: 'Work' },
-  { to: '/about', label: 'About' },
-  { to: '/journal', label: 'Journal' },
-  { to: '/contact', label: 'Contact' },
-];
+// Nav items are CMS-editable (content/site.json → Site Settings → Navigation).
+const LINKS = SITE.nav;
 
 export function Navigation() {
   const path = usePath();
@@ -45,10 +41,10 @@ export function Navigation() {
         <nav className="nav__links" aria-label="Primary">
           {LINKS.map((l) => (
             <Link
-              key={l.to}
-              to={l.to}
-              className={`nav__link ${isActive(l.to) ? 'nav__link--active' : ''}`}
-              aria-current={isActive(l.to) ? 'page' : undefined}
+              key={l.path}
+              to={l.path}
+              className={`nav__link ${isActive(l.path) ? 'nav__link--active' : ''}`}
+              aria-current={isActive(l.path) ? 'page' : undefined}
             >
               {l.label}
             </Link>
@@ -74,8 +70,8 @@ export function Navigation() {
         <nav className="menu__links" aria-label="Mobile">
           {LINKS.map((l, i) => (
             <Link
-              key={l.to}
-              to={l.to}
+              key={l.path}
+              to={l.path}
               className="menu__link"
               style={{ transitionDelay: open ? `${120 + i * 60}ms` : '0ms' }}
             >

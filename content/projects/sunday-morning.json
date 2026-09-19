@@ -1,0 +1,17 @@
+{
+  "title": "Sunday Morning",
+  "category": "Lifestyle",
+  "year": 2025,
+  "location": "Boston",
+  "description": "Commissioned lifestyle story for a slow-living journal — bread, coffee, newspapers, and the particular quality of light on a brownstone stoop.",
+  "coverImage": "/images/projects/sunday-morning/cover-1600.webp",
+  "featured": false,
+  "order": 7,
+  "tags": ["lifestyle", "editorial", "interior"],
+  "blocks": [
+    { "layout": "pair", "images": ["/images/projects/sunday-morning/01-1600.webp", "/images/projects/sunday-morning/02-1600.webp"] },
+    { "layout": "full", "images": ["/images/projects/sunday-morning/03-1600.webp"] },
+    { "layout": "offset", "images": ["/images/projects/sunday-morning/04-1600.webp", "/images/projects/sunday-morning/05-1600.webp"] },
+    { "layout": "feature", "images": ["/images/projects/sunday-morning/06-1600.webp"] }
+  ]
+}

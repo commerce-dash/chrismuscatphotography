@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 
-Sitemap: https://commerce-dash.github.io/chrismuscatphotography/sitemap.xml
+Sitemap: https://chrismuscatphotography.com/sitemap.xml

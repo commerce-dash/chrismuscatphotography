@@ -36,9 +36,10 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Serve under /<repo-name>/ — the site is base-path aware.
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
-          VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          # Custom domain serves the site from /. To fall back to
+          # /<repo-name>/, set VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: /
+          VITE_SITE_URL: https://chrismuscatphotography.com
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

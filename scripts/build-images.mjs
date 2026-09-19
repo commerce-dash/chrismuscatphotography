@@ -14,8 +14,8 @@
  * into public/images/ using the same {name}-{width}.webp convention.
  */
 
-import { mkdir, writeFile, access, readFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { mkdir, writeFile, access, readFile, readdir } from 'node:fs/promises';
+import { dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import manifest from './image-manifest.mjs';
@@ -102,7 +102,65 @@ async function main() {
 
   await writeFile(metaPath, JSON.stringify(meta, null, 2));
   await writeFile(placeholdersPath, JSON.stringify(placeholders));
-  console.log(`\nDone. ${downloaded} downloaded, ${skipped} already present.`);
+  console.log(`\nManifest: ${downloaded} downloaded, ${skipped} already present.`);
+
+  await processUploads(meta, placeholders);
+}
+
+/**
+ * Phase 2 — CMS uploads. Any original photograph dropped into
+ * public/images/ (e.g. via /admin drag-and-drop) that doesn't follow the
+ * generated {name}-{width}.webp convention gets the full responsive
+ * WebP treatment + blur placeholder at build time.
+ */
+async function processUploads(meta, placeholders) {
+  const ORIGINAL = /\.(jpe?g|png|webp|avif)$/i;
+  const GENERATED = /-\d{3,4}\.(webp|avif)$/i;
+
+  const files = (await readdir(outDir, { recursive: true }))
+    .filter((f) => typeof f === 'string')
+    .map((f) => f.replace(/\\/g, '/'));
+
+  const uploads = files.filter((f) => ORIGINAL.test(f) && !GENERATED.test(f));
+  let processed = 0;
+
+  for (const file of uploads) {
+    const name = file.slice(0, -extname(file).length);
+    const firstWidth = OUTPUT_WIDTHS[0];
+    if (meta[name] && (await exists(join(outDir, `${name}-${firstWidth}.webp`)))) continue;
+
+    const abs = join(outDir, file);
+    const image = sharp(abs);
+    const info = await image.metadata();
+    const w0 = info.width ?? OUTPUT_WIDTHS[OUTPUT_WIDTHS.length - 1];
+    const h0 = info.height ?? w0;
+    const widths = OUTPUT_WIDTHS.filter((w) => w <= w0);
+    if (widths.length === 0) widths.push(w0);
+
+    await Promise.all(
+      widths.map((w) =>
+        sharp(abs)
+          .resize({ width: w })
+          .webp({ quality: 78 })
+          .toFile(join(outDir, `${name}-${w}.webp`))
+      )
+    );
+
+    const placeholder = await sharp(abs)
+      .resize({ width: 24 })
+      .webp({ quality: 40 })
+      .toBuffer();
+
+    meta[name] = { w: w0, h: h0, widths };
+    placeholders[name] = `data:image/webp;base64,${placeholder.toString('base64')}`;
+    processed++;
+  }
+
+  if (processed > 0) {
+    await writeFile(metaPath, JSON.stringify(meta, null, 2));
+    await writeFile(placeholdersPath, JSON.stringify(placeholders));
+  }
+  console.log(`Uploads: ${processed} processed (${uploads.length} originals found).`);
 }
 
 main().catch((err) => {

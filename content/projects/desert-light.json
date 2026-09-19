@@ -1,0 +1,17 @@
+{
+  "title": "Desert Light",
+  "category": "Travel",
+  "year": 2024,
+  "location": "Marrakech",
+  "description": "Heat, dust and geometry. Photographs from the medina and the Agafay desert — made mostly in the twenty minutes when the light turns horizontal.",
+  "coverImage": "/images/projects/desert-light/cover-1600.webp",
+  "featured": false,
+  "order": 8,
+  "tags": ["travel", "desert", "architecture"],
+  "blocks": [
+    { "layout": "full", "images": ["/images/projects/desert-light/01-1600.webp"] },
+    { "layout": "offset", "images": ["/images/projects/desert-light/02-1600.webp", "/images/projects/desert-light/03-1600.webp"] },
+    { "layout": "pair", "images": ["/images/projects/desert-light/04-1600.webp", "/images/projects/desert-light/05-1600.webp"] },
+    { "layout": "feature", "images": ["/images/projects/desert-light/06-1600.webp"], "caption": "Agafay, dusk" }
+  ]
+}

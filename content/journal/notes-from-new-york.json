@@ -1,0 +1,25 @@
+{
+  "title": "Notes from New York",
+  "category": "Locations",
+  "date": "2026-01-28",
+  "excerpt": "Field notes from four winters shooting the city after midnight — where the light pools, and which streets stay honest.",
+  "hero": "/images/journal/notes-from-new-york/hero-1600.webp",
+  "intro": "New York After Dark took four winters. These are the working notes — the corners that kept giving, and the hours when the city finally stops performing.",
+  "body": [
+    {
+      "type": "p",
+      "text": "Between 2 and 5 am the city becomes a different instrument. The avenues empty, the sodium light pools on wet asphalt, and the people you do meet have nowhere left to hurry to. I worked almost exclusively between 23rd and 14th streets, west side, where the grid tilts just enough to hold reflections."
+    },
+    {
+      "type": "image",
+      "src": "/images/journal/notes-from-new-york/01-1600.webp",
+      "caption": "Ninth Avenue, 4 am"
+    },
+    {
+      "type": "p",
+      "text": "The technical notes are boring, which is the point: a fast prime, a high tolerance for grain, and no tripod. A tripod is a claim on territory; a camera at chest height is a conversation. The moment you set up a tripod on a New York sidewalk, the photograph you came for leaves."
+    },
+    { "type": "image", "src": "/images/journal/notes-from-new-york/02-1600.webp" }
+  ],
+  "relatedProjects": ["new-york-after-dark", "portraits-of-strangers"]
+}

@@ -1,0 +1,192 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Sveltia CMS — git-based admin for this portfolio, served at /admin.
+#
+# Sign-in: "Sign in with token" using a GitHub Personal Access Token with
+#   Contents: Read & write  on commerce-dash/chrismuscatphotography
+#   (github.com → Settings → Developer settings → Personal access tokens →
+#    Fine-grained tokens → repo-scoped).
+#
+# Optional upgrade for one-click "Sign in with GitHub" OAuth:
+#   deploy github.com/sveltia/sveltia-cms-auth (free Cloudflare Worker)
+#   and uncomment base_url below.
+
+backend:
+  name: github
+  repo: commerce-dash/chrismuscatphotography
+  branch: main
+  # base_url: https://YOUR-WORKER.workers.dev
+  auth_methods: [token, oauth]
+  commit_messages:
+    create: 'cms: create {{collection}} "{{slug}}"'
+    update: 'cms: update {{collection}} "{{slug}}"'
+    delete: 'cms: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'cms: upload "{{path}}"'
+    deleteMedia: 'cms: delete media "{{path}}"'
+
+site_url: https://chrismuscatphotography.com
+
+# Drag-and-drop uploads land here; the build pipeline converts each
+# original into responsive WebP ({name}-{width}.webp) automatically.
+media_folder: /public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  # ------------------------------------------------------------------
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: /content/projects
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    summary: '{{title}} — {{year}}'
+    sortable_fields: [order, title, year]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Category
+        name: category
+        widget: select
+        options: [Portrait, Fashion, Editorial, Architecture, Travel, Lifestyle, Personal]
+      - { label: Year, name: year, widget: number, value_type: int, min_value: 1990, max_value: 2100 }
+      - { label: Location, name: location, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Cover Image, name: coverImage, widget: image }
+      - { label: Featured on homepage, name: featured, widget: boolean, default: false }
+      - label: Sort order
+        name: order
+        widget: number
+        value_type: int
+        required: false
+        hint: Lower numbers appear first in Work and homepage listings.
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        field: { label: Tag, name: tag, widget: string }
+      - label: Gallery
+        name: blocks
+        widget: list
+        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric.'
+        fields:
+          - label: Layout
+            name: layout
+            widget: select
+            options: [full, feature, pair, offset]
+          - label: Images
+            name: images
+            widget: list
+            field: { label: Image, name: image, widget: image }
+          - { label: Caption, name: caption, widget: string, required: false }
+
+  # ------------------------------------------------------------------
+  - name: journal
+    label: Journal
+    label_singular: Article
+    folder: /content/journal
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    summary: '{{title}} — {{date}}'
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Category, name: category, widget: string, hint: 'e.g. Process, Locations, Equipment, Travel, Behind the Scenes' }
+      - { label: Date, name: date, widget: datetime, format: 'YYYY-MM-DD', picker_utc: true }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Hero Image, name: hero, widget: image }
+      - { label: Introduction, name: intro, widget: text }
+      - label: Body
+        name: body
+        widget: list
+        types:
+          - label: Paragraph
+            name: p
+            widget: object
+            fields: [{ label: Text, name: text, widget: text }]
+          - label: Heading
+            name: h2
+            widget: object
+            fields: [{ label: Text, name: text, widget: string }]
+          - label: Quote
+            name: quote
+            widget: object
+            fields:
+              - { label: Text, name: text, widget: text }
+              - { label: Attribution, name: attribution, widget: string, required: false }
+          - label: Image
+            name: image
+            widget: object
+            fields:
+              - { label: Image, name: src, widget: image }
+              - { label: Caption, name: caption, widget: string, required: false }
+      - label: Related Projects
+        name: relatedProjects
+        widget: relation
+        collection: projects
+        multiple: true
+        required: false
+        value_field: '{{slug}}'
+        search_fields: [title]
+        display_fields: [title]
+
+  # ------------------------------------------------------------------
+  - name: settings
+    label: Site Settings
+    icon: settings
+    files:
+      - name: site
+        label: Identity & Navigation
+        file: /content/site.json
+        format: json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Role, name: role, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Locations line, name: locations, widget: string, hint: 'Shown in the hero and footer, e.g. "Melbourne · Sydney"' }
+          - { label: Email, name: email, widget: string }
+          - { label: Instagram URL, name: instagram, widget: string }
+          - { label: Instagram handle, name: instagramHandle, widget: string }
+          - { label: Homepage statement, name: statement, widget: text }
+          - label: Navigation
+            name: nav
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Path, name: path, widget: string, hint: '/work, /about, /journal, /contact' }
+
+      - name: about
+        label: About Page
+        file: /content/about.json
+        format: json
+        fields:
+          - { label: Portrait, name: portrait, widget: image }
+          - label: Biography
+            name: bio
+            widget: list
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - label: Selected Clients
+            name: clients
+            widget: list
+            required: false
+            field: { label: Client, name: client, widget: string }
+          - label: Publications
+            name: publications
+            widget: list
+            required: false
+            field: { label: Publication, name: publication, widget: string }
+          - label: Awards
+            name: awards
+            widget: list
+            required: false
+            field: { label: Award, name: award, widget: string }
+          - label: Exhibitions
+            name: exhibitions
+            widget: list
+            required: false
+            field: { label: Exhibition, name: exhibition, widget: string }

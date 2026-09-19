@@ -1,6 +1,7 @@
 import { articles } from '../data/journal';
 import { featuredProjects } from '../data/projects';
 import { Link } from '../lib/router';
+import { SITE } from '../lib/site';
 import { usePageMeta } from '../lib/usePageMeta';
 import { Hero } from '../components/Hero';
 import { OptimizedImage } from '../components/OptimizedImage';
@@ -50,10 +51,7 @@ export function Home() {
 
       <section className="section section--statement" aria-label="Statement">
         <Reveal>
-          <p className="statement">
-            Photographs made slowly — <em>available light, long pauses,</em> and the
-            conviction that restraint is a form of attention.
-          </p>
+          <p className="statement">{SITE.statement}</p>
         </Reveal>
       </section>
 

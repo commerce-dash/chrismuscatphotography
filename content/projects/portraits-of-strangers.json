@@ -1,0 +1,17 @@
+{
+  "title": "Portraits of Strangers",
+  "category": "Portrait",
+  "year": 2024,
+  "location": "New York",
+  "description": "Sixty-second encounters. Each portrait was made within a minute of meeting — no direction, no rehearsal, just the first honest frame.",
+  "coverImage": "/images/projects/portraits-of-strangers/cover-1600.webp",
+  "featured": true,
+  "order": 5,
+  "tags": ["portrait", "street", "documentary"],
+  "blocks": [
+    { "layout": "pair", "images": ["/images/projects/portraits-of-strangers/01-1600.webp", "/images/projects/portraits-of-strangers/02-1600.webp"] },
+    { "layout": "full", "images": ["/images/projects/portraits-of-strangers/03-1600.webp"] },
+    { "layout": "pair", "images": ["/images/projects/portraits-of-strangers/04-1600.webp", "/images/projects/portraits-of-strangers/05-1600.webp"] },
+    { "layout": "feature", "images": ["/images/projects/portraits-of-strangers/06-1600.webp"] }
+  ]
+}

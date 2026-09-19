@@ -4,22 +4,22 @@
  * projects are added to the sitemap as soon as they exist in src/data.
  */
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const siteUrl = (
-  process.env.VITE_SITE_URL || 'https://commerce-dash.github.io/chrismuscatphotography'
+  process.env.VITE_SITE_URL || 'https://chrismuscatphotography.com'
 ).replace(/\/$/, '');
 
-const slugs = async (file) => {
-  const src = await readFile(join(root, 'src', 'data', file), 'utf8');
-  return [...src.matchAll(/slug:\s*'([\w-]+)'/g)].map((m) => m[1]);
+const slugs = async (dir) => {
+  const files = await readdir(join(root, 'content', dir));
+  return files.filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''));
 };
 
-const [projects, articles] = await Promise.all([slugs('projects.ts'), slugs('journal.ts')]);
+const [projects, articles] = await Promise.all([slugs('projects'), slugs('journal')]);
 
 const routes = [
   '/',
@@ -48,6 +48,7 @@ ${routes
 
 const robots = `User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;

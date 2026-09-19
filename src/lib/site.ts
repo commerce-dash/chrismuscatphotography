@@ -1,17 +1,31 @@
+import siteJson from '../../content/site.json';
+
 /**
- * Site-wide configuration. Change these values to re-skin the portfolio
- * for a different photographer — nothing else needs to change.
+ * Site-wide configuration. Identity, contact details, the homepage
+ * statement and the navigation menu are all CMS-editable at /admin
+ * (content/site.json). `url` stays env-driven since it is build config.
  */
-export const SITE = {
-  name: 'Chris Muscat',
-  role: 'Photographer',
-  location: 'Melbourne',
-  locations: 'Melbourne · Sydney',
-  email: 'hello@chrismuscatphotography.com',
-  instagram: 'https://instagram.com/chrismuscatphotography',
-  instagramHandle: '@chrismuscatphotography',
+export interface NavItem {
+  label: string;
+  path: string;
+}
+
+interface SiteConfig {
+  name: string;
+  role: string;
+  location: string;
+  locations: string;
+  email: string;
+  instagram: string;
+  instagramHandle: string;
+  statement: string;
+  nav: NavItem[];
+}
+
+export const SITE: SiteConfig & { url: string } = {
+  ...(siteJson as SiteConfig),
   url: (
     (import.meta.env.VITE_SITE_URL as string | undefined) ??
-    'https://commerce-dash.github.io/chrismuscatphotography'
+    'https://chrismuscatphotography.com'
   ).replace(/\/$/, ''),
-} as const;
+};

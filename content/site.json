@@ -1,0 +1,16 @@
+{
+  "name": "Chris Muscat",
+  "role": "Photographer",
+  "location": "Melbourne",
+  "locations": "Melbourne · Sydney",
+  "email": "hello@chrismuscatphotography.com",
+  "instagram": "https://instagram.com/chrismuscatphotography",
+  "instagramHandle": "@chrismuscatphotography",
+  "statement": "Photographs made slowly — available light, long pauses, and the conviction that restraint is a form of attention.",
+  "nav": [
+    { "label": "Work", "path": "/work" },
+    { "label": "About", "path": "/about" },
+    { "label": "Journal", "path": "/journal" },
+    { "label": "Contact", "path": "/contact" }
+  ]
+}

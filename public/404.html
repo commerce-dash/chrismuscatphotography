@@ -17,7 +17,7 @@
     -->
     <script>
       (function () {
-        var PATH_SEGMENTS_TO_KEEP = 1;
+        var PATH_SEGMENTS_TO_KEEP = 0;
         var parts = window.location.pathname.split('/');
         var base = parts.slice(0, 1 + PATH_SEGMENTS_TO_KEEP).join('/') + '/';
         try {
