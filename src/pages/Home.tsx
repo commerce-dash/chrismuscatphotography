@@ -49,12 +49,15 @@ export function Home() {
         </div>
       </section>
 
-      <section className="section section--statement" aria-label="Statement">
-        <Reveal>
-          <p className="statement">{SITE.statement}</p>
-        </Reveal>
-      </section>
+      {SITE.home.showStatement && (
+        <section className="section section--statement" aria-label="Statement">
+          <Reveal>
+            <p className="statement">{SITE.statement}</p>
+          </Reveal>
+        </section>
+      )}
 
+      {SITE.home.showJournal && (
       <section className="section" aria-labelledby="journal-teaser">
         <Reveal className="section__head">
           <h2 id="journal-teaser" className="section__title">
@@ -86,6 +89,7 @@ export function Home() {
           ))}
         </div>
       </section>
+      )}
     </>
   );
 }

@@ -7,6 +7,20 @@
   "instagram": "https://instagram.com/chrismuscatphotography",
   "instagramHandle": "@chrismuscatphotography",
   "statement": "Photographs made slowly — available light, long pauses, and the conviction that restraint is a form of attention.",
+  "hero": {
+    "image": "/images/site/hero-1600.webp",
+    "overline": "Melbourne · Sydney",
+    "title": "Chris Muscat",
+    "subtitle": "Selected Work",
+    "align": "left"
+  },
+  "home": {
+    "showStatement": true,
+    "showJournal": true
+  },
+  "theme": {
+    "serif": "Fraunces"
+  },
   "nav": [
     {
       "label": "Work",

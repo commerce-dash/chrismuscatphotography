@@ -302,6 +302,13 @@ button {
   bottom: clamp(56px, 9vh, 96px);
 }
 
+.hero__content--center {
+  text-align: center;
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .hero__overline {
   font-size: 11px;
   letter-spacing: 0.22em;

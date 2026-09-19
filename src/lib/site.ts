@@ -10,6 +10,24 @@ export interface NavItem {
   path: string;
 }
 
+export interface HeroConfig {
+  image: string;
+  overline: string;
+  title: string;
+  subtitle: string;
+  align: 'left' | 'center';
+}
+
+export interface HomeConfig {
+  showStatement: boolean;
+  showJournal: boolean;
+}
+
+export interface ThemeConfig {
+  /** Editorial serif — one of the preloaded Google families. */
+  serif: 'Fraunces' | 'Cormorant Garamond' | 'Playfair Display';
+}
+
 interface SiteConfig {
   name: string;
   role: string;
@@ -19,13 +37,37 @@ interface SiteConfig {
   instagram: string;
   instagramHandle: string;
   statement: string;
+  hero: HeroConfig;
+  home: HomeConfig;
+  theme: ThemeConfig;
   nav: NavItem[];
 }
 
-export const SITE: SiteConfig & { url: string } = {
-  ...(siteJson as SiteConfig),
+const json = siteJson as Partial<SiteConfig>;
+
+export const SITE = {
+  name: '',
+  role: '',
+  location: '',
+  locations: '',
+  email: '',
+  instagram: '',
+  instagramHandle: '',
+  statement: '',
+  nav: [] as NavItem[],
+  ...json,
+  hero: {
+    image: 'site/hero',
+    overline: '',
+    title: '',
+    subtitle: '',
+    align: 'left' as const,
+    ...json.hero,
+  },
+  home: { showStatement: true, showJournal: true, ...json.home },
+  theme: { serif: 'Fraunces' as ThemeConfig['serif'], ...json.theme },
   url: (
     (import.meta.env.VITE_SITE_URL as string | undefined) ??
     'https://chrismuscatphotography.com'
   ).replace(/\/$/, ''),
-};
+} as SiteConfig & { url: string };

@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { usePath } from './lib/router';
+import { SITE } from './lib/site';
 import { Cursor } from './components/Cursor';
 import { Footer } from './components/Footer';
 import { Navigation } from './components/Navigation';
@@ -28,6 +30,15 @@ function renderRoute(path: string) {
 
 export function App() {
   const path = usePath();
+
+  // CMS-selectable serif (Site Settings → Theme). Preloaded in index.html;
+  // unused families are never downloaded by the browser.
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--serif',
+      `'${SITE.theme.serif}', Georgia, 'Times New Roman', serif`
+    );
+  }, []);
 
   return (
     <>

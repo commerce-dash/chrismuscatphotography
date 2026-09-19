@@ -3,14 +3,17 @@ import { OptimizedImage } from './OptimizedImage';
 
 /**
  * Cinematic homepage hero: full-viewport photograph, slow settle-in scale,
- * minimal editorial overlay. One-shot motion only — nothing loops.
+ * minimal editorial overlay. Image, text and alignment are CMS-editable
+ * (Site Settings → Homepage). One-shot motion only — nothing loops.
  */
 export function Hero() {
+  const hero = SITE.hero;
+
   return (
     <section className="hero" aria-label="Introduction">
       <div className="hero__media">
         <OptimizedImage
-          src="site/hero"
+          src={hero.image}
           alt={`Signature photograph by ${SITE.name}`}
           sizes="100vw"
           eager
@@ -20,10 +23,10 @@ export function Hero() {
 
       <div className="hero__overlay" aria-hidden="true" />
 
-      <div className="hero__content">
-        <p className="hero__overline">{SITE.locations}</p>
-        <h1 className="hero__title">{SITE.name}</h1>
-        <p className="hero__sub">Selected Work</p>
+      <div className={`hero__content ${hero.align === 'center' ? 'hero__content--center' : ''}`}>
+        <p className="hero__overline">{hero.overline}</p>
+        <h1 className="hero__title">{hero.title}</h1>
+        <p className="hero__sub">{hero.subtitle}</p>
       </div>
 
       <div className="hero__scroll" aria-hidden="true">

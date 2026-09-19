@@ -151,6 +151,37 @@ collections:
           - { label: Email, name: email, widget: string }
           - { label: Instagram URL, name: instagram, widget: string }
           - { label: Instagram handle, name: instagramHandle, widget: string }
+          - label: Homepage hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Hero image, name: image, widget: image }
+              - { label: Overline, name: overline, widget: string, hint: 'Small line above the title' }
+              - { label: Title, name: title, widget: string }
+              - { label: Subtitle, name: subtitle, widget: string }
+              - label: Text alignment
+                name: align
+                widget: select
+                options:
+                  - { label: Bottom left, value: left }
+                  - { label: Centered, value: center }
+                default: left
+          - label: Homepage sections
+            name: home
+            widget: object
+            fields:
+              - { label: Show statement, name: showStatement, widget: boolean, default: true }
+              - { label: Show journal teaser, name: showJournal, widget: boolean, default: true }
+          - label: Theme
+            name: theme
+            widget: object
+            fields:
+              - label: Serif font
+                name: serif
+                widget: select
+                options: [Fraunces, Cormorant Garamond, Playfair Display]
+                default: Fraunces
+                hint: Used for titles, project names and editorial text.
           - { label: Homepage statement, name: statement, widget: text }
           - label: Navigation
             name: nav
