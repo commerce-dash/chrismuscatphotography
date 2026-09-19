@@ -9,12 +9,14 @@ import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Project } from './pages/Project';
+import { Search } from './pages/Search';
 import { Work } from './pages/Work';
 
 function renderRoute(path: string) {
   if (path === '/') return <Home />;
   if (path === '/work') return <Work />;
   if (path === '/about') return <About />;
+  if (path === '/search') return <Search />;
   if (path === '/contact') return <Contact />;
 
   const m = path.match(/^\/work\/([\w-]+)$/);

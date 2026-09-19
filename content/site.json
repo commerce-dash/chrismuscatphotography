@@ -30,6 +30,10 @@
       "path": "/about"
     },
     {
+      "label": "Search",
+      "path": "/search"
+    },
+    {
       "label": "Contact",
       "path": "/contact"
     }

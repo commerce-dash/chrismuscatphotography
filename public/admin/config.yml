@@ -154,7 +154,7 @@ collections:
             summary: '{{fields.label}}'
             fields:
               - { label: Label, name: label, widget: string }
-              - { label: Path, name: path, widget: string, hint: '/work, /about, /contact' }
+              - { label: Path, name: path, widget: string, hint: '/work, /about, /search, /contact' }
 
       - name: image-alt
         label: Image Alt Text

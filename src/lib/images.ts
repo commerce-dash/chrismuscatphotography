@@ -69,6 +69,22 @@ export function imageAlt(src: string): string | undefined {
   return ALTS[resolveName(src)];
 }
 
+/**
+ * Subject search across the reviewed photo library. Matches every query
+ * term against the image's reviewed description plus its filename tokens.
+ * Returns managed names ('uploads/…') usable directly by OptimizedImage.
+ */
+export function searchPhotos(query: string): string[] {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return [];
+  return Object.keys(ALTS)
+    .filter((name) => {
+      const haystack = `${name} ${ALTS[name]}`.toLowerCase();
+      return terms.every((t) => haystack.includes(t));
+    })
+    .sort();
+}
+
 /** Single-file URL. Defaults to the largest available width. */
 export function imageSrc(src: string, width?: number): string {
   const name = resolveName(src);

@@ -25,6 +25,7 @@ const routes = [
   '/',
   '/work',
   '/about',
+  '/search',
   '/contact',
   ...projects.map((s) => `/work/${s}`),
 ];
