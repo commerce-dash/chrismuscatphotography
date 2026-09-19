@@ -6,10 +6,9 @@
   "email": "hello@chrismuscatphotography.com",
   "instagram": "https://instagram.com/chrismuscatphotography",
   "instagramHandle": "@chrismuscatphotography",
-  "statement": "Photographs made slowly — available light, long pauses, and the conviction that restraint is a form of attention.",
   "hero": {
-    "image": "/images/site/hero-1600.webp",
-    "overline": "Melbourne · Sydney",
+    "image": "/images/uploads/NIK_0619 (1).jpg",
+    "overline": "Angkor Wat, Cambodia, Vietnam",
     "title": "Chris Muscat",
     "subtitle": "Selected Work",
     "align": "left"
@@ -21,6 +20,7 @@
   "theme": {
     "serif": "Fraunces"
   },
+  "statement": "Photographs made slowly — available light, long pauses, and the conviction that restraint is a form of attention.",
   "nav": [
     {
       "label": "Work",
