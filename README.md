@@ -52,23 +52,7 @@ into `OptimizedImage`'s srcset automatically.
 instead of pasting a token, deploy `sveltia/sveltia-cms-auth` (free
 Cloudflare Worker) and set `base_url` in `public/admin/config.yml`.
 
-## Custom domain & DNS (Namecheap)
 
-The site serves `chrismuscatphotography.com` (see `public/CNAME`).
-In **Namecheap → Domain List → Manage → Advanced DNS**:
-
-| Type | Host | Value |
-| --- | --- | --- |
-| A Record | `@` | `185.199.108.153` |
-| A Record | `@` | `185.199.109.153` |
-| A Record | `@` | `185.199.110.153` |
-| A Record | `@` | `185.199.111.153` |
-| CNAME Record | `www` | `commerce-dash.github.io` |
-
-Delete any conflicting records (e.g. a parking-page redirect).
-Then in the repo: **Settings → Pages → Custom domain** should read
-`chrismuscatphotography.com`; enable **Enforce HTTPS** once the
-certificate provisions (a few minutes after DNS resolves).
 
 ## Deployment
 
