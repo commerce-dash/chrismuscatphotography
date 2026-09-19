@@ -1,5 +1,5 @@
 {
-  "title": "Angkor Wat",
+  "title": "Cambodia",
   "category": "Travel",
   "year": 2007,
   "location": "Cambodia",
@@ -17,32 +17,9 @@
     {
       "layout": "full",
       "images": [
-        "/images/projects/new-york-after-dark/01-1600.webp"
+        "/images/uploads/NIK_0619 (1).jpg"
       ],
-      "caption": ""
-    },
-    {
-      "layout": "pair",
-      "images": [
-        "/images/projects/new-york-after-dark/02-1600.webp",
-        "/images/projects/new-york-after-dark/03-1600.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "feature",
-      "images": [
-        "/images/projects/new-york-after-dark/04-1600.webp"
-      ],
-      "caption": "West 23rd Street, 3:40 am"
-    },
-    {
-      "layout": "offset",
-      "images": [
-        "/images/projects/new-york-after-dark/05-1600.webp",
-        "/images/projects/new-york-after-dark/06-1600.webp"
-      ],
-      "caption": ""
+      "caption": "Angkor Wat"
     }
   ]
 }
