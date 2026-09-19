@@ -1,17 +1,48 @@
 {
-  "title": "New York After Dark",
-  "category": "Urban",
-  "year": 2026,
-  "location": "New York",
-  "description": "A study of the city between midnight and dawn — empty avenues, lit windows, and the few people still awake. Shot over four winters on available light only.",
-  "coverImage": "/images/projects/new-york-after-dark/cover-1600.webp",
+  "title": "Angkor Wat",
+  "category": "Travel",
+  "year": 2007,
+  "location": "Cambodia",
+  "description": "Ancient stone and warm dust — temples reclaimed by jungle, river towns, and quiet mornings along the Tonlé Sap",
+  "coverImage": "/images/uploads/NIK_0619 (1).jpg",
   "featured": true,
   "order": 1,
-  "tags": ["portrait", "editorial", "night", "city"],
+  "tags": [
+    "portrait",
+    "editorial",
+    "night",
+    "city"
+  ],
   "blocks": [
-    { "layout": "full", "images": ["/images/projects/new-york-after-dark/01-1600.webp"] },
-    { "layout": "pair", "images": ["/images/projects/new-york-after-dark/02-1600.webp", "/images/projects/new-york-after-dark/03-1600.webp"] },
-    { "layout": "feature", "images": ["/images/projects/new-york-after-dark/04-1600.webp"], "caption": "West 23rd Street, 3:40 am" },
-    { "layout": "offset", "images": ["/images/projects/new-york-after-dark/05-1600.webp", "/images/projects/new-york-after-dark/06-1600.webp"] }
+    {
+      "layout": "full",
+      "images": [
+        "/images/projects/new-york-after-dark/01-1600.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/projects/new-york-after-dark/02-1600.webp",
+        "/images/projects/new-york-after-dark/03-1600.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "images": [
+        "/images/projects/new-york-after-dark/04-1600.webp"
+      ],
+      "caption": "West 23rd Street, 3:40 am"
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/projects/new-york-after-dark/05-1600.webp",
+        "/images/projects/new-york-after-dark/06-1600.webp"
+      ],
+      "caption": ""
+    }
   ]
 }
