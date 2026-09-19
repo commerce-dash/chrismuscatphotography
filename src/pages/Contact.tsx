@@ -81,11 +81,13 @@ export function Contact() {
             </div>
             <div className={field}>
               <label htmlFor="type">Project Type</label>
-              <select id="type" name="type" defaultValue="Editorial">
-                <option>Editorial</option>
-                <option>Portrait</option>
-                <option>Fashion</option>
-                <option>Architecture</option>
+              <select id="type" name="type" defaultValue="Portraits">
+                <option>Urban</option>
+                <option>Travel</option>
+                <option>Portraits</option>
+                <option>Events</option>
+                <option>Animals</option>
+                <option>Landscapes</option>
                 <option>Commission</option>
                 <option>Other</option>
               </select>

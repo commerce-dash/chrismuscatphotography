@@ -12,7 +12,7 @@ import { WorkItem } from '../components/WorkItem';
 export function Work() {
   usePageMeta({
     title: 'Work',
-    description: 'Selected photographs and projects — portrait, fashion, editorial, architecture and travel photography by Chris Muscat.',
+    description: 'Selected photographs and projects — urban, travel, portrait, event, animal and landscape photography by Chris Muscat.',
     path: '/work',
   });
 

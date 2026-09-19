@@ -49,7 +49,7 @@ collections:
       - label: Category
         name: category
         widget: select
-        options: [Portrait, Fashion, Editorial, Architecture, Travel, Lifestyle, Personal]
+        options: [Urban, Travel, Portraits, Events, Animals, Landscapes]
       - { label: Year, name: year, widget: number, value_type: int, min_value: 1990, max_value: 2100 }
       - { label: Location, name: location, widget: string }
       - { label: Description, name: description, widget: text }

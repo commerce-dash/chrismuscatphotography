@@ -16,13 +16,12 @@
 
 export const CATEGORIES = [
   'All',
-  'Portrait',
-  'Fashion',
-  'Editorial',
-  'Architecture',
+  'Urban',
   'Travel',
-  'Lifestyle',
-  'Personal',
+  'Portraits',
+  'Events',
+  'Animals',
+  'Landscapes',
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
