@@ -51,6 +51,23 @@ export function Navigation() {
           ))}
         </nav>
 
+        <Link
+          to="/search"
+          className={`nav__search ${isActive('/search') ? 'nav__link--active' : ''}`}
+          aria-label="Search photos"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle cx="7" cy="7" r="5.25" stroke="currentColor" strokeWidth="1.3" />
+            <path d="M11 11l4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+          </svg>
+        </Link>
+
         <button
           className="nav__toggle"
           onClick={() => setOpen(!open)}
@@ -71,12 +88,19 @@ export function Navigation() {
         }}
       >
         <nav className="menu__links" aria-label="Mobile">
+          <Link
+            to="/search"
+            className="menu__link"
+            style={{ transitionDelay: open ? '120ms' : '0ms' }}
+          >
+            Search
+          </Link>
           {LINKS.map((l, i) => (
             <Link
               key={l.path}
               to={l.path}
               className="menu__link"
-              style={{ transitionDelay: open ? `${120 + i * 60}ms` : '0ms' }}
+              style={{ transitionDelay: open ? `${180 + i * 60}ms` : '0ms' }}
             >
               {l.label}
             </Link>

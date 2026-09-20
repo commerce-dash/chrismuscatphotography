@@ -193,6 +193,21 @@ button {
   transform: scaleX(1);
 }
 
+.nav__search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  padding: 10px;
+  margin: -10px 0;
+  transition: color 0.3s;
+}
+
+.nav__search:hover,
+.nav__search.nav__link--active {
+  color: var(--ink);
+}
+
 .nav__toggle {
   font-size: 11px;
   letter-spacing: 0.18em;
