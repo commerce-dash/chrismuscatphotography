@@ -43,7 +43,7 @@ const LOCAL_BASE = `${import.meta.env.BASE_URL}images/`;
  *   'https://cdn…/x.jpg'               -> unchanged (external)
  */
 export function resolveName(src: string): string {
-  const m = src.match(/(?:^|\/)images\/(.+?)\.(?:jpe?g|png|webp|avif)$/i);
+  const m = src.match(/(?:^|\/)images\/(?:generated\/)?(.+?)\.(?:jpe?g|png|webp|avif)$/i);
   if (!m) return src;
   return m[1].replace(/-\d{3,4}$/, '');
 }
@@ -95,7 +95,7 @@ export function imageSrc(src: string, width?: number): string {
     return src.startsWith('/') ? `${import.meta.env.BASE_URL}${src.slice(1)}` : `${LOCAL_BASE}${src}`;
   }
   const w = width ?? meta.widths[meta.widths.length - 1];
-  const path = `${name}-${w}.webp`;
+  const path = `generated/${name}-${w}.webp`;
   return CDN_BASE ? `${CDN_BASE}${path}` : `${LOCAL_BASE}${path}`;
 }
 
@@ -104,7 +104,7 @@ export function imageSrcSet(src: string): string | undefined {
   const name = resolveName(src);
   const meta = META[name];
   if (!meta) return undefined;
-  const base = CDN_BASE ?? LOCAL_BASE;
+  const base = `${CDN_BASE ?? LOCAL_BASE}generated/`;
   return meta.widths.map((w) => `${base}${name}-${w}.webp ${w}w`).join(', ');
 }
 

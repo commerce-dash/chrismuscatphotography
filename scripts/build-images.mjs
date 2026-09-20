@@ -22,6 +22,9 @@ import manifest from './image-manifest.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(root, 'public', 'images');
+// Generated size variants live outside uploads/ so the CMS asset picker
+// only shows originals.
+const genDir = join(outDir, 'generated');
 const metaPath = join(root, 'src', 'data', 'image-meta.json');
 const placeholdersPath = join(root, 'src', 'data', 'placeholders.json');
 
@@ -44,11 +47,11 @@ async function fetchMaster(entry, attempt = 0) {
 
 async function buildEntry(entry) {
   const widths = OUTPUT_WIDTHS.filter((w) => w <= entry.w);
-  const first = join(outDir, `${entry.name}-${widths[0]}.webp`);
+  const first = join(genDir, `${entry.name}-${widths[0]}.webp`);
   if (await exists(first)) return { entry, widths, skipped: true };
 
   const master = await fetchMaster(entry);
-  const target = join(outDir, dirname(entry.name));
+  const target = join(genDir, dirname(entry.name));
   await mkdir(target, { recursive: true });
 
   await Promise.all(
@@ -56,7 +59,7 @@ async function buildEntry(entry) {
       sharp(master)
         .resize({ width: w })
         .webp({ quality: 78 })
-        .toFile(join(outDir, `${entry.name}-${w}.webp`))
+        .toFile(join(genDir, `${entry.name}-${w}.webp`))
     )
   );
 
@@ -121,13 +124,15 @@ async function processUploads(meta, placeholders) {
     .filter((f) => typeof f === 'string')
     .map((f) => f.replace(/\\/g, '/'));
 
-  const uploads = files.filter((f) => ORIGINAL.test(f) && !GENERATED.test(f));
+  const uploads = files.filter(
+    (f) => ORIGINAL.test(f) && !GENERATED.test(f) && !f.startsWith('generated/')
+  );
   let processed = 0;
 
   for (const file of uploads) {
     const name = file.slice(0, -extname(file).length);
     const firstWidth = OUTPUT_WIDTHS[0];
-    if (meta[name] && (await exists(join(outDir, `${name}-${firstWidth}.webp`)))) continue;
+    if (meta[name] && (await exists(join(genDir, `${name}-${firstWidth}.webp`)))) continue;
 
     const abs = join(outDir, file);
     const image = sharp(abs);
@@ -137,12 +142,13 @@ async function processUploads(meta, placeholders) {
     const widths = OUTPUT_WIDTHS.filter((w) => w <= w0);
     if (widths.length === 0) widths.push(w0);
 
+    await mkdir(join(genDir, dirname(name)), { recursive: true });
     await Promise.all(
       widths.map((w) =>
         sharp(abs)
           .resize({ width: w })
           .webp({ quality: 78 })
-          .toFile(join(outDir, `${name}-${w}.webp`))
+          .toFile(join(genDir, `${name}-${w}.webp`))
       )
     );
 
