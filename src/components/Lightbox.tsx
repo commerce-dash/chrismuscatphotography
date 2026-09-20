@@ -78,19 +78,42 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     };
   }, [onClose, prev, next]);
 
-  const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    touchRef.current = { x: t.clientX, y: t.clientY };
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const draggedRef = useRef(false);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest('button, a')) return;
+    touchRef.current = { x: e.clientX, y: e.clientY };
+    draggedRef.current = false;
+    e.currentTarget.setPointerCapture(e.pointerId);
   };
-  const onTouchEnd = (e: React.TouchEvent) => {
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    const start = touchRef.current;
+    if (!start) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+      draggedRef.current = true;
+      setDragging(true);
+    }
+    setDragX(dx);
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
     const start = touchRef.current;
     touchRef.current = null;
+    setDragging(false);
+    setDragX(0);
     if (!start) return;
-    const dx = e.changedTouches[0].clientX - start.x;
-    const dy = e.changedTouches[0].clientY - start.y;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
     if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) next();
       else prev();
+    } else if (dy > SWIPE_THRESHOLD && Math.abs(dy) > Math.abs(dx)) {
+      onClose();
     }
   };
 
@@ -99,13 +122,15 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   return (
     <div
       ref={rootRef}
-      className="lightbox"
+      className={`lightbox ${dragging ? 'lightbox--dragging' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label={label ?? 'Image viewer'}
       tabIndex={-1}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
     >
       <div className="lightbox__top">
         <p className="lightbox__counter" aria-live="polite">
@@ -119,7 +144,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
       <figure
         className="lightbox__stage"
         onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
+          if (e.target === e.currentTarget && !draggedRef.current) onClose();
         }}
       >
         {outgoing !== null && outgoing !== index && (
@@ -137,7 +162,14 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
             />
           </div>
         )}
-        <div className="lightbox__layer lightbox__layer--in" key={index}>
+        <div
+          className="lightbox__layer lightbox__layer--in"
+          key={index}
+          style={{
+            transform: dragX ? `translateX(${dragX}px)` : undefined,
+            transition: dragging ? 'none' : 'transform 0.35s var(--ease-out)',
+          }}
+        >
           <OptimizedImage
             src={image.src}
             alt={image.alt}

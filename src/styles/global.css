@@ -733,6 +733,7 @@ button {
   animation: fade-in 0.4s var(--ease-soft);
   outline: none;
   touch-action: pan-y pinch-zoom;
+  user-select: none;
 }
 
 .lightbox__top {
@@ -773,7 +774,12 @@ button {
   position: relative;
   flex: 1;
   min-height: 0;
+  cursor: grab;
   animation: rise-in 0.5s var(--ease-out);
+}
+
+.lightbox--dragging .lightbox__stage {
+  cursor: grabbing;
 }
 
 .lightbox__layer {
@@ -786,7 +792,9 @@ button {
 }
 
 .lightbox__layer--in {
-  animation: lb-in 0.55s var(--ease-out) both;
+  /* backwards (not both): after the settle animation the inline drag
+     transform must be free to take over. */
+  animation: lb-in 0.55s var(--ease-out) backwards;
 }
 
 .lightbox__layer--out {
