@@ -66,7 +66,13 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Slug, name: slug, widget: string, required: false, hint: 'URL segment — page lives at /work/<slug>. Use lowercase-hyphens. Blank = filename.' }
-      - label: Category
+      - { label: 'Redirect old URL', name: redirect, widget: boolean, default: false, required: false, hint: 'When set and the slug differs from the file name, permanently redirects /work/<file-name> to the new slug.' }
+      - label: 'Additional old URLs'
+        name: redirectFrom
+        widget: list
+        required: false
+        field: { label: 'Old slug', name: old, widget: string }
+        hint: 'e.g. desert-light — redirects /work/desert-light to this page'
         name: category
         widget: select
         options: [Urban, Travel, Portraits, Events, Animals, Landscapes]

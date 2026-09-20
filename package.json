@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run images && vite",
     "predev": "npm run sitemap",
-    "build": "npm run sitemap && npm run images && vite build",
+    "build": "npm run sitemap && npm run images && vite build && node scripts/build-redirects.mjs",
     "preview": "vite preview",
     "lint": "eslint . && tsc --noEmit",
     "typecheck": "tsc --noEmit",
