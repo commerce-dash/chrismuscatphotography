@@ -1,5 +1,8 @@
 {
   "title": "Victoria",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
   "category": "Landscapes",
   "year": 2010,
   "location": "Australia",
@@ -27,6 +30,21 @@
       "layout": "full",
       "images": [
         "/images/uploads/DSC_2625-2400.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/2007_03_05_24-2400.webp",
+        "/images/uploads/213_1311.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "full",
+      "images": [
+        "/images/uploads/215-1581_IMG-EDIT.webp"
       ],
       "caption": ""
     }
