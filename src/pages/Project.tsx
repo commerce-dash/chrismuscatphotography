@@ -85,12 +85,10 @@ export function Project({ slug }: { slug: string }) {
                       }
                     />
                   </button>
-                  {block.caption && ii === 0 && (
-                    <figcaption className="block__caption">{block.caption}</figcaption>
-                  )}
                 </Reveal>
               );
             })}
+            {block.caption && <p className="block__caption">{block.caption}</p>}
           </div>
         ))}
       </div>

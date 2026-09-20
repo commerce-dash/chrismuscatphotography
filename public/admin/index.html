@@ -59,12 +59,12 @@
                         src: resolveImage(getAsset, src),
                         alt: '',
                         loading: 'lazy',
-                      }),
-                      block.caption && ii === 0
-                        ? h('figcaption', { className: 'block__caption' }, block.caption)
-                        : null
+                      })
                     )
-                  )
+                  ),
+                  block.caption
+                    ? h('p', { key: 'caption', className: 'block__caption' }, block.caption)
+                    : null
                 )
               )
             )
@@ -139,7 +139,8 @@
         .block__item { margin: 0; }
         .block__item img { display: block; width: 100%; height: auto; }
         .block__caption {
-          margin-top: 12px;
+          grid-column: 1 / -1;
+          margin: 0;
           font-size: 11px;
           letter-spacing: 0.14em;
           text-transform: uppercase;

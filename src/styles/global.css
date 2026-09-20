@@ -701,7 +701,8 @@ button {
 }
 
 .block__caption {
-  margin-top: 12px;
+  grid-column: 1 / -1;
+  margin-top: 0;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
