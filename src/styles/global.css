@@ -832,7 +832,9 @@ button {
   align-items: center;
   justify-content: center;
   aspect-ratio: auto;
-  background: none;
+  /* The blur-up placeholder is set inline — !important is required to
+     stop it tiling the whole stage behind the contained image. */
+  background: none !important;
   overflow: visible;
 }
 
