@@ -45,6 +45,14 @@
         "/images/uploads/NIK_4792-2400.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_4257.webp",
+        "/images/uploads/NIK_6500.webp"
+      ],
+      "caption": ""
     }
   ]
 }
