@@ -27,11 +27,16 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   const touchRef = useRef<{ x: number; y: number } | null>(null);
   const lastIndexRef = useRef(index);
   const [outgoing, setOutgoing] = useState<number | null>(null);
+  const [zoomed, setZoomed] = useState(false);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const panStartRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (lastIndexRef.current !== index) {
       setOutgoing(lastIndexRef.current);
       lastIndexRef.current = index;
+      setZoomed(false);
+      setPan({ x: 0, y: 0 });
     }
   }, [index]);
 
@@ -85,6 +90,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0 || (e.target as HTMLElement).closest('button, a')) return;
     touchRef.current = { x: e.clientX, y: e.clientY };
+    panStartRef.current = pan;
     draggedRef.current = false;
     e.currentTarget.setPointerCapture(e.pointerId);
   };
@@ -98,7 +104,17 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
       draggedRef.current = true;
       setDragging(true);
     }
-    setDragX(dx);
+    if (zoomed) {
+      const stage = rootRef.current?.querySelector('.lightbox__stage');
+      const maxX = stage ? stage.clientWidth / 2 : 0;
+      const maxY = stage ? stage.clientHeight / 2 : 0;
+      setPan({
+        x: Math.min(maxX, Math.max(-maxX, panStartRef.current.x + dx)),
+        y: Math.min(maxY, Math.max(-maxY, panStartRef.current.y + dy)),
+      });
+    } else {
+      setDragX(dx);
+    }
   };
 
   const onPointerUp = (e: React.PointerEvent) => {
@@ -106,7 +122,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     touchRef.current = null;
     setDragging(false);
     setDragX(0);
-    if (!start) return;
+    if (!start || zoomed) return;
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
     if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
@@ -122,7 +138,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   return (
     <div
       ref={rootRef}
-      className={`lightbox ${dragging ? 'lightbox--dragging' : ''}`}
+      className={`lightbox ${dragging ? 'lightbox--dragging' : ''} ${zoomed ? 'lightbox--zoomed' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label={label ?? 'Image viewer'}
@@ -176,6 +192,18 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
             sizes="100vw"
             eager
             className="lightbox__image"
+            style={{
+              transform: zoomed
+                ? `translate(${pan.x}px, ${pan.y}px) scale(2)`
+                : undefined,
+              transition: dragging ? 'none' : 'transform 0.35s var(--ease-out)',
+            }}
+            onClick={() => {
+              if (!draggedRef.current) {
+                setZoomed((z) => !z);
+                setPan({ x: 0, y: 0 });
+              }
+            }}
           />
         </div>
       </figure>

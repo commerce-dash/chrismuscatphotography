@@ -810,6 +810,14 @@ button {
   cursor: grabbing;
 }
 
+.lightbox__stage .oi img {
+  cursor: zoom-in;
+}
+
+.lightbox--zoomed .lightbox__stage .oi img {
+  cursor: zoom-out;
+}
+
 .lightbox__layer {
   position: absolute;
   inset: 0;
