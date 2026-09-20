@@ -19,7 +19,6 @@ export const CATEGORIES = [
   'Urban',
   'Travel',
   'Portraits',
-  'Events',
   'Animals',
   'Landscapes',
 ] as const;
