@@ -1,5 +1,8 @@
 {
   "title": "Cambodia",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
   "category": "Travel",
   "year": 2007,
   "location": "Cambodia",
@@ -15,6 +18,14 @@
       "layout": "full",
       "images": [
         "/images/uploads/NIK_0619 (1).jpg"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/uploads/NIK_0358-2400.webp",
+        "/images/uploads/NIK_1223-EDIT.webp"
       ],
       "caption": ""
     }
