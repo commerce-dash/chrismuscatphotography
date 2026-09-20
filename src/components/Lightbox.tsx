@@ -42,22 +42,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     }
   }, [index]);
 
-  // Wheel zoom on pointer devices — scroll to zoom 1–4x.
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      const factor = e.deltaY < 0 ? 1.25 : 0.8;
-      setZoom((z) => {
-        const next = Math.min(4, Math.max(1, z * factor));
-        if (next <= 1) setPan({ x: 0, y: 0 });
-        return next;
-      });
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, []);
+
 
   const prev = useCallback(
     () => onNavigate((index - 1 + images.length) % images.length),
@@ -67,6 +52,40 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     () => onNavigate((index + 1) % images.length),
     [index, images.length, onNavigate]
   );
+
+  // Wheel behaviour: zoomed in -> scroll zooms back out; fitted ->
+  // scroll steps through the gallery (debounced so one gesture = one image).
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    let acc = 0;
+    let lastNav = 0;
+    let lastTick = 0;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (zoomed) {
+        setZoom((z) => {
+          const nextZoom = Math.max(1, z * 0.8);
+          if (nextZoom <= 1) setPan({ x: 0, y: 0 });
+          return nextZoom;
+        });
+        return;
+      }
+      const now = performance.now();
+      if (now - lastTick > 300) acc = 0;
+      lastTick = now;
+      acc += e.deltaY;
+      if (Math.abs(acc) > 50 && now - lastNav > 350) {
+        lastNav = now;
+        const forward = acc > 0;
+        acc = 0;
+        if (forward) next();
+        else prev();
+      }
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [zoomed, next, prev]);
 
   useEffect(() => {
     restoreFocusRef.current = document.activeElement as HTMLElement | null;
