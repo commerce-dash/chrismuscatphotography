@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { OptimizedImage } from './OptimizedImage';
 
 export interface LightboxImage {
@@ -135,7 +136,9 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
 
   const image = images[index];
 
-  return (
+  // Portal escapes any ancestor containing-block quirks (transforms,
+  // scroll containers) so position:fixed is always viewport-relative.
+  return createPortal(
     <div
       ref={rootRef}
       className={`lightbox ${dragging ? 'lightbox--dragging' : ''} ${zoomed ? 'lightbox--zoomed' : ''}`}
@@ -214,6 +217,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
       <button className="lightbox__zone lightbox__zone--next" onClick={next} aria-label="Next image">
         <span aria-hidden="true">→</span>
       </button>
-    </div>
+    </div>,
+    document.body
   );
 }

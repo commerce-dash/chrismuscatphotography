@@ -44,7 +44,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  /* clip, not hidden — a hidden body becomes a scroll container, which
+     breaks position:fixed descendants (the lightbox sized to the page). */
+  overflow-x: clip;
 }
 
 img {
