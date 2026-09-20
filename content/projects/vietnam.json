@@ -1,5 +1,10 @@
 {
   "title": "Vietnam",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [
+    "desert-light"
+  ],
   "category": "Travel",
   "year": 2007,
   "location": "South East Asia",
@@ -7,7 +12,6 @@
   "coverImage": "/images/uploads/NIK_7833.jpg",
   "featured": true,
   "order": 8,
-  "redirectFrom": ["desert-light"],
   "tags": [
     "travel"
   ],
@@ -17,6 +21,13 @@
       "images": [
         "/images/uploads/NIK_7833.jpg",
         "/images/uploads/NIK_5867-1600.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "images": [
+        "/images/uploads/NIK_4292-2400.webp"
       ],
       "caption": ""
     }
