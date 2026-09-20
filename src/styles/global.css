@@ -931,6 +931,32 @@ button {
 
 .search-page__head {
   max-width: 720px;
+  position: relative;
+}
+
+.search-page__close {
+  position: fixed;
+  top: calc(var(--nav-h) + 16px);
+  right: var(--gutter);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 10px 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: rgba(20, 19, 17, 0.6);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.search-page__close:hover {
+  background: rgba(48, 46, 42, 0.85);
+  border-color: var(--ink-dim);
 }
 
 .search-page__field {

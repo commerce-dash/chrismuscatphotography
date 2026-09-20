@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, usePath } from '../lib/router';
+import { Link, navigate, usePath } from '../lib/router';
 import { SITE } from '../lib/site';
 
 // Nav items are CMS-editable (content/site.json → Site Settings → Navigation).
@@ -54,7 +54,15 @@ export function Navigation() {
         <Link
           to="/search"
           className={`nav__search ${isActive('/search') ? 'nav__link--active' : ''}`}
-          aria-label="Search photos"
+          aria-label={isActive('/search') ? 'Close search' : 'Search photos'}
+          onClick={(e) => {
+            if (isActive('/search')) {
+              e.preventDefault();
+              navigate(sessionStorage.getItem('search:return') || '/');
+            } else {
+              sessionStorage.setItem('search:return', path);
+            }
+          }}
         >
           <svg
             width="15"

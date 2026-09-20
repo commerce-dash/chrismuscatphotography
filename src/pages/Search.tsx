@@ -1,5 +1,6 @@
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { imageAlt, searchPhotos } from '../lib/images';
+import { navigate } from '../lib/router';
 import { usePageMeta } from '../lib/usePageMeta';
 import { Lightbox } from '../components/Lightbox';
 import { OptimizedImage } from '../components/OptimizedImage';
@@ -21,6 +22,19 @@ export function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const results = useMemo(() => searchPhotos(query), [query]);
+
+  const close = useCallback(
+    () => navigate(sessionStorage.getItem('search:return') || '/'),
+    []
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && lightboxIndex === null) close();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [close, lightboxIndex]);
   const lightboxImages = useMemo(
     () => results.map((src) => ({ src, alt: imageAlt(src) ?? 'Photograph' })),
     [results]
@@ -29,6 +43,9 @@ export function Search() {
   return (
     <div className="search-page">
       <header className="search-page__head">
+        <button className="search-page__close" onClick={close} aria-label="Close search">
+          <span aria-hidden="true">✕</span> Close
+        </button>
         <Reveal>
           <h1 className="section__title">Search the archive</h1>
           <label className="search-page__field">
