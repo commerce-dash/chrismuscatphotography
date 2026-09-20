@@ -66,6 +66,9 @@ export function Navigation() {
         className={`menu ${open ? 'menu--open' : ''}`}
         aria-hidden={!open}
         ref={(el) => el?.toggleAttribute('inert', !open)}
+        onClick={(e) => {
+          if (!(e.target as HTMLElement).closest('a')) setOpen(false);
+        }}
       >
         <nav className="menu__links" aria-label="Mobile">
           {LINKS.map((l, i) => (
