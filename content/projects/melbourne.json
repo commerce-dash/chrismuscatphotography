@@ -15,13 +15,6 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/2007_03_26_138.webp"
-      ],
-      "caption": "12 Apostles, Great Ocean Road, Victoria, Australia"
-    },
-    {
-      "layout": "full",
-      "images": [
         "/images/uploads/DSC_2621.webp"
       ],
       "caption": ""
@@ -46,6 +39,13 @@
         "/images/uploads/218_1873_hdr.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "full",
+      "images": [
+        "/images/uploads/2007_03_26_138.webp"
+      ],
+      "caption": "12 Apostles, Great Ocean Road, Victoria, Australia"
     },
     {
       "layout": "full",
