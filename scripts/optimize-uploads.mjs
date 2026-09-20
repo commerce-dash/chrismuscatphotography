@@ -10,7 +10,9 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'images', 'uploads');
-const ORIGINAL = /\.(jpe?g|png|webp|avif)$/i;
+// webp files are already optimized masters — skip them to avoid a
+// lossy re-encode on every run.
+const ORIGINAL = /\.(jpe?g|png|avif)$/i;
 const GENERATED = /-\d{3,4}\.(webp|avif)$/i;
 
 const files = (await readdir(dir)).filter((f) => ORIGINAL.test(f) && !GENERATED.test(f));
