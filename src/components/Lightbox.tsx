@@ -93,7 +93,9 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     touchRef.current = { x: e.clientX, y: e.clientY };
     panStartRef.current = pan;
     draggedRef.current = false;
-    e.currentTarget.setPointerCapture(e.pointerId);
+    // No pointer capture: it retargets the click to this element, which
+    // would swallow the image's tap-to-zoom. The viewer covers the whole
+    // viewport, so moves are always delivered here anyway.
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
