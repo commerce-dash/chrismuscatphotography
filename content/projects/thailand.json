@@ -1,0 +1,23 @@
+{
+  "title": "Thailand",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
+  "category": "Travel",
+  "year": 2009,
+  "location": "South East Asia",
+  "description": "desc",
+  "coverImage": "/images/uploads/nik_8247.webp",
+  "featured": true,
+  "order": null,
+  "tags": [],
+  "blocks": [
+    {
+      "layout": "feature",
+      "images": [
+        "/images/uploads/NIK_0011.webp"
+      ],
+      "caption": ""
+    }
+  ]
+}
