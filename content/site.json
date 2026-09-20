@@ -2,7 +2,7 @@
   "name": "Chris Muscat Photography",
   "role": "Photographer",
   "location": "Boston",
-  "locations": "Boston · MA, U.S.A.",
+  "locations": "Boston Â· MA, U.S.A.",
   "email": "hello@chrismuscatphotography.com",
   "instagram": "https://instagram.com/chrismuscatphotography",
   "instagramHandle": "@chrismuscatphotography",
@@ -19,7 +19,7 @@
   "theme": {
     "serif": "Fraunces"
   },
-  "statement": "I'm Chris � a self-taught photographer. I never studied this; I just kept carrying a camera until looking closely became a habit. Most of these photos happened because I was willing to wait.",
+  "statement": "I'm Chris — a self-taught photographer. I never studied this; I just kept carrying a camera until looking closely became a habit. Most of these photos happened because I was willing to wait.",
   "nav": [
     {
       "label": "Work",
@@ -33,5 +33,6 @@
       "label": "Contact",
       "path": "/contact"
     }
-  ]
+  ],
+  "workSub": "Selected photographs and projects, 2019–2026"
 }

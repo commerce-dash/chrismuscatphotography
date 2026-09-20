@@ -155,6 +155,7 @@ collections:
                 default: Fraunces
                 hint: Used for titles, project names and editorial text.
           - { label: Homepage statement, name: statement, widget: text }
+          - { label: Work page subtitle, name: workSub, widget: string, hint: 'Line under the "Work" heading, e.g. "Selected photographs and projects"' }
           - label: Navigation
             name: nav
             widget: list

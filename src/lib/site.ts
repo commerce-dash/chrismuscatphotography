@@ -36,6 +36,8 @@ interface SiteConfig {
   instagram: string;
   instagramHandle: string;
   statement: string;
+  /** Subtitle line under the "Work" page heading. */
+  workSub: string;
   hero: HeroConfig;
   home: HomeConfig;
   theme: ThemeConfig;
@@ -53,6 +55,7 @@ export const SITE = {
   instagram: '',
   instagramHandle: '',
   statement: '',
+  workSub: '',
   nav: [] as NavItem[],
   ...json,
   hero: {

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Category, projects } from '../data/projects';
 import { usePageMeta } from '../lib/usePageMeta';
+import { SITE } from '../lib/site';
 import { FilterBar } from '../components/FilterBar';
 import { Reveal } from '../components/Reveal';
 import { WorkItem } from '../components/WorkItem';
@@ -27,9 +28,7 @@ export function Work() {
       <header className="page-head">
         <Reveal>
           <h1 className="page-head__title">Work</h1>
-          <p className="page-head__sub">
-            Selected photographs and projects, 2019–2026
-          </p>
+          <p className="page-head__sub">{SITE.workSub}</p>
         </Reveal>
       </header>
 
