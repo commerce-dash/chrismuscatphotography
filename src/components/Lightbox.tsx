@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { OptimizedImage } from './OptimizedImage';
 
 export interface LightboxImage {
@@ -25,6 +25,15 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   const rootRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const touchRef = useRef<{ x: number; y: number } | null>(null);
+  const lastIndexRef = useRef(index);
+  const [outgoing, setOutgoing] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (lastIndexRef.current !== index) {
+      setOutgoing(lastIndexRef.current);
+      lastIndexRef.current = index;
+    }
+  }, [index]);
 
   const prev = useCallback(
     () => onNavigate((index - 1 + images.length) % images.length),
@@ -109,18 +118,34 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
 
       <figure
         className="lightbox__stage"
-        key={index}
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}
       >
-        <OptimizedImage
-          src={image.src}
-          alt={image.alt}
-          sizes="100vw"
-          eager
-          className="lightbox__image"
-        />
+        {outgoing !== null && outgoing !== index && (
+          <div
+            className="lightbox__layer lightbox__layer--out"
+            aria-hidden="true"
+            onAnimationEnd={() => setOutgoing(null)}
+          >
+            <OptimizedImage
+              src={images[outgoing].src}
+              alt=""
+              sizes="100vw"
+              eager
+              className="lightbox__image"
+            />
+          </div>
+        )}
+        <div className="lightbox__layer lightbox__layer--in" key={index}>
+          <OptimizedImage
+            src={image.src}
+            alt={image.alt}
+            sizes="100vw"
+            eager
+            className="lightbox__image"
+          />
+        </div>
       </figure>
 
       <button className="lightbox__zone lightbox__zone--prev" onClick={prev} aria-label="Previous image">
