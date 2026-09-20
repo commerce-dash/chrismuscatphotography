@@ -702,7 +702,9 @@ button {
 
 .block__caption {
   grid-column: 1 / -1;
-  margin-top: 0;
+  /* Counteract the block's --gutter row gap so the caption hugs the
+     images at ~12px regardless of layout spacing. */
+  margin-top: calc(12px - var(--gutter));
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
