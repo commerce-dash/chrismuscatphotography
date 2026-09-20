@@ -769,6 +769,11 @@ button {
   user-select: none;
 }
 
+/* While zoomed, all touch gestures go to JS so drags pan in any direction. */
+.lightbox--zoomed {
+  touch-action: none;
+}
+
 .lightbox__top {
   display: flex;
   align-items: center;

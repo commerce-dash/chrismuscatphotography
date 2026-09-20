@@ -28,7 +28,8 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
   const touchRef = useRef<{ x: number; y: number } | null>(null);
   const lastIndexRef = useRef(index);
   const [outgoing, setOutgoing] = useState<number | null>(null);
-  const [zoomed, setZoomed] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const zoomed = zoom > 1;
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const panStartRef = useRef({ x: 0, y: 0 });
 
@@ -36,10 +37,27 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     if (lastIndexRef.current !== index) {
       setOutgoing(lastIndexRef.current);
       lastIndexRef.current = index;
-      setZoomed(false);
+      setZoom(1);
       setPan({ x: 0, y: 0 });
     }
   }, [index]);
+
+  // Wheel zoom on pointer devices — scroll to zoom 1–4x.
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const factor = e.deltaY < 0 ? 1.25 : 0.8;
+      setZoom((z) => {
+        const next = Math.min(4, Math.max(1, z * factor));
+        if (next <= 1) setPan({ x: 0, y: 0 });
+        return next;
+      });
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   const prev = useCallback(
     () => onNavigate((index - 1 + images.length) % images.length),
@@ -199,13 +217,13 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
             className="lightbox__image"
             style={{
               transform: zoomed
-                ? `translate(${pan.x}px, ${pan.y}px) scale(2)`
+                ? `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
                 : undefined,
               transition: dragging ? 'none' : 'transform 0.35s var(--ease-out)',
             }}
             onClick={() => {
               if (!draggedRef.current) {
-                setZoomed((z) => !z);
+                setZoom((z) => (z > 1 ? 1 : 2));
                 setPan({ x: 0, y: 0 });
               }
             }}
