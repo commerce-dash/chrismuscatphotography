@@ -7,7 +7,7 @@
   "year": 2007,
   "location": "Victoria, Australia",
   "description": "Shot during 2007.",
-  "coverImage": "/images/uploads/NIK_3628-2400.webp",
+  "coverImage": "/images/uploads/NIK_3628.webp",
   "featured": true,
   "order": null,
   "tags": [],
@@ -15,7 +15,7 @@
     {
       "layout": "pair",
       "images": [
-        "/images/uploads/2007_03_05_24-2400.webp",
+        "/images/uploads/2007_03_05_24.webp",
         "/images/uploads/213_1311.webp"
       ],
       "caption": ""
@@ -23,14 +23,14 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/2007_03_05_31-2400.webp"
+        "/images/uploads/2007_03_05_31.webp"
       ],
       "caption": ""
     },
     {
       "layout": "full",
       "images": [
-        "/images/uploads/2007_03_12_7-2400.webp"
+        "/images/uploads/2007_03_12_7.webp"
       ],
       "caption": ""
     }

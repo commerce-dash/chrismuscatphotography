@@ -4,7 +4,7 @@
   "year": 2020,
   "location": "Misc",
   "description": "Patient portraits of the wild and the tame — character, texture, and the unguarded second before they look away.",
-  "coverImage": "/images/uploads/2007_01240013 (1)-1600.webp",
+  "coverImage": "/images/uploads/2007_01240013 (1).webp",
   "featured": true,
   "order": null,
   "tags": [],
@@ -12,15 +12,15 @@
     {
       "layout": "pair",
       "images": [
-        "/images/uploads/_DSC5425-1200.webp",
-        "/images/uploads/145-4519_IMG-1600.webp"
+        "/images/uploads/_DSC5425.webp",
+        "/images/uploads/145-4519_IMG.webp"
       ],
       "caption": ""
     },
     {
       "layout": "full",
       "images": [
-        "/images/uploads/NIK_2582-1600.webp"
+        "/images/uploads/NIK_2582.webp"
       ],
       "caption": ""
     },
@@ -35,7 +35,7 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/0305-2400.webp",
+        "/images/uploads/0305.webp",
         "/images/uploads/194_9488.webp"
       ],
       "caption": ""
