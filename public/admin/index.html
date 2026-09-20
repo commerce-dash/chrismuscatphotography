@@ -9,5 +9,146 @@
   </head>
   <body>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <script>
+      // Storefront-matching preview for the Projects collection.
+      // Mirrors the block layouts in src/styles/global.css (.block--full /
+      // feature / pair / offset) so the preview pane shows the gallery the
+      // way it will render on the live site.
+      const resolveImage = (getAsset, src) => {
+        if (!src || !getAsset) return src;
+        const a = getAsset(src);
+        if (!a) return src;
+        if (typeof a === 'string') return a;
+        const url = a.url || String(a);
+        return url && url !== '[object Object]' ? url : src;
+      };
+
+      const ProjectPreview = createClass({
+        render() {
+          const { entry, getAsset } = this.props;
+          const data = entry.get('data').toJS();
+          const blocks = data.blocks || [];
+          const overline = [data.category, data.year, data.location]
+            .filter(Boolean)
+            .join(' · ');
+
+          return h(
+            'div',
+            { className: 'pv' },
+            h(
+              'header',
+              { className: 'pv-head' },
+              overline ? h('p', { className: 'pv-overline' }, overline) : null,
+              h('h1', { className: 'pv-title' }, data.title || ''),
+              data.description
+                ? h('p', { className: 'pv-desc' }, data.description)
+                : null
+            ),
+            h(
+              'div',
+              { className: 'pv-gallery' },
+              blocks.map((block, bi) =>
+                h(
+                  'div',
+                  { key: bi, className: `block block--${block.layout || 'feature'}` },
+                  (block.images || []).map((src, ii) =>
+                    h(
+                      'figure',
+                      { key: `${bi}-${ii}`, className: `block__item block__item--${ii}` },
+                      h('img', {
+                        src: resolveImage(getAsset, src),
+                        alt: '',
+                        loading: 'lazy',
+                      }),
+                      block.caption && ii === 0
+                        ? h('figcaption', { className: 'block__caption' }, block.caption)
+                        : null
+                    )
+                  )
+                )
+              )
+            )
+          );
+        },
+      });
+
+      CMS.registerPreviewStyle(
+        'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap'
+      );
+      CMS.registerPreviewStyle(
+        `
+        :root { color-scheme: dark; }
+        body {
+          background: #161513;
+          color: #ece8e0;
+          font-family: 'Segoe UI', system-ui, sans-serif;
+          margin: 0;
+        }
+        .pv-head {
+          padding: 72px 24px 48px;
+          max-width: 1100px;
+        }
+        .pv-overline {
+          font-size: 11px;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #a09a8f;
+          margin: 0 0 1.4rem;
+        }
+        .pv-title {
+          font-family: 'Fraunces', Georgia, serif;
+          font-weight: 300;
+          font-size: clamp(3rem, 8vw, 6.8rem);
+          line-height: 1.04;
+          letter-spacing: -0.01em;
+          margin: 0;
+        }
+        .pv-desc {
+          margin: 32px 0 0;
+          font-family: 'Fraunces', Georgia, serif;
+          font-weight: 300;
+          font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+          line-height: 1.6;
+          color: #a09a8f;
+          max-width: 46ch;
+        }
+        .pv-gallery {
+          padding: 0 24px 80px;
+          display: flex;
+          flex-direction: column;
+          gap: clamp(48px, 8vw, 130px);
+        }
+        .block { display: grid; gap: 24px; }
+        .block--full { margin-inline: -24px; }
+        .block--feature { width: min(76%, 1150px); margin-inline: auto; }
+        .block--pair { grid-template-columns: 1fr 1fr; align-items: start; }
+        .block--offset { grid-template-columns: repeat(12, 1fr); align-items: start; }
+        .block--offset .block__item--0 { grid-column: 1 / 8; }
+        .block--offset .block__item--1 {
+          grid-column: 9 / 13;
+          margin-top: clamp(40px, 12vw, 180px);
+        }
+        .block__item { margin: 0; }
+        .block__item img { display: block; width: 100%; height: auto; }
+        .block__caption {
+          margin-top: 12px;
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #6f6a61;
+          text-align: right;
+        }
+        @media (max-width: 768px) {
+          .block--pair, .block--offset { grid-template-columns: 1fr; gap: 20px; }
+          .block--offset .block__item--0,
+          .block--offset .block__item--1 { grid-column: 1 / -1; margin-top: 0; }
+          .block--offset .block__item--1 { width: 78%; margin-left: auto; }
+          .block--feature { width: 100%; }
+        }
+        `,
+        { raw: true }
+      );
+      CMS.registerPreviewTemplate('projects', ProjectPreview);
+    </script>
   </body>
 </html>
