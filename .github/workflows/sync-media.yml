@@ -1,0 +1,51 @@
+name: Sync media
+
+# Re-encodes any new non-WebP originals in public/images/uploads into
+# WebP masters, regenerates responsive variants under
+# public/images/generated, commits the results, then triggers a deploy.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Optimize new originals
+        run: node scripts/optimize-uploads.mjs
+
+      - name: Generate responsive variants
+        run: node scripts/build-images.mjs
+
+      - name: Commit media changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A public/images src/data/image-meta.json src/data/placeholders.json
+          if git diff --cached --quiet; then
+            echo "No media changes to commit."
+          else
+            git commit -m "chore: sync media (optimize originals, regenerate variants)"
+            git push
+          fi
+
+      - name: Trigger deploy
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main

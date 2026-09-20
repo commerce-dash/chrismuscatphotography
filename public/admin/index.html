@@ -157,6 +157,90 @@
         { raw: true }
       );
       CMS.registerPreviewTemplate('projects', ProjectPreview);
+
+      // ---- Sync media button -------------------------------------------------
+      // Triggers the "Sync media" GitHub Actions workflow, which optimizes new
+      // originals in /images/uploads, regenerates responsive variants, commits,
+      // and redeploys. Uses the GitHub token Sveltia stored at login when
+      // available; otherwise opens the workflow's manual-run page.
+      const SYNC_REPO = 'commerce-dash/chrismuscatphotography';
+      const SYNC_WORKFLOW = 'sync-media.yml';
+      const SYNC_PAGE = `https://github.com/${SYNC_REPO}/actions/workflows/${SYNC_WORKFLOW}`;
+
+      const findGhToken = () => {
+        for (let i = 0; i < localStorage.length; i++) {
+          const v = localStorage.getItem(localStorage.key(i));
+          if (!v) continue;
+          const m =
+            v.match(/"(?:access_token|token)"\s*:\s*"([^"]+)"/) ||
+            v.match(/\b((?:ghp|gho|ghu|ghs|ghr|github_pat)_[A-Za-z0-9_]+)\b/);
+          if (m) return m[1];
+        }
+        return null;
+      };
+
+      const setSyncStatus = (msg, sticky) => {
+        const el = document.getElementById('sync-media-status');
+        el.textContent = msg;
+        el.style.opacity = '1';
+        if (!sticky) setTimeout(() => (el.style.opacity = '0'), 6000);
+      };
+
+      const syncMedia = async () => {
+        const btn = document.getElementById('sync-media-btn');
+        btn.disabled = true;
+        setSyncStatus('Syncing media…', true);
+        try {
+          const token = findGhToken();
+          if (!token) throw new Error('no token');
+          const res = await fetch(
+            `https://api.github.com/repos/${SYNC_REPO}/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: 'application/vnd.github+json',
+              },
+              body: JSON.stringify({ ref: 'main' }),
+            }
+          );
+          if (!res.ok) throw new Error(`dispatch ${res.status}`);
+          setSyncStatus('Sync started — site redeploys in a few minutes.');
+        } catch {
+          setSyncStatus('Open the workflow page and click "Run workflow".', true);
+          window.open(SYNC_PAGE, '_blank', 'noopener');
+        } finally {
+          setTimeout(() => (btn.disabled = false), 30000);
+        }
+      };
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <style>
+            #sync-media-btn {
+              position: fixed; right: 20px; bottom: 20px; z-index: 99999;
+              padding: 10px 18px; border-radius: 999px; cursor: pointer;
+              background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
+              font: 600 12px/1 'Segoe UI', system-ui, sans-serif;
+              letter-spacing: 0.08em; text-transform: uppercase;
+            }
+            #sync-media-btn:hover { background: #33302a; }
+            #sync-media-btn:disabled { opacity: 0.5; cursor: default; }
+            #sync-media-status {
+              position: fixed; right: 20px; bottom: 64px; z-index: 99999;
+              max-width: 280px; padding: 8px 14px; border-radius: 8px;
+              background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
+              font: 12px/1.4 'Segoe UI', system-ui, sans-serif;
+              opacity: 0; transition: opacity 0.3s; pointer-events: none;
+            }
+          </style>
+          <div id="sync-media-status"></div>
+          <button id="sync-media-btn" type="button" title="Optimize new uploads, regenerate image sizes, redeploy">↻ Sync media</button>
+        `;
+        document.body.appendChild(wrap);
+        document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
+      });
     </script>
   </body>
 </html>
