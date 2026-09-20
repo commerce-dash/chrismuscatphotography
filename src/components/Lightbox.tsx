@@ -103,11 +103,17 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
           {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
         </p>
         <button className="lightbox__close" onClick={onClose} aria-label="Close viewer">
-          Close
+          <span aria-hidden="true">✕</span> Close
         </button>
       </div>
 
-      <figure className="lightbox__stage" key={index}>
+      <figure
+        className="lightbox__stage"
+        key={index}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      >
         <OptimizedImage
           src={image.src}
           alt={image.alt}

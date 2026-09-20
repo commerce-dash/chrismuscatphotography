@@ -745,11 +745,24 @@ button {
 }
 
 .lightbox__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink);
-  padding: 8px 0;
+  padding: 10px 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: rgba(28, 27, 24, 0.7);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.lightbox__close:hover {
+  background: rgba(48, 46, 42, 0.85);
+  border-color: var(--ink-dim);
 }
 
 .lightbox__stage {
@@ -758,7 +771,7 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 0;
-  padding: 0 var(--gutter) 32px;
+  padding: 0 clamp(8px, 2vw, 32px) 20px;
   animation: rise-in 0.5s var(--ease-out);
 }
 
@@ -775,30 +788,36 @@ button {
 .lightbox__stage .oi img {
   width: auto;
   height: auto;
-  max-width: 92vw;
-  max-height: calc(100svh - 160px);
+  max-width: 96vw;
+  max-height: calc(100svh - 116px);
   object-fit: contain;
 }
 
 .lightbox__zone {
   position: absolute;
+  z-index: 2;
   top: 50%;
   transform: translateY(-50%);
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
-  color: var(--ink-dim);
+  color: var(--ink);
   font-size: 20px;
-  transition: color 0.3s;
+  background: rgba(28, 27, 24, 0.6);
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .lightbox__zone:hover {
-  color: var(--ink);
+  background: rgba(48, 46, 42, 0.85);
+  border-color: var(--ink-dim);
 }
 
-.lightbox__zone--prev { left: 8px; }
-.lightbox__zone--next { right: 8px; }
+.lightbox__zone--prev { left: clamp(8px, 2vw, 24px); }
+.lightbox__zone--next { right: clamp(8px, 2vw, 24px); }
 
 /* ============================================================
    Search
