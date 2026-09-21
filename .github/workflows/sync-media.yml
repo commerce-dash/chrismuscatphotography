@@ -3,8 +3,8 @@ name: Sync media
 # Re-encodes any new non-WebP originals in public/images/uploads into
 # WebP masters, regenerates responsive variants under
 # public/images/generated, writes alt text for undescribed uploads via
-# the GitHub Models API (when GH_MODELS_TOKEN is set), commits the
-# results, then triggers a deploy.
+# the GitHub Models API (GITHUB_TOKEN with models: read — no secret
+# needed), commits the results, then triggers a deploy.
 #
 # Auth: uses the GH_PAT secret when present (a classic PAT with `repo`
 # scope). A PAT push triggers the deploy workflow on its own. Without
@@ -19,6 +19,7 @@ on:
 permissions:
   contents: write
   actions: write
+  models: read
 
 jobs:
   sync:
@@ -46,7 +47,8 @@ jobs:
 
       - name: Generate alt text for new images
         env:
-          GH_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN || secrets.GH_PAT }}
+          # GITHUB_TOKEN works with models: read permission — no secret needed.
+          GH_MODELS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/generate-alt.mjs
 
       - name: Commit media changes
