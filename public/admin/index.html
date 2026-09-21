@@ -214,7 +214,95 @@
         }
       };
 
-      window.addEventListener('DOMContentLoaded', () => {
+      // ---- "In gallery" badges on media assets ------------------------------
+      // Fetches the content JSONs and marks any upload already referenced by a
+      // project gallery, cover, hero or portrait with a badge in the media
+      // library and asset picker.
+      const normName = (s) =>
+        String(s)
+          .split('/')
+          .pop()
+          .trim()
+          .replace(/\.(webp|jpe?g|png|avif|gif)$/i, '')
+          .replace(/-\d{3,4}$/, '');
+
+      const inUse = new Set();
+      const collect = (v) => {
+        if (typeof v === 'string' && /\.(webp|jpe?g|png|avif|gif)$/i.test(v)) {
+          inUse.add(normName(v));
+        } else if (Array.isArray(v)) v.forEach(collect);
+        else if (v && typeof v === 'object') Object.values(v).forEach(collect);
+      };
+
+      const loadUsedImages = async () => {
+        try {
+          const headers = { Accept: 'application/vnd.github+json' };
+          const token = findGhToken();
+          if (token) headers.Authorization = `Bearer ${token}`;
+          const tree = await (
+            await fetch(
+              `https://api.github.com/repos/${SYNC_REPO}/git/trees/main?recursive=1`,
+              { headers }
+            )
+          ).json();
+          const files = (tree.tree || [])
+            .map((n) => n.path)
+            .filter(
+              (p) =>
+                /^content\/(projects\/[^/]+|site|about)\.json$/.test(p)
+            );
+          await Promise.all(
+            files.map(async (p) => {
+              try {
+                collect(
+                  await (
+                    await fetch(
+                      `https://raw.githubusercontent.com/${SYNC_REPO}/main/${p}`
+                    )
+                  ).json()
+                );
+              } catch {}
+            })
+          );
+        } catch {}
+      };
+
+      const FILE_RE = /[\w][\w\-() .']*\.(?:webp|jpe?g|png|avif|gif)/i;
+      const badgeImg = (img) => {
+        if (img.dataset.badgeChecked) return;
+        img.dataset.badgeChecked = '1';
+        const card =
+          img.closest('li, [role="option"], [role="listitem"], article') ||
+          img.parentElement;
+        if (!card) return;
+        const candidates = [img.alt, img.title, card.title, card.textContent];
+        const hit = candidates.some((c) => {
+          const m = c && FILE_RE.exec(c);
+          return m && inUse.has(normName(m[0]));
+        });
+        if (!hit || card.querySelector('.in-gallery-badge')) return;
+        if (getComputedStyle(card).position === 'static')
+          card.style.position = 'relative';
+        const b = document.createElement('span');
+        b.className = 'in-gallery-badge';
+        b.textContent = '✓ In gallery';
+        card.appendChild(b);
+      };
+
+      const scanBadges = (root) => {
+        if (root.nodeType !== 1) return;
+        if (root.tagName === 'IMG') badgeImg(root);
+        root.querySelectorAll?.('img').forEach(badgeImg);
+      };
+
+      new MutationObserver((recs) =>
+        recs.forEach((r) => r.addedNodes.forEach(scanBadges))
+      ).observe(document.body, { childList: true, subtree: true });
+
+      window.addEventListener('DOMContentLoaded', async () => {
+        await loadUsedImages();
+        scanBadges(document.body);
+
         const wrap = document.createElement('div');
         wrap.innerHTML = `
           <style>
@@ -233,6 +321,14 @@
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 12px/1.4 'Segoe UI', system-ui, sans-serif;
               opacity: 0; transition: opacity 0.3s; pointer-events: none;
+            }
+            .in-gallery-badge {
+              position: absolute; top: 6px; left: 6px; z-index: 10;
+              padding: 3px 8px; border-radius: 999px;
+              background: rgba(22, 101, 52, 0.92); color: #fff;
+              font: 600 10px/1 'Segoe UI', system-ui, sans-serif;
+              letter-spacing: 0.06em; text-transform: uppercase;
+              pointer-events: none;
             }
           </style>
           <div id="sync-media-status"></div>
