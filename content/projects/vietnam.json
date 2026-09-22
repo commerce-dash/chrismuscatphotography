@@ -7,6 +7,7 @@
   ],
   "category": "Travel",
   "year": 2007,
+  "yearTo": null,
   "location": "South East Asia",
   "description": "Street life and slow rivers — motorbikes at dusk, mist on the paddies, and unhurried light from Hanoi to the Mekong Delta.",
   "coverImage": "/images/uploads/NIK_7833.jpg",
@@ -19,7 +20,7 @@
     {
       "layout": "offset",
       "images": [
-        "/images/uploads/NIK_7833.jpg",
+        "/images/uploads/NIK_4414.webp",
         "/images/uploads/NIK_5867.webp"
       ],
       "caption": ""
