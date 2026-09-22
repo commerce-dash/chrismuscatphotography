@@ -19,6 +19,7 @@
   "blocks": [
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6388-EDIT.webp"
       ],
@@ -26,6 +27,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5989.webp"
       ],
@@ -33,6 +35,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5160.webp"
       ],
@@ -40,6 +43,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6016.webp"
       ],
@@ -47,6 +51,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_2919.webp",
         "/images/uploads/NIK_5690.webp"
@@ -55,6 +60,7 @@
     },
     {
       "layout": "offset",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0988-EDIT-3.webp",
         "/images/uploads/NIK_1573.webp",
@@ -64,6 +70,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5942.webp",
         "/images/uploads/NIK_5955.webp"
@@ -72,6 +79,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6540.webp"
       ],
@@ -79,8 +87,17 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_7065.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_1045-EDIT-3.webp"
       ],
       "caption": ""
     }
