@@ -1,0 +1,25 @@
+{
+  "title": "U.S.A.",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
+  "category": "Travel",
+  "year": 2014,
+  "yearTo": 2024,
+  "location": "North America",
+  "description": "",
+  "coverImage": "/images/uploads/_DSC3841.webp",
+  "featured": true,
+  "order": null,
+  "tags": [],
+  "blocks": [
+    {
+      "layout": "trio",
+      "images": [
+        "/images/uploads/NIK_9633.webp"
+      ],
+      "caption": "",
+      "side": "left"
+    }
+  ]
+}
