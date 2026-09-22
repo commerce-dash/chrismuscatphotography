@@ -7,6 +7,7 @@
   ],
   "category": "Family",
   "year": 2026,
+  "yearTo": null,
   "location": "Boston",
   "description": "",
   "coverImage": "/images/uploads/DSC_6197.webp",
@@ -52,20 +53,6 @@
       "images": [
         "/images/uploads/NIK_4333.webp",
         "/images/uploads/NIK_4347.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "feature",
-      "images": [
-        "/images/uploads/NIK_3423.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "feature",
-      "images": [
-        "/images/uploads/DSC_3061.webp"
       ],
       "caption": ""
     }
