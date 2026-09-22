@@ -15,6 +15,7 @@
   "blocks": [
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/213_1390.webp"
       ],
@@ -22,6 +23,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/215-1581_IMG-EDIT.webp"
       ],
@@ -29,6 +31,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/218_1873_hdr.webp"
       ],
@@ -36,6 +39,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/2007_03_26_138.webp"
       ],
@@ -43,11 +47,19 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4939.webp",
         "/images/uploads/NIK_2992.webp",
+        "/images/uploads/NIK_30732007_08_13.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "full",
+      "side": "left",
+      "images": [
         "/images/uploads/NIK_30482007_08_13.webp",
-        "/images/uploads/NIK_30732007_08_13.webp",
         "/images/uploads/NIK_3110.webp"
       ],
       "caption": ""
