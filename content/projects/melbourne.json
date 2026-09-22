@@ -5,6 +5,7 @@
   "redirectFrom": [],
   "category": "Landscapes",
   "year": 2010,
+  "yearTo": null,
   "location": "Australia",
   "description": "Shot over several years in my home state.",
   "coverImage": "/images/uploads/218_1873_hdr.webp",
@@ -15,7 +16,7 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/DSC_2625.webp"
+        "/images/uploads/213_1390.webp"
       ],
       "caption": ""
     },
@@ -43,7 +44,11 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/NIK_4939.webp"
+        "/images/uploads/NIK_4939.webp",
+        "/images/uploads/NIK_2992.webp",
+        "/images/uploads/NIK_30482007_08_13.webp",
+        "/images/uploads/NIK_30732007_08_13.webp",
+        "/images/uploads/NIK_3110.webp"
       ],
       "caption": ""
     }
