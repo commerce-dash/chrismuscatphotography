@@ -14,12 +14,19 @@
   "tags": [],
   "blocks": [
     {
-      "layout": "trio",
+      "layout": "pair",
       "images": [
+        "/images/uploads/_DSC2465.webp",
         "/images/uploads/NIK_9633.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
+    },
+    {
+      "layout": "full",
+      "images": [
+        "/images/uploads/DSC_8371.webp"
+      ],
+      "caption": ""
     }
   ]
 }
