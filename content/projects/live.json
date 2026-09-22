@@ -6,6 +6,7 @@
   "category": "Music",
   "year": 2015,
   "yearTo": 2026,
+  "location": "",
   "description": "Rock shows across clubs and countries — sweat, haze and stage light photographed from the floor.",
   "coverImage": "/images/uploads/NIK_6388-EDIT.webp",
   "featured": true,
@@ -24,9 +25,8 @@
       "caption": ""
     },
     {
-      "layout": "pair",
+      "layout": "feature",
       "images": [
-        "/images/uploads/NIK_6120.webp",
         "/images/uploads/NIK_5989.webp"
       ],
       "caption": ""
@@ -54,13 +54,6 @@
       "caption": ""
     },
     {
-      "layout": "feature",
-      "images": [
-        "/images/uploads/NIK_6252.webp"
-      ],
-      "caption": ""
-    },
-    {
       "layout": "offset",
       "images": [
         "/images/uploads/NIK_0988-EDIT-3.webp",
@@ -78,18 +71,9 @@
       "caption": ""
     },
     {
-      "layout": "pair",
+      "layout": "feature",
       "images": [
-        "/images/uploads/NIK_6262.webp",
-        "/images/uploads/NIK_6276.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "pair",
-      "images": [
-        "/images/uploads/NIK_6540.webp",
-        "/images/uploads/NIK_6161.webp"
+        "/images/uploads/NIK_6540.webp"
       ],
       "caption": ""
     },
