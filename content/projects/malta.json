@@ -23,9 +23,20 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/NIK_4208.webp"
+        "/images/uploads/NIK_4208.webp",
+        "/images/uploads/NIK_0703-Edit.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "trio",
+      "images": [
+        "/images/uploads/NIK_0954-EDIT-2.webp",
+        "/images/uploads/NIK_1095-2.webp",
+        "/images/uploads/NIK_5462.webp"
+      ],
+      "caption": "",
+      "side": "left"
     }
   ]
 }
