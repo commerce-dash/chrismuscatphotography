@@ -34,10 +34,19 @@
       "caption": ""
     },
     {
-      "layout": "feature",
+      "layout": "full",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_5160.webp"
+        "/images/uploads/NIK_6243.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_5160.webp",
+        "/images/uploads/NIK_5894.webp"
       ],
       "caption": ""
     },
@@ -63,8 +72,7 @@
       "side": "left",
       "images": [
         "/images/uploads/NIK_0988-EDIT-3.webp",
-        "/images/uploads/NIK_1573.webp",
-        "/images/uploads/NIK_1898-EDIT.webp"
+        "/images/uploads/NIK_1573.webp"
       ],
       "caption": ""
     },
