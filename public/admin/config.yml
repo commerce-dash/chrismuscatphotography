@@ -114,8 +114,9 @@ collections:
             hint: 'trio only — which side the first (tall) image sits on'
           - label: Images
             name: images
-            widget: list
-            field: { label: Image, name: image, widget: image }
+            widget: image
+            multiple: true
+            hint: 'Shift/ctrl-click to pick several at once'
           - { label: Caption, name: caption, widget: string, required: false }
 
   # ------------------------------------------------------------------
