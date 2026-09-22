@@ -53,8 +53,9 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     [index, images.length, onNavigate]
   );
 
-  // Wheel behaviour: zoomed in -> scroll zooms back out; fitted ->
-  // scroll steps through the gallery (debounced so one gesture = one image).
+  // Wheel behaviour: zoomed in -> scroll pans up/down (and sideways) the
+  // image; fitted -> scroll steps through the gallery (debounced so one
+  // gesture = one image).
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -64,11 +65,13 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       if (zoomed) {
-        setZoom((z) => {
-          const nextZoom = Math.max(1, z * 0.8);
-          if (nextZoom <= 1) setPan({ x: 0, y: 0 });
-          return nextZoom;
-        });
+        const stage = el.querySelector('.lightbox__stage');
+        const maxX = stage ? stage.clientWidth / 2 : 0;
+        const maxY = stage ? stage.clientHeight / 2 : 0;
+        setPan((p) => ({
+          x: Math.min(maxX, Math.max(-maxX, p.x - e.deltaX)),
+          y: Math.min(maxY, Math.max(-maxY, p.y - e.deltaY)),
+        }));
         return;
       }
       const now = performance.now();
