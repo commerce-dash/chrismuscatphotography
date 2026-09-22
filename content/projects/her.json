@@ -1,12 +1,12 @@
 {
-  "title": "Her",
+  "title": "Family",
   "slug": "",
   "redirect": false,
   "redirectFrom": [],
   "category": "Family",
   "year": 2026,
   "location": "Boston",
-  "description": "Portraits of family.",
+  "description": "Portraits",
   "coverImage": "/images/uploads/DSC_6197.webp",
   "featured": true,
   "order": 10,
@@ -24,18 +24,8 @@
       "caption": ""
     },
     {
-      "layout": "pair",
+      "layout": "full",
       "images": [
-        "/images/uploads/DSC_2562.webp",
-        "/images/uploads/DSC_2583.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "offset",
-      "images": [
-        "/images/uploads/DSC_2955.webp",
-        "/images/uploads/DSC_2964.webp",
         "/images/uploads/DSC_3289.webp"
       ],
       "caption": ""
@@ -64,11 +54,9 @@
       "caption": ""
     },
     {
-      "layout": "offset",
+      "layout": "feature",
       "images": [
-        "/images/uploads/NIK_3423.webp",
-        "/images/uploads/DSC_3011.webp",
-        "/images/uploads/DSC_2893.webp"
+        "/images/uploads/NIK_3423.webp"
       ],
       "caption": ""
     },
