@@ -73,7 +73,7 @@ collections:
         required: false
         field: { label: 'Old slug', name: old, widget: string }
         hint: 'e.g. desert-light — redirects /work/desert-light to this page'
-      - { label: Category, name: category, widget: select, options: [Urban, Travel, Portraits, Animals, Landscapes] }
+      - { label: Category, name: category, widget: select, options: [Urban, Travel, Portraits, Family, Music, Animals, Landscapes] }
       - { label: Year, name: year, widget: number, value_type: int, min_value: 1990, max_value: 2100 }
       - { label: Location, name: location, widget: string }
       - { label: Description, name: description, widget: text }

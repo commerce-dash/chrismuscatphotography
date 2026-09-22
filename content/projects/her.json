@@ -1,0 +1,67 @@
+{
+  "title": "Her",
+  "category": "Family",
+  "year": 2026,
+  "location": "Boston",
+  "description": "A portrait of my daughter, made slowly over the years.",
+  "coverImage": "/images/uploads/DSC_6197.webp",
+  "featured": true,
+  "order": 10,
+  "tags": ["portrait", "family", "childhood"],
+  "blocks": [
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/DSC_6195.webp"]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/DSC_2562.webp",
+        "/images/uploads/DSC_2583.webp"
+      ]
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/uploads/DSC_2955.webp",
+        "/images/uploads/DSC_2964.webp",
+        "/images/uploads/DSC_3289.webp"
+      ]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/DSC_6187.webp",
+        "/images/uploads/DSC_6197.webp"
+      ]
+    },
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/NIK_5615.webp"]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_4333.webp",
+        "/images/uploads/NIK_4347.webp"
+      ]
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/uploads/NIK_3423.webp",
+        "/images/uploads/DSC_3011.webp",
+        "/images/uploads/DSC_2893.webp"
+      ]
+    },
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/DSC_3061.webp"]
+    },
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/NIK_2969.webp"],
+      "caption": "Where it started"
+    }
+  ]
+}

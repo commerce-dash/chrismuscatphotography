@@ -1,0 +1,74 @@
+{
+  "title": "Live",
+  "category": "Music",
+  "year": 2026,
+  "location": "Boston",
+  "description": "Sweat, haze and stage light — rock shows photographed from the floor.",
+  "coverImage": "/images/uploads/NIK_6388-EDIT.webp",
+  "featured": true,
+  "order": 20,
+  "tags": ["concert", "live music", "stage", "black and white"],
+  "blocks": [
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/NIK_6388-EDIT.webp"]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_6120.webp",
+        "/images/uploads/NIK_5989.webp"
+      ]
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/uploads/NIK_5286.webp",
+        "/images/uploads/NIK_5763-EDIT.webp",
+        "/images/uploads/NIK_5743.webp"
+      ]
+    },
+    {
+      "layout": "full",
+      "images": ["/images/uploads/NIK_6016.webp"],
+      "caption": "The floor"
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_2919.webp",
+        "/images/uploads/NIK_5690.webp"
+      ]
+    },
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/NIK_6252.webp"]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_5891-EDIT-2.webp",
+        "/images/uploads/NIK_6136-2.webp"
+      ]
+    },
+    {
+      "layout": "offset",
+      "images": [
+        "/images/uploads/NIK_0988-EDIT-3.webp",
+        "/images/uploads/NIK_5160.webp",
+        "/images/uploads/NIK_1898-EDIT.webp"
+      ]
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_6746.webp",
+        "/images/uploads/NIK_6499.webp"
+      ]
+    },
+    {
+      "layout": "feature",
+      "images": ["/images/uploads/NIK_7065.webp"]
+    }
+  ]
+}
