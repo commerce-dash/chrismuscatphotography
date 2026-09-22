@@ -2,7 +2,9 @@
   "title": "Portraits",
   "slug": "",
   "redirect": false,
-  "redirectFrom": [],
+  "redirectFrom": [
+    "her"
+  ],
   "category": "Family",
   "year": 2026,
   "location": "Boston",
