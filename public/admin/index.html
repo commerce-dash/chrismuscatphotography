@@ -314,11 +314,15 @@
           .replace(/-\d{3,4}$/, '');
 
       const inUse = new Set();
-      const collect = (v) => {
+      // Images picked in the editor during this session — the committed
+      // JSONs only update on save, so these are merged in on every refetch.
+      const sessionAssigned = new Set();
+      const collect = (v, target = inUse) => {
         if (typeof v === 'string' && /\.(webp|jpe?g|png|avif|gif)$/i.test(v)) {
-          inUse.add(normName(v));
-        } else if (Array.isArray(v)) v.forEach(collect);
-        else if (v && typeof v === 'object') Object.values(v).forEach(collect);
+          target.add(normName(v));
+        } else if (Array.isArray(v)) v.forEach((x) => collect(x, target));
+        else if (v && typeof v === 'object')
+          Object.values(v).forEach((x) => collect(x, target));
       };
 
       const loadUsedImages = async () => {
@@ -338,19 +342,28 @@
               (p) =>
                 /^content\/(projects\/[^/]+|site|about)\.json$/.test(p)
             );
+          // Contents API (not raw.githubusercontent) so post-save refetches
+          // aren't served a stale cached copy.
+          const fresh = new Set();
           await Promise.all(
             files.map(async (p) => {
               try {
+                const data = await (
+                  await fetch(
+                    `https://api.github.com/repos/${SYNC_REPO}/contents/${p}?ref=main`,
+                    { headers }
+                  )
+                ).json();
                 collect(
-                  await (
-                    await fetch(
-                      `https://raw.githubusercontent.com/${SYNC_REPO}/main/${p}`
-                    )
-                  ).json()
+                  JSON.parse(atob(String(data.content).replace(/\n/g, ''))),
+                  fresh
                 );
               } catch {}
             })
           );
+          inUse.clear();
+          fresh.forEach((n) => inUse.add(n));
+          sessionAssigned.forEach((n) => inUse.add(n));
         } catch {}
       };
 
@@ -382,9 +395,81 @@
         root.querySelectorAll?.('img').forEach(badgeImg);
       };
 
+      // Clear every badge + checked flag and rescan — used whenever the
+      // assigned set changes (new pick in the editor, or post-save refetch).
+      const rebuildBadges = () => {
+        document
+          .querySelectorAll('.in-gallery-badge')
+          .forEach((b) => b.remove());
+        document
+          .querySelectorAll('img[data-badge-checked]')
+          .forEach((i) => delete i.dataset.badgeChecked);
+        scanBadges(document.body);
+      };
+
+      // An image assigned to a field in the open editor isn't committed yet,
+      // so scrape the field values live and badge those thumbnails too.
+      const FILE_RE_FIELD = /[\w][\w\-() .']*\.(?:webp|jpe?g|png|avif|gif)/i;
+      const collectFromEditor = () => {
+        let added = false;
+        document.querySelectorAll('input, textarea').forEach((el) => {
+          const m = el.value && FILE_RE_FIELD.exec(el.value);
+          if (m) {
+            const n = normName(m[0]);
+            if (!inUse.has(n)) {
+              inUse.add(n);
+              sessionAssigned.add(n);
+              added = true;
+            }
+          }
+        });
+        if (added) rebuildBadges();
+      };
+
+      let editorScanT;
+      const queueEditorScan = () => {
+        clearTimeout(editorScanT);
+        editorScanT = setTimeout(collectFromEditor, 300);
+      };
+
+      // After Sveltia commits a save, refetch the JSONs so badges reflect
+      // the real assigned set (and drop badges for removed images).
+      let refreshT;
+      const queueRefresh = (delay = 8000) => {
+        clearTimeout(refreshT);
+        refreshT = setTimeout(async () => {
+          await loadUsedImages();
+          collectFromEditor();
+          rebuildBadges();
+        }, delay);
+      };
+
+      const SAVE_TOAST_RE = /saved|published|updated|committed/i;
+      const TOAST_SEL =
+        '[role="status"], [role="alert"], [class*="toast"], [class*="snackbar"], [class*="notification"]';
+      const looksLikeSaveToast = (el) =>
+        el.nodeType === 1 &&
+        SAVE_TOAST_RE.test(el.textContent || '') &&
+        (el.matches?.(TOAST_SEL) || el.querySelector?.(TOAST_SEL));
+
       new MutationObserver((recs) =>
-        recs.forEach((r) => r.addedNodes.forEach(scanBadges))
+        recs.forEach((r) =>
+          r.addedNodes.forEach((n) => {
+            scanBadges(n);
+            queueEditorScan();
+            if (looksLikeSaveToast(n)) queueRefresh();
+          })
+        )
       ).observe(document.body, { childList: true, subtree: true });
+
+      // Field value edits don't produce DOM mutations — listen directly.
+      document.addEventListener('change', queueEditorScan, true);
+
+      // Also refresh when returning to the tab (e.g. after a save committed
+      // in another window or a GitHub-side edit).
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) queueRefresh(2000);
+      });
 
       window.addEventListener('DOMContentLoaded', async () => {
         await loadUsedImages();
