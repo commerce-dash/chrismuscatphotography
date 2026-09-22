@@ -5,6 +5,7 @@
   "redirectFrom": [],
   "category": "Travel",
   "year": 2007,
+  "yearTo": null,
   "location": "Cambodia",
   "description": "Ancient stone and warm dust — temples reclaimed by jungle, river towns, and quiet mornings along the Tonlé Sap.",
   "coverImage": "/images/uploads/NIK_0619 (1).jpg",
@@ -16,6 +17,7 @@
   "blocks": [
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0619 (1).webp"
       ],
@@ -23,6 +25,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9564.webp",
         "/images/uploads/NIK_1646.webp"
@@ -31,6 +34,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0986.webp",
         "/images/uploads/NIK_1211.webp"
@@ -39,6 +43,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_1480.webp"
       ],
@@ -46,6 +51,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9911.webp"
       ],
@@ -53,6 +59,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9749.webp",
         "/images/uploads/NIK_9805.webp"
@@ -61,10 +68,28 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/DSCF2657.webp"
       ],
       "caption": "Russian Market, Phonm Penh"
+    },
+    {
+      "layout": "full",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_0358.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_9885.webp",
+        "/images/uploads/NIK_9828.webp"
+      ],
+      "caption": ""
     }
   ]
 }
