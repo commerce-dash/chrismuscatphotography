@@ -10,16 +10,18 @@
   <body>
     <script>
       // Editor panes should scroll independently — Sveltia defaults
-      // "Sync Scrolling" to on (Editor Options menu). Seed the pref off
-      // once; the menu toggle still controls it afterwards.
+      // "Sync Scrolling" to on (Editor Options menu). Flip it off once
+      // (tracked separately so an existing saved pref is corrected too);
+      // the menu toggle still controls it afterwards.
       try {
-        const k = 'sveltia-cms.prefs';
-        const p = JSON.parse(localStorage.getItem(k) || '{}');
-        const ev = p['entry-view'] || {};
-        if (ev.syncScrolling === undefined) {
+        if (!localStorage.getItem('cmp-scroll-sync-seeded')) {
+          const k = 'sveltia-cms.prefs';
+          const p = JSON.parse(localStorage.getItem(k) || '{}');
+          const ev = p['entry-view'] || {};
           ev.syncScrolling = false;
           p['entry-view'] = ev;
           localStorage.setItem(k, JSON.stringify(p));
+          localStorage.setItem('cmp-scroll-sync-seeded', '1');
         }
       } catch {}
     </script>
