@@ -542,6 +542,7 @@
           const m = c && FILE_RE.exec(c);
           return m && inUse.has(normName(m[0]));
         });
+        card.classList.toggle('in-gallery-assigned', !!hit);
         if (!hit || card.querySelector('.in-gallery-badge')) return;
         if (getComputedStyle(card).position === 'static')
           card.style.position = 'relative';
@@ -693,7 +694,21 @@
               letter-spacing: 0.06em; text-transform: uppercase;
               pointer-events: none;
             }
+            .cmp-hide-assigned .in-gallery-assigned { display: none !important; }
+            #hide-assigned-wrap {
+              position: fixed; left: 20px; bottom: 20px; z-index: 99999;
+              display: flex; align-items: center; gap: 7px;
+              padding: 10px 16px; border-radius: 999px; cursor: pointer;
+              background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
+              font: 600 12px/1 'Segoe UI', system-ui, sans-serif;
+              letter-spacing: 0.08em; text-transform: uppercase;
+              user-select: none;
+            }
+            #hide-assigned-wrap input { accent-color: #166534; cursor: pointer; }
           </style>
+          <label id="hide-assigned-wrap" title="Hide images already assigned to a gallery">
+            <input type="checkbox" id="hide-assigned"> Hide assigned
+          </label>
           <div id="sync-media-status"></div>
           <button id="push-local-btn" type="button" title="Commit new files from your local uploads folder to the repo, then sync">⇪ Push local folder</button>
           <button id="sync-media-btn" type="button" title="Optimize new uploads, regenerate image sizes, redeploy">↻ Sync media</button>
@@ -701,6 +716,14 @@
         document.body.appendChild(wrap);
         document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
         document.getElementById('push-local-btn').addEventListener('click', uploadLocal);
+
+        const hideToggle = document.getElementById('hide-assigned');
+        hideToggle.checked = localStorage.getItem('cmp-hide-assigned') === '1';
+        document.body.classList.toggle('cmp-hide-assigned', hideToggle.checked);
+        hideToggle.addEventListener('change', () => {
+          document.body.classList.toggle('cmp-hide-assigned', hideToggle.checked);
+          localStorage.setItem('cmp-hide-assigned', hideToggle.checked ? '1' : '');
+        });
       });
     </script>
   </body>
