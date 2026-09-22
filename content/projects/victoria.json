@@ -5,6 +5,7 @@
   "redirectFrom": [],
   "category": "Urban",
   "year": 2007,
+  "yearTo": null,
   "location": "Victoria, Australia",
   "description": "Shot during 2007.",
   "coverImage": "/images/uploads/NIK_3628.webp",
@@ -33,6 +34,16 @@
         "/images/uploads/2007_03_12_7.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "trio",
+      "images": [
+        "/images/uploads/0857.webp",
+        "/images/uploads/_DSC4906.webp",
+        "/images/uploads/0576.webp"
+      ],
+      "caption": "",
+      "side": "left"
     }
   ]
 }
