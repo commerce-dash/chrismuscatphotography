@@ -589,6 +589,42 @@
         }
       };
 
+      // ---- Independent preview scrolling -----------------------------------
+      // Sveltia drives preview scrolling itself via wheel/touchmove listeners
+      // on the iframe's <html> for its scroll-sync feature; with sync off the
+      // preview has no scroller. Patch the iframe document: make it scrollable
+      // and take over wheel events in capture phase (before Sveltia's handler).
+      const patchPreviewDoc = (iframe) => {
+        const doc = iframe.contentDocument;
+        if (!doc || doc.dataset.cmpScrollPatched) return;
+        doc.dataset.cmpScrollPatched = '1';
+        doc.documentElement.style.overflowY = 'auto';
+        if (doc.body) doc.body.style.overflowY = 'visible';
+        doc.addEventListener(
+          'wheel',
+          (e) => {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            doc.defaultView?.scrollBy(0, e.deltaY);
+          },
+          { capture: true, passive: false }
+        );
+      };
+
+      const watchPreviewIframe = (root) => {
+        if (root.nodeType !== 1) return;
+        const iframes = [];
+        if (root.tagName === 'IFRAME') iframes.push(root);
+        root.querySelectorAll?.('iframe').forEach((i) => iframes.push(i));
+        iframes.forEach((i) => {
+          if (i.dataset.cmpWatched) return;
+          i.dataset.cmpWatched = '1';
+          i.addEventListener('load', () => patchPreviewDoc(i));
+          if (i.contentDocument?.readyState === 'complete')
+            patchPreviewDoc(i);
+        });
+      };
+
       // ---- "In gallery" badges on media assets ------------------------------
       // Fetches the content JSONs and marks any upload already referenced by a
       // project gallery, cover, hero or portrait with a badge in the media
@@ -694,6 +730,7 @@
           .querySelectorAll('img[data-badge-checked]')
           .forEach((i) => delete i.dataset.badgeChecked);
         scanBadges(document.body);
+        watchPreviewIframe(document.body);
       };
 
       // An image assigned to a field in the open editor isn't committed yet,
@@ -803,6 +840,7 @@
         recs.forEach((r) =>
           r.addedNodes.forEach((n) => {
             scanBadges(n);
+            watchPreviewIframe(n);
             queueEditorScan();
             queueFieldTune();
             if (looksLikeSaveToast(n)) queueRefresh();
@@ -823,6 +861,7 @@
       window.addEventListener('DOMContentLoaded', async () => {
         await loadUsedImages();
         scanBadges(document.body);
+        watchPreviewIframe(document.body);
 
         const wrap = document.createElement('div');
         wrap.innerHTML = `
