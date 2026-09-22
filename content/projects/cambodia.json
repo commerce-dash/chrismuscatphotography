@@ -17,86 +17,106 @@
   "blocks": [
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0619 (1).webp"
       ],
-      "caption": "Angkor Wat, Siem Reap",
-      "side": "left"
+      "caption": "Angkor Wat, Siem Reap"
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9564.webp",
         "/images/uploads/NIK_1646.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0986.webp",
         "/images/uploads/NIK_1211.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_1480.webp"
       ],
-      "caption": "Angkor Wat, Siem Reap",
-      "side": "left"
+      "caption": "Angkor Wat, Siem Reap"
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9911.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9749.webp",
         "/images/uploads/NIK_9805.webp"
       ],
-      "caption": "Mekong River",
-      "side": "left"
+      "caption": "Mekong River"
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/DSCF2657.webp"
       ],
-      "caption": "Russian Market, Phonm Penh",
-      "side": "left"
+      "caption": "Russian Market, Phonm Penh"
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0358.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9885.webp",
         "/images/uploads/NIK_9828.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_1441.webp",
         "/images/uploads/NIK_0737.webp",
         "/images/uploads/NIK_1359.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_0189.webp",
+        "/images/uploads/NIK_0195-Edit.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "trio",
+      "side": "left",
+      "images": [
+        "/images/uploads/DSCF2795.webp",
+        "/images/uploads/NIK_0062.webp",
+        "/images/uploads/NIK_0011.webp"
       ],
       "caption": ""
     }
