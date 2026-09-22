@@ -642,11 +642,43 @@
         SAVE_TOAST_RE.test(el.textContent || '') &&
         (el.matches?.(TOAST_SEL) || el.querySelector?.(TOAST_SEL));
 
+      // ---- Conditional field: hide "Anchor side" unless layout = trio -------
+      // Sveltia has no dependent fields, so we hide the field wrapper in the
+      // DOM. The value still exists in the JSON (harmless on other layouts).
+      const LAYOUT_SEL = (sel) =>
+        [...sel.options].some((o) => o.value === 'mosaic');
+      const tuneBlockFields = () => {
+        document.querySelectorAll('label').forEach((lab) => {
+          if (lab.textContent.trim() !== 'Anchor side') return;
+          // The field wrapper = nearest ancestor containing this field's select.
+          let wrap = lab.parentElement;
+          while (wrap && !wrap.querySelector('select')) wrap = wrap.parentElement;
+          if (!wrap) return;
+          // The block item = nearest ancestor containing the layout select
+          // (the only select whose options include 'mosaic').
+          let block = wrap;
+          let layoutSel = null;
+          while (block) {
+            layoutSel = [...block.querySelectorAll('select')].find(LAYOUT_SEL);
+            if (layoutSel) break;
+            block = block.parentElement;
+          }
+          wrap.style.display =
+            layoutSel && layoutSel.value === 'trio' ? '' : 'none';
+        });
+      };
+      let tuneT;
+      const queueFieldTune = () => {
+        clearTimeout(tuneT);
+        tuneT = setTimeout(tuneBlockFields, 200);
+      };
+
       new MutationObserver((recs) =>
         recs.forEach((r) =>
           r.addedNodes.forEach((n) => {
             scanBadges(n);
             queueEditorScan();
+            queueFieldTune();
             if (looksLikeSaveToast(n)) queueRefresh();
           })
         )
@@ -654,6 +686,7 @@
 
       // Field value edits don't produce DOM mutations — listen directly.
       document.addEventListener('change', queueEditorScan, true);
+      document.addEventListener('change', queueFieldTune, true);
 
       // Also refresh when returning to the tab (e.g. after a save committed
       // in another window or a GitHub-side edit).
