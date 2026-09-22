@@ -28,7 +28,11 @@
           const { entry, getAsset } = this.props;
           const data = entry.get('data').toJS();
           const blocks = data.blocks || [];
-          const overline = [data.category, data.year, data.location]
+          const overline = [
+            data.category,
+            data.yearTo ? `${data.year}–${data.yearTo}` : data.year,
+            data.location,
+          ]
             .filter(Boolean)
             .join(' · ');
 

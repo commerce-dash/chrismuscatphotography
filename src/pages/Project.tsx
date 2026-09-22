@@ -52,7 +52,13 @@ export function Project({ slug }: { slug: string }) {
       <header className="project__head">
         <Reveal>
           <p className="project__overline">
-            {project.category} — {project.location} — {project.year}
+            {[
+              project.category,
+              project.location,
+              project.yearTo ? `${project.year}–${project.yearTo}` : `${project.year}`,
+            ]
+              .filter(Boolean)
+              .join(' — ')}
           </p>
           <h1 className="project__title">{project.title}</h1>
           {project.description && (

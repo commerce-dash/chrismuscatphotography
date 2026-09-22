@@ -75,7 +75,8 @@ collections:
         hint: 'e.g. desert-light — redirects /work/desert-light to this page'
       - { label: Category, name: category, widget: select, options: [Urban, Travel, Portraits, Family, Music, Animals, Landscapes] }
       - { label: Year, name: year, widget: number, value_type: int, min_value: 1990, max_value: 2100 }
-      - { label: Location, name: location, widget: string }
+      - { label: 'End year', name: yearTo, widget: number, value_type: int, min_value: 1990, max_value: 2100, required: false, hint: 'For work spanning years — shows a range like 2019–2026. Leave blank for a single year.' }
+      - { label: Location, name: location, widget: string, required: false, hint: 'Leave blank for work shot across many places.' }
       - { label: Description, name: description, widget: text, required: false }
       - { label: Cover Image, name: coverImage, widget: image }
       - { label: Featured on homepage, name: featured, widget: boolean, default: false }

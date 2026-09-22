@@ -41,7 +41,9 @@ export interface Project {
   title: string;
   category: Exclude<Category, 'All'>;
   year: number;
-  location: string;
+  /** Optional end year for work spanning a period, e.g. 2019–2026. */
+  yearTo?: number;
+  location?: string;
   description?: string;
   coverImage: string;
   blocks: GalleryBlock[];

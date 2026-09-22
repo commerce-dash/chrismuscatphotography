@@ -37,7 +37,8 @@ export function WorkItem({ project, className = '', sizes, style, eager }: WorkI
       <div className="work-item__caption">
         <h3 className="work-item__title">{project.title}</h3>
         <p className="work-item__meta">
-          {project.category} · {project.year}
+          {project.category} ·{' '}
+          {project.yearTo ? `${project.year}–${project.yearTo}` : project.year}
         </p>
       </div>
     </Link>

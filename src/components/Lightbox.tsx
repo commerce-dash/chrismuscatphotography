@@ -60,6 +60,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
     const el = rootRef.current;
     if (!el) return;
     let acc = 0;
+    // Gesture lock: timestamp of last navigation (0 = unlocked).
     let lastNav = 0;
     let lastTick = 0;
     const onWheel = (e: WheelEvent) => {
@@ -75,10 +76,17 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
         return;
       }
       const now = performance.now();
-      if (now - lastTick > 300) acc = 0;
+      // A "gesture" is a continuous run of wheel events (trackpad flick,
+      // momentum scroll). One gesture = one image: once we navigate, stay
+      // locked until scrolling pauses.
+      if (now - lastTick > 400) {
+        acc = 0;
+        lastNav = 0;
+      }
       lastTick = now;
+      if (lastNav) return;
       acc += e.deltaY;
-      if (Math.abs(acc) > 160 && now - lastNav > 800) {
+      if (Math.abs(acc) > 140) {
         lastNav = now;
         const forward = acc > 0;
         acc = 0;
