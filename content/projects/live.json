@@ -19,6 +19,7 @@
   "blocks": [
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6388-EDIT.webp"
       ],
@@ -26,6 +27,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5989.webp"
       ],
@@ -33,6 +35,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6243.webp"
       ],
@@ -40,6 +43,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5160.webp",
         "/images/uploads/NIK_5894.webp"
@@ -48,6 +52,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_6016.webp"
       ],
@@ -55,6 +60,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_2919.webp",
         "/images/uploads/NIK_5690.webp"
@@ -63,6 +69,7 @@
     },
     {
       "layout": "offset",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0988-EDIT-3.webp",
         "/images/uploads/NIK_1573.webp"
@@ -71,6 +78,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5942.webp",
         "/images/uploads/NIK_5955.webp"
@@ -79,13 +87,7 @@
     },
     {
       "layout": "feature",
-      "images": [
-        "/images/uploads/NIK_6540.webp"
-      ],
-      "caption": ""
-    },
-    {
-      "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_7065.webp"
       ],
@@ -93,8 +95,21 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_1045-EDIT-3.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_2991.webp",
+        "/images/uploads/NIK_4101.webp",
+        "/images/uploads/NIK_6563 (1).webp",
+        "/images/uploads/NIK_7073.webp",
+        "/images/uploads/NIK_7236.webp"
       ],
       "caption": ""
     }
