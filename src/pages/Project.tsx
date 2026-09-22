@@ -55,7 +55,9 @@ export function Project({ slug }: { slug: string }) {
             {project.category} — {project.location} — {project.year}
           </p>
           <h1 className="project__title">{project.title}</h1>
-          <p className="project__desc">{project.description}</p>
+          {project.description && (
+            <p className="project__desc">{project.description}</p>
+          )}
         </Reveal>
       </header>
 

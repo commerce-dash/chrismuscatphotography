@@ -42,7 +42,7 @@ export interface Project {
   category: Exclude<Category, 'All'>;
   year: number;
   location: string;
-  description: string;
+  description?: string;
   coverImage: string;
   blocks: GalleryBlock[];
   featured: boolean;
