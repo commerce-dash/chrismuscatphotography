@@ -511,13 +511,16 @@
           const tree = await (
             await gh('/git/trees/main?recursive=1')
           ).json();
+          // Compare by basename — the optimizer renames masters to .webp,
+          // so a local .jpg must match a committed .webp of the same name.
+          const stem = (n) => n.replace(/\.[^.]+$/, '').toLowerCase();
           const remote = new Set(
             (tree.tree || [])
               .map((n) => n.path)
               .filter((p) => p.startsWith('public/images/uploads/'))
-              .map((p) => p.split('/').pop())
+              .map((p) => stem(p.split('/').pop()))
           );
-          const fresh = files.filter((f) => !remote.has(f.name));
+          const fresh = files.filter((f) => !remote.has(stem(f.name)));
           if (!fresh.length) {
             setSyncStatus(
               'Everything in that folder is already in the repo — use ↻ Sync media to process it.'
