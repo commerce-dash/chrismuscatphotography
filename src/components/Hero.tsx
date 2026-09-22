@@ -24,9 +24,9 @@ export function Hero() {
       <div className="hero__overlay" aria-hidden="true" />
 
       <div className={`hero__content ${hero.align === 'center' ? 'hero__content--center' : ''}`}>
-        <p className="hero__overline">{hero.overline}</p>
+        {hero.overline && <p className="hero__overline">{hero.overline}</p>}
         <h1 className="hero__title">{hero.title}</h1>
-        <p className="hero__sub">{hero.subtitle}</p>
+        {hero.subtitle && <p className="hero__sub">{hero.subtitle}</p>}
       </div>
 
       <div className="hero__scroll" aria-hidden="true">

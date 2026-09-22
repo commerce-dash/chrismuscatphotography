@@ -140,9 +140,9 @@ collections:
             widget: object
             fields:
               - { label: Hero image, name: image, widget: image }
-              - { label: Overline, name: overline, widget: string, hint: 'Small line above the title' }
+              - { label: Overline, name: overline, widget: string, required: false, hint: 'Small line above the title' }
               - { label: Title, name: title, widget: string }
-              - { label: Subtitle, name: subtitle, widget: string }
+              - { label: Subtitle, name: subtitle, widget: string, required: false }
               - label: Text alignment
                 name: align
                 widget: select
