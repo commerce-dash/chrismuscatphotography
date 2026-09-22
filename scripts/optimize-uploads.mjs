@@ -4,7 +4,7 @@
  * Keeps the basename (content references resolve extension-agnostically).
  * Run: node scripts/optimize-uploads.mjs
  */
-import { readdir, stat, rename, unlink } from 'node:fs/promises';
+import { readdir, stat, rename, unlink, access } from 'node:fs/promises';
 import { dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -18,10 +18,23 @@ const GENERATED = /-\d{3,4}\.(webp|avif)$/i;
 const files = (await readdir(dir)).filter((f) => ORIGINAL.test(f) && !GENERATED.test(f));
 let done = 0, saved = 0;
 
+const exists = async (p) => {
+  try {
+    await access(p);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 for (const file of files) {
   const src = join(dir, file);
   const name = file.slice(0, -extname(file).length);
-  const dest = join(dir, `${name}.webp`);
+  // A master .webp with this name may already exist (e.g. camera counter
+  // reused across shoots) — pick a -2/-3 suffix instead of overwriting it.
+  let out = name;
+  for (let i = 2; await exists(join(dir, `${out}.webp`)); i++) out = `${name}-${i}`;
+  const dest = join(dir, `${out}.webp`);
   const before = (await stat(src)).size;
   const img = sharp(src).rotate(); // honour EXIF orientation
   const meta = await img.metadata();
@@ -34,7 +47,7 @@ for (const file of files) {
   if (src !== dest) await unlink(src);
   await rename(tmp, dest);
   saved += before - buf.length;
-  console.log(`${file} -> ${name}.webp  ${(before / 1e6).toFixed(1)}MB -> ${(buf.length / 1e3).toFixed(0)}KB  (${meta.width}x${meta.height})`);
+  console.log(`${file} -> ${out}.webp  ${(before / 1e6).toFixed(1)}MB -> ${(buf.length / 1e3).toFixed(0)}KB  (${meta.width}x${meta.height})`);
   done++;
 }
 
