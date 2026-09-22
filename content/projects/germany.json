@@ -14,10 +14,18 @@
   "tags": [],
   "blocks": [
     {
-      "layout": "full",
+      "layout": "feature",
       "side": "left",
       "images": [
         "/images/uploads/NIK_2565.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "full",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_2162.webp"
       ],
       "caption": ""
     }
