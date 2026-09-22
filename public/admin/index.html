@@ -226,20 +226,46 @@
         try {
           const token = await findGhToken();
           if (!token) throw new Error('not signed in');
-          const res = await fetch(
-            `https://api.github.com/repos/${SYNC_REPO}/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
-            {
-              method: 'POST',
+          const gh = (path, opts = {}) =>
+            fetch(`https://api.github.com/repos/${SYNC_REPO}${path}`, {
+              ...opts,
               headers: {
                 Authorization: `Bearer ${token}`,
                 Accept: 'application/vnd.github+json',
+                'Content-Type': 'application/json',
+                ...(opts.headers || {}),
               },
-              body: JSON.stringify({ ref: 'main' }),
-            }
+            });
+
+          // Preferred: dispatch the workflow directly. Requires Actions scope.
+          const res = await gh(
+            `/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
+            { method: 'POST', body: JSON.stringify({ ref: 'main' }) }
           );
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          setSyncStatus('Sync started — site redeploys in a few minutes.');
-          return;
+          if (res.ok) {
+            setSyncStatus('Sync started — site redeploys in a few minutes.');
+            return;
+          }
+
+          // Fallback: commit a trigger file — works with Contents-only tokens.
+          // The push event runs the sync workflow via its paths filter.
+          let sha;
+          const cur = await gh('/contents/.sync-trigger');
+          if (cur.ok) sha = (await cur.json()).sha;
+          const put = await gh('/contents/.sync-trigger', {
+            method: 'PUT',
+            body: JSON.stringify({
+              message: 'chore: trigger media sync',
+              content: btoa(`sync ${Date.now()}\n`),
+              branch: 'main',
+              ...(sha ? { sha } : {}),
+            }),
+          });
+          if (put.ok) {
+            setSyncStatus('Sync queued — site redeploys in a few minutes.');
+            return;
+          }
+          throw new Error(`HTTP ${put.status}`);
         } catch (e) {
           setSyncStatus(
             `Couldn't trigger sync from here (${e.message}). Opening GitHub — click "Run workflow".`,

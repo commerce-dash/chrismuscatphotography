@@ -16,6 +16,11 @@ name: Sync media
 
 on:
   workflow_dispatch:
+  # The admin "Sync media" button commits this file when it can't
+  # dispatch the workflow directly (e.g. token without Actions scope).
+  push:
+    branches: [main]
+    paths: ['.sync-trigger']
 
 permissions:
   contents: write
