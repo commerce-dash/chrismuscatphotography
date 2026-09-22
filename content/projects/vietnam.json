@@ -19,6 +19,7 @@
   "blocks": [
     {
       "layout": "offset",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4414.webp",
         "/images/uploads/NIK_5867.webp"
@@ -27,6 +28,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4292.webp"
       ],
@@ -34,6 +36,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5964.webp",
         "/images/uploads/NIK_7628.webp"
@@ -42,6 +45,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4792.webp"
       ],
@@ -49,11 +53,23 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4257.webp",
         "/images/uploads/NIK_6500.webp"
       ],
       "caption": "Hanoi / Sapa"
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_5512.webp",
+        "/images/uploads/NIK_4173.webp",
+        "/images/uploads/NIK_5639-EDIT.webp",
+        "/images/uploads/NIK_4737.webp"
+      ],
+      "caption": ""
     }
   ]
 }
