@@ -416,11 +416,16 @@
 
       // An image assigned to a field in the open editor isn't committed yet,
       // so scrape the field values live and badge those thumbnails too.
+      // Sveltia renders the path as plain text (not always an input), so we
+      // walk text nodes — but only while the entry editor route is active,
+      // and never inside the asset-picker dialog, or the media library's own
+      // filename labels would falsely mark everything as in use.
       const FILE_RE_FIELD = /[\w][\w\-() .']*\.(?:webp|jpe?g|png|avif|gif)/i;
       const collectFromEditor = () => {
+        if (!/collections|entries/i.test(location.hash)) return;
         let added = false;
-        document.querySelectorAll('input, textarea').forEach((el) => {
-          const m = el.value && FILE_RE_FIELD.exec(el.value);
+        const consider = (v) => {
+          const m = v && FILE_RE_FIELD.exec(v);
           if (m) {
             const n = normName(m[0]);
             if (!inUse.has(n)) {
@@ -429,7 +434,29 @@
               added = true;
             }
           }
-        });
+        };
+        document
+          .querySelectorAll('input, textarea')
+          .forEach((el) => consider(el.value));
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode: (node) => {
+              if (!node.nodeValue || !FILE_RE_FIELD.test(node.nodeValue))
+                return NodeFilter.FILTER_REJECT;
+              let p = node.parentElement;
+              while (p) {
+                if (p.getAttribute?.('role') === 'dialog')
+                  return NodeFilter.FILTER_REJECT;
+                p = p.parentElement;
+              }
+              return NodeFilter.FILTER_ACCEPT;
+            },
+          }
+        );
+        let node;
+        while ((node = walker.nextNode())) consider(node.nodeValue);
         if (added) rebuildBadges();
       };
 
