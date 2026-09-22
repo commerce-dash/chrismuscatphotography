@@ -8,7 +8,7 @@
   "yearTo": null,
   "location": "Cambodia",
   "description": "Ancient stone and warm dust — temples reclaimed by jungle, river towns, and quiet mornings along the Tonlé Sap.",
-  "coverImage": "/images/uploads/NIK_0619 (1).jpg",
+  "coverImage": "/images/uploads/NIK_1359.webp",
   "featured": true,
   "order": null,
   "tags": [
@@ -94,7 +94,9 @@
     {
       "layout": "full",
       "images": [
-        "/images/uploads/NIK_1441.webp"
+        "/images/uploads/NIK_1441.webp",
+        "/images/uploads/NIK_0737.webp",
+        "/images/uploads/NIK_1359.webp"
       ],
       "caption": ""
     }
