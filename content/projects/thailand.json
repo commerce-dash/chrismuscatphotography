@@ -5,6 +5,7 @@
   "redirectFrom": [],
   "category": "Travel",
   "year": 2009,
+  "yearTo": null,
   "location": "South East Asia",
   "description": "desc",
   "coverImage": "/images/uploads/nik_8247.webp",
@@ -15,7 +16,15 @@
     {
       "layout": "feature",
       "images": [
-        "/images/uploads/NIK_0011.webp"
+        "/images/uploads/NIK_8967.webp",
+        "/images/uploads/NIK_8987.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "images": [
+        "/images/uploads/NIK_8918.webp"
       ],
       "caption": ""
     }
