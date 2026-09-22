@@ -78,7 +78,7 @@ export function Lightbox({ images, index, onClose, onNavigate, label }: Lightbox
       if (now - lastTick > 300) acc = 0;
       lastTick = now;
       acc += e.deltaY;
-      if (Math.abs(acc) > 50 && now - lastNav > 350) {
+      if (Math.abs(acc) > 160 && now - lastNav > 800) {
         lastNav = now;
         const forward = acc > 0;
         acc = 0;
