@@ -18,7 +18,9 @@ export function Home() {
     path: '/',
   });
 
-  const featured = featuredProjects.slice(0, 5);
+  // Every featured project renders; the five-position editorial
+  // composition repeats per row group.
+  const featured = featuredProjects;
 
   return (
     <>
@@ -36,7 +38,7 @@ export function Home() {
 
         <div className="editorial-grid">
           {featured.map((p, i) => (
-            <Reveal key={p.id} className={`editorial-grid__cell editorial-grid__cell--${i}`} delay={i * 60}>
+            <Reveal key={p.id} className={`editorial-grid__cell editorial-grid__cell--${i % 5}`} delay={i * 60}>
               <WorkItem
                 project={p}
                 sizes="(min-width: 1024px) 60vw, (min-width: 768px) 70vw, 100vw"
