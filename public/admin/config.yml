@@ -94,15 +94,25 @@ collections:
       - label: Gallery
         name: blocks
         widget: list
-        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric.'
+        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric, trio = one tall beside two stacked.'
         fields:
           - label: Layout
             name: layout
             widget: select
-            options: [full, feature, pair, offset]
+            options: [full, feature, pair, offset, trio]
+          - label: Anchor side
+            name: side
+            widget: select
+            required: false
+            default: left
+            options:
+              - { label: Left, value: left }
+              - { label: Right, value: right }
+            hint: 'trio only — which side the first (tall) image sits on'
           - label: Images
             name: images
             widget: list
+            hint: 'trio: first image is the tall anchor, next two stack beside it'
             field: { label: Image, name: image, widget: image }
           - { label: Caption, name: caption, widget: string, required: false }
 

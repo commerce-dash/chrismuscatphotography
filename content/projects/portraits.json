@@ -55,6 +55,16 @@
         "/images/uploads/NIK_4347.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "trio",
+      "side": "right",
+      "images": [
+        "/images/uploads/DSC_2955.webp",
+        "/images/uploads/DSC_3292.webp",
+        "/images/uploads/DSC_4634.webp"
+      ],
+      "caption": ""
     }
   ]
 }

@@ -54,7 +54,14 @@
               blocks.map((block, bi) =>
                 h(
                   'div',
-                  { key: bi, className: `block block--${block.layout || 'feature'}` },
+                  {
+                    key: bi,
+                    className: `block block--${block.layout || 'feature'}${
+                      block.layout === 'trio' && block.side === 'right'
+                        ? ' block--trio--right'
+                        : ''
+                    }`,
+                  },
                   (block.images || []).map((src, ii) =>
                     h(
                       'figure',
@@ -140,6 +147,16 @@
           grid-column: 6 / 13;
           margin-top: clamp(48px, 10vw, 150px);
         }
+        .block--trio { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; align-items: stretch; }
+        .block--trio .block__item--0 { grid-row: 1 / -1; grid-column: 1; }
+        .block--trio .block__item--1 { grid-column: 2; grid-row: 1; }
+        .block--trio .block__item--2 { grid-column: 2; grid-row: 2; }
+        .block--trio .block__item--0 img { height: 100%; object-fit: cover; }
+        .block--trio .block__item--1 img,
+        .block--trio .block__item--2 img { aspect-ratio: 3 / 2; object-fit: cover; }
+        .block--trio--right .block__item--0 { grid-column: 2; }
+        .block--trio--right .block__item--1,
+        .block--trio--right .block__item--2 { grid-column: 1; }
         .block__item { margin: 0; }
         .block__item img { display: block; width: 100%; height: auto; }
         .block__caption {
@@ -152,9 +169,12 @@
           text-align: right;
         }
         @media (max-width: 768px) {
-          .block--pair, .block--offset { grid-template-columns: 1fr; gap: 20px; }
+          .block--pair, .block--offset, .block--trio { grid-template-columns: 1fr; gap: 20px; }
           .block--offset .block__item { grid-column: 1 / -1 !important; margin-top: 0 !important; }
           .block--offset .block__item:nth-child(even) { width: 78%; margin-left: auto; }
+          .block--trio { grid-template-rows: none; }
+          .block--trio .block__item { grid-column: 1 / -1 !important; grid-row: auto !important; }
+          .block--trio .block__item--0 img { height: auto; aspect-ratio: 3 / 4; }
           .block--feature { width: 100%; }
         }
         `,

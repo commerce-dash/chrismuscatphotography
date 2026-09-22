@@ -682,6 +682,34 @@ button {
   margin-top: clamp(48px, 10vw, 150px);
 }
 
+/* Trio — first image is the tall anchor spanning both rows; images 2–3
+   stack in the other column. The anchor's .oi fills the spanned rows so
+   all edges align; its overflow crops a sliver top/bottom. */
+.block--trio {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  align-items: stretch;
+}
+
+.block--trio .block__item--0 { grid-row: 1 / -1; grid-column: 1; }
+.block--trio .block__item--1 { grid-column: 2; grid-row: 1; }
+.block--trio .block__item--2 { grid-column: 2; grid-row: 2; }
+
+.block--trio .block__item--0 .oi {
+  aspect-ratio: auto !important;
+  height: 100%;
+}
+
+.block--trio .block__item--1 .oi,
+.block--trio .block__item--2 .oi {
+  aspect-ratio: 3 / 2 !important;
+}
+
+/* Anchor on the right — horizontals stack left. */
+.block--trio--right .block__item--0 { grid-column: 2; }
+.block--trio--right .block__item--1,
+.block--trio--right .block__item--2 { grid-column: 1; }
+
 .block__item {
   display: block;
 }
@@ -1456,6 +1484,22 @@ button {
   .block--offset .block__item:nth-child(even) {
     width: 78%;
     margin-left: auto;
+  }
+
+  .block--trio {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 20px;
+  }
+
+  .block--trio .block__item {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .block--trio .block__item--0 .oi {
+    aspect-ratio: 3 / 4 !important;
+    height: auto;
   }
 
   .block--feature {

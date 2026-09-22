@@ -69,7 +69,12 @@ export function Project({ slug }: { slug: string }) {
 
       <div className="project__gallery">
         {project.blocks.map((block, bi) => (
-          <div key={bi} className={`block block--${block.layout}`}>
+          <div
+            key={bi}
+            className={`block block--${block.layout}${
+              block.layout === 'trio' && block.side === 'right' ? ' block--trio--right' : ''
+            }`}
+          >
             {block.images.map((src, ii) => {
               const flatIndex = indexOf(bi, ii);
               return (

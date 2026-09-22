@@ -11,7 +11,8 @@
  *   full    — one edge-to-edge photograph
  *   feature — one large photograph, inset
  *   pair    — two photographs, side by side
- *   offset  — two photographs on an asymmetric grid
+ *   offset  — photographs on an asymmetric staggered grid
+ *   trio    — one tall anchor beside two stacked horizontals
  */
 
 export const CATEGORIES = [
@@ -27,12 +28,14 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number];
 
-export type BlockLayout = 'full' | 'feature' | 'pair' | 'offset';
+export type BlockLayout = 'full' | 'feature' | 'pair' | 'offset' | 'trio';
 
 export interface GalleryBlock {
   layout: BlockLayout;
   images: string[];
   caption?: string;
+  /** trio only — which side the first (tall) image sits on. Default left. */
+  side?: 'left' | 'right';
 }
 
 export interface Project {
