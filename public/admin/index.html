@@ -8,6 +8,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <script>
+      // Editor panes should scroll independently — Sveltia defaults
+      // "Sync Scrolling" to on (Editor Options menu). Seed the pref off
+      // once; the menu toggle still controls it afterwards.
+      try {
+        const k = 'sveltia-cms.prefs';
+        const p = JSON.parse(localStorage.getItem(k) || '{}');
+        const ev = p['entry-view'] || {};
+        if (ev.syncScrolling === undefined) {
+          ev.syncScrolling = false;
+          p['entry-view'] = ev;
+          localStorage.setItem(k, JSON.stringify(p));
+        }
+      } catch {}
+    </script>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
     <script>
       // Storefront-matching preview for the Projects collection.
