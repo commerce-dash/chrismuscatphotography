@@ -14,14 +14,14 @@
       // (tracked separately so an existing saved pref is corrected too);
       // the menu toggle still controls it afterwards.
       try {
-        if (!localStorage.getItem('cmp-scroll-sync-seeded')) {
+        if (!localStorage.getItem('cmp-scroll-sync-v2')) {
           const k = 'sveltia-cms.prefs';
           const p = JSON.parse(localStorage.getItem(k) || '{}');
           const ev = p['entry-view'] || {};
           ev.syncScrolling = false;
           p['entry-view'] = ev;
           localStorage.setItem(k, JSON.stringify(p));
-          localStorage.setItem('cmp-scroll-sync-seeded', '1');
+          localStorage.setItem('cmp-scroll-sync-v2', '1');
         }
       } catch {}
     </script>
