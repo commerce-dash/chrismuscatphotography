@@ -710,6 +710,28 @@ button {
 .block--trio--right .block__item--1,
 .block--trio--right .block__item--2 { grid-column: 1; }
 
+/* Mosaic — a seamless wall of square tiles, edge-to-edge with no gutter.
+   auto-fill + minmax keeps tiles ~square while always filling the row;
+   every image is center-cropped to 1:1 so mixed orientations read as a
+   single pattern (doors, windows, textures…). */
+.block--mosaic {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(140px, 16vw, 260px), 1fr)
+  );
+  gap: 0;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.block--mosaic .oi {
+  aspect-ratio: 1 !important;
+}
+
+.block--mosaic .block__caption {
+  margin-top: 12px;
+  padding-inline: var(--gutter);
+}
+
 .block__item {
   display: block;
 }

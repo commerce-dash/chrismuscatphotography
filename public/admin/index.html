@@ -157,6 +157,13 @@
         .block--trio--right .block__item--0 { grid-column: 2; }
         .block--trio--right .block__item--1,
         .block--trio--right .block__item--2 { grid-column: 1; }
+        .block--mosaic {
+          grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+          gap: 0;
+          margin-inline: -24px;
+        }
+        .block--mosaic .block__item img { aspect-ratio: 1; height: 100%; object-fit: cover; }
+        .block--mosaic .block__caption { margin-top: 12px; padding-inline: 24px; }
         .block__item { margin: 0; }
         .block__item img { display: block; width: 100%; height: auto; }
         .block__caption {

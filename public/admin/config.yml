@@ -94,12 +94,12 @@ collections:
       - label: Gallery
         name: blocks
         widget: list
-        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric, trio = one tall beside two stacked.'
+        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric, trio = one tall beside two stacked, mosaic = seamless square-tile grid.'
         fields:
           - label: Layout
             name: layout
             widget: select
-            options: [full, feature, pair, offset, trio]
+            options: [full, feature, pair, offset, trio, mosaic]
           - label: Anchor side
             name: side
             widget: select

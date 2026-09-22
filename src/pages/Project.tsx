@@ -94,7 +94,9 @@ export function Project({ slug }: { slug: string }) {
                           ? '100vw'
                           : block.layout === 'feature'
                             ? '(min-width: 1024px) 72vw, 100vw'
-                            : '(min-width: 768px) 50vw, 100vw'
+                            : block.layout === 'mosaic'
+                              ? '(min-width: 1024px) 20vw, (min-width: 768px) 25vw, 50vw'
+                              : '(min-width: 768px) 50vw, 100vw'
                       }
                     />
                   </button>

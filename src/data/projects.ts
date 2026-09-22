@@ -13,6 +13,7 @@
  *   pair    — two photographs, side by side
  *   offset  — photographs on an asymmetric staggered grid
  *   trio    — one tall anchor beside two stacked horizontals
+ *   mosaic  — many photos as a seamless edge-to-edge square grid
  */
 
 export const CATEGORIES = [
@@ -28,7 +29,13 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number];
 
-export type BlockLayout = 'full' | 'feature' | 'pair' | 'offset' | 'trio';
+export type BlockLayout =
+  | 'full'
+  | 'feature'
+  | 'pair'
+  | 'offset'
+  | 'trio'
+  | 'mosaic';
 
 export interface GalleryBlock {
   layout: BlockLayout;
