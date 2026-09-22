@@ -250,6 +250,43 @@
         if (!sticky) setTimeout(() => (el.style.opacity = '0'), 6000);
       };
 
+      const makeGh = (token) => (path, opts = {}) =>
+        fetch(`https://api.github.com/repos/${SYNC_REPO}${path}`, {
+          ...opts,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+            ...(opts.headers || {}),
+          },
+        });
+
+      // Preferred: dispatch the workflow directly (needs Actions scope).
+      // Fallback: commit a trigger file (works with Contents-only tokens) —
+      // the push runs the sync workflow via its paths filter.
+      const triggerSync = async (gh) => {
+        const res = await gh(
+          `/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
+          { method: 'POST', body: JSON.stringify({ ref: 'main' }) }
+        );
+        if (res.ok) return 'Sync started — site redeploys in a few minutes.';
+
+        let sha;
+        const cur = await gh('/contents/.sync-trigger');
+        if (cur.ok) sha = (await cur.json()).sha;
+        const put = await gh('/contents/.sync-trigger', {
+          method: 'PUT',
+          body: JSON.stringify({
+            message: 'chore: trigger media sync',
+            content: btoa(`sync ${Date.now()}\n`),
+            branch: 'main',
+            ...(sha ? { sha } : {}),
+          }),
+        });
+        if (put.ok) return 'Sync queued — site redeploys in a few minutes.';
+        throw new Error(`HTTP ${put.status}`);
+      };
+
       const syncMedia = async () => {
         const btn = document.getElementById('sync-media-btn');
         btn.disabled = true;
@@ -257,46 +294,8 @@
         try {
           const token = await findGhToken();
           if (!token) throw new Error('not signed in');
-          const gh = (path, opts = {}) =>
-            fetch(`https://api.github.com/repos/${SYNC_REPO}${path}`, {
-              ...opts,
-              headers: {
-                Authorization: `Bearer ${token}`,
-                Accept: 'application/vnd.github+json',
-                'Content-Type': 'application/json',
-                ...(opts.headers || {}),
-              },
-            });
-
-          // Preferred: dispatch the workflow directly. Requires Actions scope.
-          const res = await gh(
-            `/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
-            { method: 'POST', body: JSON.stringify({ ref: 'main' }) }
-          );
-          if (res.ok) {
-            setSyncStatus('Sync started — site redeploys in a few minutes.');
-            return;
-          }
-
-          // Fallback: commit a trigger file — works with Contents-only tokens.
-          // The push event runs the sync workflow via its paths filter.
-          let sha;
-          const cur = await gh('/contents/.sync-trigger');
-          if (cur.ok) sha = (await cur.json()).sha;
-          const put = await gh('/contents/.sync-trigger', {
-            method: 'PUT',
-            body: JSON.stringify({
-              message: 'chore: trigger media sync',
-              content: btoa(`sync ${Date.now()}\n`),
-              branch: 'main',
-              ...(sha ? { sha } : {}),
-            }),
-          });
-          if (put.ok) {
-            setSyncStatus('Sync queued — site redeploys in a few minutes.');
-            return;
-          }
-          throw new Error(`HTTP ${put.status}`);
+          setSyncStatus(await triggerSync(makeGh(token)));
+          return;
         } catch (e) {
           setSyncStatus(
             `Couldn't trigger sync from here (${e.message}). Opening GitHub — click "Run workflow".`,
@@ -305,6 +304,162 @@
           window.open(SYNC_PAGE, '_blank', 'noopener');
         } finally {
           setTimeout(() => (btn.disabled = false), 30000);
+        }
+      };
+
+      // ---- Push local folder -------------------------------------------------
+      // "Sync media" runs on GitHub and can't see files dropped in the local
+      // uploads folder. This button uses the File System Access API (Chrome /
+      // Edge): pick the uploads folder once, then it diffs filenames against
+      // the repo, commits the new ones in a single commit, and fires the sync
+      // workflow — optimize, variants, alts, deploy — all in one click.
+      const IMG_RE = /\.(jpe?g|png|webp|avif|gif|tiff?)$/i;
+      const HANDLE_KEY = 'uploads-dir-handle';
+
+      const idb = () =>
+        new Promise((res, rej) => {
+          const r = indexedDB.open('cmp-admin', 1);
+          r.onupgradeneeded = () => r.result.createObjectStore('kv');
+          r.onsuccess = () => res(r.result);
+          r.onerror = () => rej(r.error);
+        });
+      const idbGet = async (k) => {
+        const db = await idb();
+        return new Promise((res) => {
+          const r = db.transaction('kv').objectStore('kv').get(k);
+          r.onsuccess = () => res(r.result);
+          r.onerror = () => res(undefined);
+        });
+      };
+      const idbSet = async (k, v) => {
+        const db = await idb();
+        return new Promise((res, rej) => {
+          const r = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k);
+          r.onsuccess = () => res();
+          r.onerror = () => rej(r.error);
+        });
+      };
+
+      const getUploadsDir = async () => {
+        let h = await idbGet(HANDLE_KEY);
+        if (h) {
+          if ((await h.queryPermission({ mode: 'read' })) === 'granted') return h;
+          if ((await h.requestPermission({ mode: 'read' })) === 'granted') return h;
+        }
+        h = await showDirectoryPicker({ id: 'uploads' });
+        await idbSet(HANDLE_KEY, h);
+        return h;
+      };
+
+      const bufToBase64 = (buf) => {
+        const bytes = new Uint8Array(buf);
+        let s = '';
+        for (let i = 0; i < bytes.length; i += 0x8000)
+          s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+        return btoa(s);
+      };
+
+      const uploadLocal = async () => {
+        const btn = document.getElementById('push-local-btn');
+        btn.disabled = true;
+        try {
+          if (!window.showDirectoryPicker)
+            throw new Error('needs Chrome or Edge');
+          const token = await findGhToken();
+          if (!token) throw new Error('not signed in');
+          const gh = makeGh(token);
+
+          setSyncStatus('Reading local folder…', true);
+          const dir = await getUploadsDir();
+          const files = [];
+          for await (const entry of dir.values()) {
+            if (entry.kind === 'file' && IMG_RE.test(entry.name))
+              files.push(entry);
+          }
+          if (!files.length) {
+            setSyncStatus('No image files found in that folder.', true);
+            return;
+          }
+
+          setSyncStatus(`Checking ${files.length} file(s) against the repo…`, true);
+          const tree = await (
+            await gh('/git/trees/main?recursive=1')
+          ).json();
+          const remote = new Set(
+            (tree.tree || [])
+              .map((n) => n.path)
+              .filter((p) => p.startsWith('public/images/uploads/'))
+              .map((p) => p.split('/').pop())
+          );
+          const fresh = files.filter((f) => !remote.has(f.name));
+          if (!fresh.length) {
+            setSyncStatus(
+              'Everything in that folder is already in the repo — use ↻ Sync media to process it.'
+            );
+            return;
+          }
+
+          // One commit for the whole batch: blobs → tree → commit → ref.
+          const head = await (await gh('/git/ref/heads/main')).json();
+          const base = await (
+            await gh(`/git/commits/${head.object.sha}`)
+          ).json();
+          const items = [];
+          let i = 0;
+          for (const fh of fresh) {
+            i++;
+            setSyncStatus(`Uploading ${i}/${fresh.length} — ${fh.name}`, true);
+            const buf = await (await fh.getFile()).arrayBuffer();
+            const blob = await (
+              await gh('/git/blobs', {
+                method: 'POST',
+                body: JSON.stringify({
+                  content: bufToBase64(buf),
+                  encoding: 'base64',
+                }),
+              })
+            ).json();
+            items.push({
+              path: `public/images/uploads/${fh.name}`,
+              mode: '100644',
+              type: 'blob',
+              sha: blob.sha,
+            });
+          }
+          const newTree = await (
+            await gh('/git/trees', {
+              method: 'POST',
+              body: JSON.stringify({ base_tree: base.tree.sha, tree: items }),
+            })
+          ).json();
+          const newCommit = await (
+            await gh('/git/commits', {
+              method: 'POST',
+              body: JSON.stringify({
+                message: `media: upload ${fresh.length} file(s) from local folder`,
+                tree: newTree.sha,
+                parents: [head.object.sha],
+              }),
+            })
+          ).json();
+          const upd = await gh('/git/refs/heads/main', {
+            method: 'PATCH',
+            body: JSON.stringify({ sha: newCommit.sha }),
+          });
+          if (!upd.ok)
+            throw new Error(
+              `ref update HTTP ${upd.status} — someone else committed first, click again to retry`
+            );
+
+          setSyncStatus(
+            `${fresh.length} file(s) pushed — starting sync…`,
+            true
+          );
+          setSyncStatus(await triggerSync(gh));
+        } catch (e) {
+          setSyncStatus(`Local push failed (${e.message}).`, true);
+        } finally {
+          btn.disabled = false;
         }
       };
 
@@ -512,17 +667,19 @@
         const wrap = document.createElement('div');
         wrap.innerHTML = `
           <style>
-            #sync-media-btn {
-              position: fixed; right: 20px; bottom: 20px; z-index: 99999;
+            #sync-media-btn, #push-local-btn {
+              position: fixed; right: 20px; z-index: 99999;
               padding: 10px 18px; border-radius: 999px; cursor: pointer;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 600 12px/1 'Segoe UI', system-ui, sans-serif;
               letter-spacing: 0.08em; text-transform: uppercase;
             }
-            #sync-media-btn:hover { background: #33302a; }
-            #sync-media-btn:disabled { opacity: 0.5; cursor: default; }
+            #sync-media-btn { bottom: 20px; }
+            #push-local-btn { bottom: 64px; }
+            #sync-media-btn:hover, #push-local-btn:hover { background: #33302a; }
+            #sync-media-btn:disabled, #push-local-btn:disabled { opacity: 0.5; cursor: default; }
             #sync-media-status {
-              position: fixed; right: 20px; bottom: 64px; z-index: 99999;
+              position: fixed; right: 20px; bottom: 108px; z-index: 99999;
               max-width: 280px; padding: 8px 14px; border-radius: 8px;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 12px/1.4 'Segoe UI', system-ui, sans-serif;
@@ -538,10 +695,12 @@
             }
           </style>
           <div id="sync-media-status"></div>
+          <button id="push-local-btn" type="button" title="Commit new files from your local uploads folder to the repo, then sync">⇪ Push local folder</button>
           <button id="sync-media-btn" type="button" title="Optimize new uploads, regenerate image sizes, redeploy">↻ Sync media</button>
         `;
         document.body.appendChild(wrap);
         document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
+        document.getElementById('push-local-btn').addEventListener('click', uploadLocal);
       });
     </script>
   </body>
