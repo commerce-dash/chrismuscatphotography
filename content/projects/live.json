@@ -13,8 +13,7 @@
   "tags": [
     "concert",
     "live music",
-    "stage",
-    "black and white"
+    "stage"
   ],
   "blocks": [
     {
@@ -35,7 +34,7 @@
     {
       "layout": "feature",
       "images": [
-        "/images/uploads/NIK_5286.webp"
+        "/images/uploads/NIK_5160.webp"
       ],
       "caption": ""
     },
@@ -62,18 +61,10 @@
       "caption": ""
     },
     {
-      "layout": "pair",
-      "images": [
-        "/images/uploads/NIK_5891-EDIT-2.webp",
-        "/images/uploads/NIK_6136-2.webp"
-      ],
-      "caption": ""
-    },
-    {
       "layout": "offset",
       "images": [
         "/images/uploads/NIK_0988-EDIT-3.webp",
-        "/images/uploads/NIK_5160.webp",
+        "/images/uploads/NIK_1573.webp",
         "/images/uploads/NIK_1898-EDIT.webp"
       ],
       "caption": ""
@@ -81,8 +72,24 @@
     {
       "layout": "pair",
       "images": [
-        "/images/uploads/NIK_6746.webp",
-        "/images/uploads/NIK_6499.webp"
+        "/images/uploads/NIK_5942.webp",
+        "/images/uploads/NIK_5955.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_6262.webp",
+        "/images/uploads/NIK_6276.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "pair",
+      "images": [
+        "/images/uploads/NIK_6540.webp",
+        "/images/uploads/NIK_6161.webp"
       ],
       "caption": ""
     },
