@@ -17,77 +17,84 @@
   "blocks": [
     {
       "layout": "full",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_0619 (1).webp"
       ],
-      "caption": "Angkor Wat, Siem Reap"
+      "caption": "Angkor Wat, Siem Reap",
+      "side": "left"
     },
     {
       "layout": "pair",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_9564.webp",
         "/images/uploads/NIK_1646.webp"
       ],
-      "caption": ""
+      "caption": "",
+      "side": "left"
     },
     {
       "layout": "pair",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_0986.webp",
         "/images/uploads/NIK_1211.webp"
       ],
-      "caption": ""
+      "caption": "",
+      "side": "left"
     },
     {
       "layout": "full",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_1480.webp"
       ],
-      "caption": "Angkor Wat, Siem Reap"
+      "caption": "Angkor Wat, Siem Reap",
+      "side": "left"
     },
     {
       "layout": "full",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_9911.webp"
       ],
-      "caption": ""
+      "caption": "",
+      "side": "left"
     },
     {
       "layout": "pair",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_9749.webp",
         "/images/uploads/NIK_9805.webp"
       ],
-      "caption": "Mekong River"
+      "caption": "Mekong River",
+      "side": "left"
     },
     {
       "layout": "full",
-      "side": "left",
       "images": [
         "/images/uploads/DSCF2657.webp"
       ],
-      "caption": "Russian Market, Phonm Penh"
+      "caption": "Russian Market, Phonm Penh",
+      "side": "left"
     },
     {
       "layout": "full",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_0358.webp"
       ],
-      "caption": ""
+      "caption": "",
+      "side": "left"
     },
     {
       "layout": "pair",
-      "side": "left",
       "images": [
         "/images/uploads/NIK_9885.webp",
         "/images/uploads/NIK_9828.webp"
+      ],
+      "caption": "",
+      "side": "left"
+    },
+    {
+      "layout": "full",
+      "images": [
+        "/images/uploads/NIK_1441.webp"
       ],
       "caption": ""
     }
