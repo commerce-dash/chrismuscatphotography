@@ -140,7 +140,6 @@ collections:
               - label: Images
                 name: images
                 widget: list
-                hint: 'First image is the tall anchor, next two stack beside it'
                 field: { label: Image, name: image, widget: image }
               - label: Anchor side
                 name: side
