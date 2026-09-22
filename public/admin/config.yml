@@ -91,30 +91,73 @@ collections:
         widget: list
         required: false
         field: { label: Tag, name: tag, widget: string }
+      # Variable-type list: the layout is chosen when adding a block, so
+      # each type only shows the fields it needs (e.g. "Anchor side" only
+      # exists on trio). typeKey keeps the JSON key as `layout`, so the
+      # site, preview and existing content are unchanged.
       - label: Gallery
         name: blocks
         widget: list
-        hint: 'Compose the project page: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric, trio = one tall beside two stacked, mosaic = seamless square-tile grid.'
-        fields:
-          - label: Layout
-            name: layout
-            widget: select
-            options: [full, feature, pair, offset, trio, mosaic]
-          - label: Anchor side
-            name: side
-            widget: select
-            required: false
-            default: left
-            options:
-              - { label: Left, value: left }
-              - { label: Right, value: right }
-            hint: 'trio only — which side the first (tall) image sits on'
-          - label: Images
-            name: images
-            widget: list
-            hint: 'trio: first image is the tall anchor, next two stack beside it'
-            field: { label: Image, name: image, widget: image }
-          - { label: Caption, name: caption, widget: string, required: false }
+        typeKey: layout
+        hint: 'Add a block and pick its layout: full = edge-to-edge, feature = large inset, pair = two side by side, offset = asymmetric, trio = one tall beside two stacked, mosaic = seamless portrait-tile grid.'
+        types:
+          - name: full
+            label: Full — edge-to-edge
+            widget: object
+            fields:
+              - &gallery-images
+                label: Images
+                name: images
+                widget: list
+                field: { label: Image, name: image, widget: image }
+              - &gallery-caption
+                label: Caption
+                name: caption
+                widget: string
+                required: false
+          - name: feature
+            label: Feature — large inset
+            widget: object
+            fields:
+              - *gallery-images
+              - *gallery-caption
+          - name: pair
+            label: Pair — two side by side
+            widget: object
+            fields:
+              - *gallery-images
+              - *gallery-caption
+          - name: offset
+            label: Offset — asymmetric grid
+            widget: object
+            fields:
+              - *gallery-images
+              - *gallery-caption
+          - name: trio
+            label: Trio — tall anchor + two stacked
+            widget: object
+            fields:
+              - label: Images
+                name: images
+                widget: list
+                hint: 'First image is the tall anchor, next two stack beside it'
+                field: { label: Image, name: image, widget: image }
+              - label: Anchor side
+                name: side
+                widget: select
+                required: false
+                default: left
+                options:
+                  - { label: Left, value: left }
+                  - { label: Right, value: right }
+                hint: 'Which side the tall image sits on'
+              - *gallery-caption
+          - name: mosaic
+            label: Mosaic — seamless tile grid
+            widget: object
+            fields:
+              - *gallery-images
+              - *gallery-caption
 
   # ------------------------------------------------------------------
   - name: settings
