@@ -1,0 +1,25 @@
+{
+  "title": "Germany",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
+  "category": "Travel",
+  "year": 2011,
+  "yearTo": null,
+  "location": "",
+  "description": "",
+  "coverImage": "/images/uploads/NIK_2162.webp",
+  "featured": false,
+  "order": null,
+  "tags": [],
+  "blocks": [
+    {
+      "layout": "full",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_2565.webp"
+      ],
+      "caption": ""
+    }
+  ]
+}
