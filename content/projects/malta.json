@@ -66,6 +66,43 @@
         "/images/uploads/NIK_0440-Edit.webp",
         "/images/uploads/NIK_0730_HDR.webp",
         "/images/uploads/NIK_0014-Edit_HDR.webp",
+        "/images/uploads/NIK_2494-EDIT.webp",
+        "/images/uploads/NIK_2670-Edit.webp",
+        "/images/uploads/NIK_2840-EDIT.webp",
+        "/images/uploads/NIK_2872.webp",
+        "/images/uploads/NIK_3034.webp",
+        "/images/uploads/NIK_3286-Edit.webp",
+        "/images/uploads/NIK_3532-Edit.webp",
+        "/images/uploads/NIK_3778.webp",
+        "/images/uploads/NIK_4295.webp",
+        "/images/uploads/NIK_4239.webp",
+        "/images/uploads/NIK_4128.webp",
+        "/images/uploads/NIK_4329.webp",
+        "/images/uploads/NIK_4344.webp",
+        "/images/uploads/NIK_4551-Edit.webp",
+        "/images/uploads/NIK_4572.webp",
+        "/images/uploads/NIK_4935-Edit-2.webp",
+        "/images/uploads/NIK_5695.webp",
+        "/images/uploads/NIK_5706-Edit.webp",
+        "/images/uploads/NIK_5455.webp",
+        "/images/uploads/NIK_5720-EDIT.webp",
+        "/images/uploads/NIK_5802.webp",
+        "/images/uploads/NIK_5814-EDIT.webp",
+        "/images/uploads/NIK_6341.webp",
+        "/images/uploads/NIK_6975-EDIT.webp",
+        "/images/uploads/NIK_7355-EDIT.webp",
+        "/images/uploads/NIK_7415.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_0757.webp",
+        "/images/uploads/NIK_0440-Edit.webp",
+        "/images/uploads/NIK_0730_HDR.webp",
+        "/images/uploads/NIK_0014-Edit_HDR.webp",
         "/images/uploads/fireworks.webp",
         "/images/uploads/NIK_2494-EDIT.webp",
         "/images/uploads/NIK_2670-Edit.webp",
@@ -102,6 +139,14 @@
       "images": [
         "/images/uploads/NIK_9511.webp",
         "/images/uploads/NIK_9095.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "trio",
+      "side": "left",
+      "images": [
+        "/images/uploads/fireworks.webp"
       ],
       "caption": ""
     }
