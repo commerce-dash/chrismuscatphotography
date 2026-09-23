@@ -15,6 +15,7 @@
  */
 
 import { mkdir, writeFile, access, readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -132,10 +133,20 @@ async function processUploads(meta, placeholders) {
   for (const file of uploads) {
     const name = file.slice(0, -extname(file).length);
     const firstWidth = OUTPUT_WIDTHS[0];
-    if (meta[name] && (await exists(join(genDir, `${name}-${firstWidth}.webp`)))) continue;
 
+    // A master can be replaced under the same filename (e.g. a CMS upload
+    // with a colliding name). Fingerprint the file so stale variants,
+    // meta and placeholders are regenerated instead of served forever.
     const abs = join(outDir, file);
-    const image = sharp(abs);
+    const buf = await readFile(abs);
+    const sha = createHash('sha256').update(buf).digest('hex').slice(0, 16);
+    if (
+      meta[name]?.sha === sha &&
+      (await exists(join(genDir, `${name}-${firstWidth}.webp`)))
+    )
+      continue;
+
+    const image = sharp(buf);
     const info = await image.metadata();
     const w0 = info.width ?? OUTPUT_WIDTHS[OUTPUT_WIDTHS.length - 1];
     const h0 = info.height ?? w0;
@@ -157,7 +168,7 @@ async function processUploads(meta, placeholders) {
       .webp({ quality: 40 })
       .toBuffer();
 
-    meta[name] = { w: w0, h: h0, widths };
+    meta[name] = { w: w0, h: h0, widths, sha };
     placeholders[name] = `data:image/webp;base64,${placeholder.toString('base64')}`;
     processed++;
   }
