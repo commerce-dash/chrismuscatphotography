@@ -22,10 +22,11 @@
       "caption": ""
     },
     {
-      "layout": "full",
+      "layout": "feature",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_2162.webp"
+        "/images/uploads/NIK_2162.webp",
+        "/images/uploads/NIK_1680.webp"
       ],
       "caption": ""
     }
