@@ -15,6 +15,7 @@
   "blocks": [
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5657-Edit.webp"
       ],
@@ -22,6 +23,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4208.webp",
         "/images/uploads/NIK_0703-Edit.webp"
@@ -35,6 +37,25 @@
         "/images/uploads/NIK_5462.webp"
       ],
       "caption": "Gozo, Malta"
+    },
+    {
+      "layout": "mosaic",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_7686-Edit.webp",
+        "/images/uploads/NIK_7690.webp",
+        "/images/uploads/NIK_7713.webp",
+        "/images/uploads/NIK_7716.webp",
+        "/images/uploads/NIK_7741.webp",
+        "/images/uploads/NIK_7745-Edit.webp",
+        "/images/uploads/NIK_7764-Edit.webp",
+        "/images/uploads/NIK_7767.webp",
+        "/images/uploads/NIK_7781.webp",
+        "/images/uploads/NIK_7779.webp",
+        "/images/uploads/NIK_7770-Edit.webp",
+        "/images/uploads/NIK_7770-Edit (1).webp"
+      ],
+      "caption": ""
     }
   ]
 }
