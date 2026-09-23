@@ -15,6 +15,7 @@
   "blocks": [
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_1599.webp"
       ],
@@ -22,9 +23,18 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5684.webp",
         "/images/uploads/NIK_1701.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/_DSC4213.webp"
       ],
       "caption": ""
     }
