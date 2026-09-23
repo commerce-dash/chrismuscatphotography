@@ -23,7 +23,7 @@
       "caption": ""
     },
     {
-      "layout": "full",
+      "layout": "feature",
       "side": "left",
       "images": [
         "/images/uploads/NIK_2582.webp"
@@ -40,11 +40,10 @@
       "caption": ""
     },
     {
-      "layout": "full",
+      "layout": "feature",
       "side": "left",
       "images": [
-        "/images/uploads/0305.webp",
-        "/images/uploads/194_9488.webp"
+        "/images/uploads/NIK_8705.webp"
       ],
       "caption": ""
     }
