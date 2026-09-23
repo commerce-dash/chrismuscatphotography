@@ -39,8 +39,15 @@
       "layout": "full",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_5743.webp",
         "/images/uploads/NIK_5764.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_5743.webp"
       ],
       "caption": ""
     },
