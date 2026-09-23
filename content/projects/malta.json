@@ -30,13 +30,11 @@
     },
     {
       "layout": "trio",
+      "side": "left",
       "images": [
-        "/images/uploads/NIK_0954-EDIT-2.webp",
-        "/images/uploads/NIK_1095-2.webp",
         "/images/uploads/NIK_5462.webp"
       ],
-      "caption": "Gozo, Malta",
-      "side": "left"
+      "caption": "Gozo, Malta"
     }
   ]
 }
