@@ -1,7 +1,11 @@
 {
-  "title": "Pets",
+  "title": "Pets & Wildlife",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
   "category": "Animals",
   "year": 2020,
+  "yearTo": null,
   "location": "Misc",
   "description": "Patient portraits of the wild and the tame — character, texture, and the unguarded second before they look away.",
   "coverImage": "/images/uploads/2007_01240013 (1).webp",
@@ -11,6 +15,7 @@
   "blocks": [
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/_DSC5425.webp",
         "/images/uploads/145-4519_IMG.webp"
@@ -19,6 +24,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_2582.webp"
       ],
@@ -26,6 +32,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/185_8544.webp",
         "/images/uploads/185_8501.webp"
@@ -34,6 +41,7 @@
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/0305.webp",
         "/images/uploads/194_9488.webp"
