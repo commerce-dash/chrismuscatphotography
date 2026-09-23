@@ -21,13 +21,15 @@
   "blocks": [
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/DSC_6195.webp"
       ],
       "caption": ""
     },
     {
-      "layout": "full",
+      "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/DSC_3289.webp"
       ],
@@ -35,6 +37,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/DSC_6187.webp",
         "/images/uploads/DSC_6197.webp"
@@ -43,6 +46,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_5615.webp"
       ],
@@ -50,6 +54,7 @@
     },
     {
       "layout": "pair",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_4333.webp",
         "/images/uploads/NIK_4347.webp"
@@ -58,6 +63,7 @@
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/DSC_2955.webp"
       ],
