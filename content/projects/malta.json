@@ -22,7 +22,7 @@
       "caption": ""
     },
     {
-      "layout": "full",
+      "layout": "feature",
       "side": "left",
       "images": [
         "/images/uploads/NIK_4208.webp",
@@ -31,10 +31,11 @@
       "caption": ""
     },
     {
-      "layout": "trio",
+      "layout": "feature",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_5462.webp"
+        "/images/uploads/NIK_5462.webp",
+        "/images/uploads/NIK_0954-EDIT.webp"
       ],
       "caption": "Gozo, Malta"
     },
