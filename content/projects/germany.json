@@ -29,6 +29,25 @@
         "/images/uploads/NIK_1680.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "feature",
+      "side": "left",
+      "images": [
+        "/images/uploads/DSC_7803.webp",
+        "/images/uploads/DSC_7955.webp",
+        "/images/uploads/DSC_7994 (1).webp",
+        "/images/uploads/DSC_8087.webp",
+        "/images/uploads/DSC_8106.webp",
+        "/images/uploads/NIK_3645.webp",
+        "/images/uploads/NIK_7993.webp",
+        "/images/uploads/NIK_8043.webp",
+        "/images/uploads/NIK_9361-2.webp",
+        "/images/uploads/NIK_9622.webp",
+        "/images/uploads/NIK_9654.webp",
+        "/images/uploads/NIK_9772.webp"
+      ],
+      "caption": ""
     }
   ]
 }
