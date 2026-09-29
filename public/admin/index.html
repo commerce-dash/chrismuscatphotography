@@ -537,7 +537,7 @@
             return;
           }
           // Limit batch size to avoid browser/API timeouts — user can click again.
-          const BATCH_LIMIT = 20;
+          const BATCH_LIMIT = 10;
           if (fresh.length > BATCH_LIMIT) {
             setSyncStatus(
               `${fresh.length} new files — batch limit ${BATCH_LIMIT}. Upload ${BATCH_LIMIT} now, then click again for the rest.`,
@@ -573,10 +573,10 @@
             setSyncStatus(`Uploading ${i}/${fresh.length} — ${fh.name}`, true);
             const file = await fh.getFile();
             const buf = await file.arrayBuffer();
-            // GitHub blobs max 100MB — fail early with clear guidance
-            if (buf.byteLength > 100 * 1024 * 1024)
+            // GitHub recommends max 50MB per file — fail early with clear guidance
+            if (buf.byteLength > 50 * 1024 * 1024)
               throw new Error(
-                `${fh.name} is ${(buf.byteLength / 1e6).toFixed(1)}MB — max 100MB per file`
+                `${fh.name} is ${(buf.byteLength / 1e6).toFixed(1)}MB — max 50MB per file (GitHub recommendation)`
               );
             const blob = await (
               await gh('/git/blobs', {
@@ -640,13 +640,15 @@
           const detail =
             msg.includes('413') || msg.includes('payload too large')
               ? 'File too large — upload smaller batches'
-              : msg.includes('409') || msg.includes('ref already exists')
-                ? 'Conflict — someone else committed, click to retry'
-                : msg.includes('401') || msg.includes('403')
-                  ? 'Auth expired — refresh /admin and try again'
-                  : msg.includes('net::ERR') || msg.includes('fetch')
-                    ? 'Network error — check connection and retry'
-                    : msg;
+              : msg.includes('max 50MB') || msg.includes('50MB per file')
+                ? 'Remove files over 50MB and retry'
+                : msg.includes('409') || msg.includes('ref already exists')
+                  ? 'Conflict — someone else committed, click to retry'
+                  : msg.includes('401') || msg.includes('403')
+                    ? 'Auth expired — refresh /admin and try again'
+                    : msg.includes('net::ERR') || msg.includes('fetch')
+                      ? 'Network error — check connection and retry'
+                      : msg;
           setSyncStatus(`Local push failed: ${detail}`, true);
         } finally {
           btn.disabled = false;
