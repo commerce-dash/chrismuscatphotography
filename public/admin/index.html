@@ -472,7 +472,13 @@
           if ((await h.queryPermission({ mode: 'read' })) === 'granted') return h;
           if ((await h.requestPermission({ mode: 'read' })) === 'granted') return h;
         }
-        h = await showDirectoryPicker({ id: 'uploads' });
+        try {
+          h = await showDirectoryPicker({ id: 'uploads' });
+        } catch (e) {
+          throw new Error(
+            `Folder picker failed (${e.name === 'AbortError' ? 'cancelled' : e.message})`
+          );
+        }
         await idbSet(HANDLE_KEY, h);
         return h;
       };
@@ -489,8 +495,11 @@
         const btn = document.getElementById('push-local-btn');
         btn.disabled = true;
         try {
-          if (!window.showDirectoryPicker)
-            throw new Error('needs Chrome or Edge');
+          if (!window.showDirectoryPicker) {
+            throw new Error(
+              'File System Access API not available — use Chrome 86+ or Edge 86+ in a standard tab (not incognito)'
+            );
+          }
           const token = await findGhToken();
           if (!token) throw new Error('not signed in');
           const gh = makeGh(token);

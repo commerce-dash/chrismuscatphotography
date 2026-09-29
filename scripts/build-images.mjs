@@ -125,9 +125,25 @@ async function processUploads(meta, placeholders) {
     .filter((f) => typeof f === 'string')
     .map((f) => f.replace(/\\/g, '/'));
 
-  const uploads = files.filter(
-    (f) => ORIGINAL.test(f) && !GENERATED.test(f) && !f.startsWith('generated/')
-  );
+  // When both .jpg and .webp exist (e.g. after a failed upload), prefer
+  // the JPEG as the source and skip the WebP duplicate.
+  const seen = new Set();
+  const uploads = files
+    .filter((f) => ORIGINAL.test(f) && !GENERATED.test(f) && !f.startsWith('generated/'))
+    .filter((f) => {
+      const name = f.slice(0, -extname(f).length);
+      if (seen.has(name)) return false;
+      seen.add(name);
+      return true;
+    })
+    .sort((a, b) => {
+      // Prefer JPEG over WebP when both exist
+      const pa = extname(a).toLowerCase();
+      const pb = extname(b).toLowerCase();
+      if (pa === '.jpg' && pb === '.webp') return -1;
+      if (pa === '.webp' && pb === '.jpg') return 1;
+      return 0;
+    });
   let processed = 0;
 
   for (const file of uploads) {
