@@ -558,10 +558,14 @@
           setSyncStatus(`Uploading ${fresh.length} file(s) (${sizeStr})…`, true);
 
           // One commit for the whole batch: blobs → tree → commit → ref.
-          const head = await (await gh('/git/ref/heads/main')).json();
-          const base = await (
-            await gh(`/git/commits/${head.object.sha}`)
-          ).json();
+          // Retry conflicts automatically once by refetching the current head.
+          let retries = 0;
+          let newCommit;
+          while (retries < 2) {
+            const head = await (await gh('/git/ref/heads/main')).json();
+            const base = await (
+              await gh(`/git/commits/${head.object.sha}`)
+            ).json();
           const items = [];
           let i = 0;
           for (const fh of fresh) {
@@ -596,7 +600,7 @@
               body: JSON.stringify({ base_tree: base.tree.sha, tree: items }),
             })
           ).json();
-          const newCommit = await (
+          newCommit = await (
             await gh('/git/commits', {
               method: 'POST',
               body: JSON.stringify({
@@ -610,10 +614,20 @@
             method: 'PATCH',
             body: JSON.stringify({ sha: newCommit.sha }),
           });
-          if (!upd.ok)
+          if (upd.ok) break;
+          if (upd.status === 409 && retries < 1) {
+            retries++;
+            setSyncStatus('Conflict detected — retrying…', true);
+            continue;
+          }
+          const body = await upd.text();
+          if (upd.status === 422) {
             throw new Error(
-              `ref update HTTP ${upd.status} — someone else committed first, click again to retry`
+              `Invalid payload (422): ${body || 'unknown'}. Try a smaller batch or refresh /admin.`
             );
+          }
+          throw new Error(`ref update HTTP ${upd.status}: ${body}`);
+          }
 
           setSyncStatus(
             `${fresh.length} file(s) pushed — starting sync…`,
