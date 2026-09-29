@@ -15,14 +15,17 @@
   "blocks": [
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_8967.webp",
-        "/images/uploads/NIK_8987.webp"
+        "/images/uploads/NIK_8987.webp",
+        "/images/uploads/NIK_9156.webp"
       ],
       "caption": ""
     },
     {
       "layout": "feature",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_8918.webp"
       ],
@@ -30,19 +33,23 @@
     },
     {
       "layout": "trio",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_0581.webp",
         "/images/uploads/NIK_7348.webp",
         "/images/uploads/NIK_9421.webp"
       ],
-      "caption": "",
-      "side": "left"
+      "caption": ""
     },
     {
       "layout": "full",
+      "side": "left",
       "images": [
         "/images/uploads/NIK_9360.webp",
-        "/images/uploads/NIK_9156.webp"
+        "/images/uploads/NIK_0561.webp",
+        "/images/uploads/NIK_4309.webp",
+        "/images/uploads/NIK_9094.webp",
+        "/images/uploads/NIK_9538.webp"
       ],
       "caption": ""
     }
