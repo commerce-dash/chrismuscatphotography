@@ -527,6 +527,26 @@
             );
             return;
           }
+          // Limit batch size to avoid browser/API timeouts — user can click again.
+          const BATCH_LIMIT = 20;
+          if (fresh.length > BATCH_LIMIT) {
+            setSyncStatus(
+              `${fresh.length} new files — batch limit ${BATCH_LIMIT}. Upload ${BATCH_LIMIT} now, then click again for the rest.`,
+              true
+            );
+            fresh.length = BATCH_LIMIT;
+          }
+          // Show total size so users can spot problematic files before upload.
+          let totalBytes = 0;
+          for (const f of fresh) {
+            const sz = (await f.getFile()).size;
+            totalBytes += sz;
+          }
+          const sizeStr =
+            totalBytes > 10 * 1024 * 1024
+              ? `${(totalBytes / 1e6).toFixed(1)}MB`
+              : `${(totalBytes / 1e3).toFixed(0)}KB`;
+          setSyncStatus(`Uploading ${fresh.length} file(s) (${sizeStr})…`, true);
 
           // One commit for the whole batch: blobs → tree → commit → ref.
           const head = await (await gh('/git/ref/heads/main')).json();
@@ -538,7 +558,13 @@
           for (const fh of fresh) {
             i++;
             setSyncStatus(`Uploading ${i}/${fresh.length} — ${fh.name}`, true);
-            const buf = await (await fh.getFile()).arrayBuffer();
+            const file = await fh.getFile();
+            const buf = await file.arrayBuffer();
+            // GitHub blobs max 100MB — fail early with clear guidance
+            if (buf.byteLength > 100 * 1024 * 1024)
+              throw new Error(
+                `${fh.name} is ${(buf.byteLength / 1e6).toFixed(1)}MB — max 100MB per file`
+              );
             const blob = await (
               await gh('/git/blobs', {
                 method: 'POST',
@@ -586,7 +612,19 @@
           );
           setSyncStatus(await triggerSync(gh));
         } catch (e) {
-          setSyncStatus(`Local push failed (${e.message}).`, true);
+          const msg = e.message || String(e);
+          // Common GitHub API errors surfaced clearly
+          const detail =
+            msg.includes('413') || msg.includes('payload too large')
+              ? 'File too large — upload smaller batches'
+              : msg.includes('409') || msg.includes('ref already exists')
+                ? 'Conflict — someone else committed, click to retry'
+                : msg.includes('401') || msg.includes('403')
+                  ? 'Auth expired — refresh /admin and try again'
+                  : msg.includes('net::ERR') || msg.includes('fetch')
+                    ? 'Network error — check connection and retry'
+                    : msg;
+          setSyncStatus(`Local push failed: ${detail}`, true);
         } finally {
           btn.disabled = false;
         }
