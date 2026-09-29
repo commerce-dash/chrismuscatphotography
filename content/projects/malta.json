@@ -74,20 +74,17 @@
       "layout": "feature",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_0757.webp",
         "/images/uploads/NIK_0440-Edit.webp",
+        "/images/uploads/NIK_0757.webp",
         "/images/uploads/NIK_0730_HDR.webp",
         "/images/uploads/NIK_2494-EDIT.webp",
         "/images/uploads/NIK_2670-Edit.webp",
-        "/images/uploads/NIK_2840-EDIT.webp",
-        "/images/uploads/NIK_3034.webp",
         "/images/uploads/NIK_3286-Edit.webp",
+        "/images/uploads/NIK_3034.webp",
         "/images/uploads/NIK_4935-Edit-2.webp",
-        "/images/uploads/NIK_5706-Edit.webp",
-        "/images/uploads/NIK_6341.webp",
-        "/images/uploads/NIK_6975-EDIT.webp",
         "/images/uploads/NIK_7355-EDIT.webp",
-        "/images/uploads/NIK_7415.webp"
+        "/images/uploads/NIK_7415.webp",
+        "/images/uploads/NIK_6975-EDIT.webp"
       ],
       "caption": ""
     },
@@ -122,21 +119,9 @@
       "layout": "feature",
       "side": "left",
       "images": [
-        "/images/uploads/NIK_0757.webp",
-        "/images/uploads/NIK_0440-Edit.webp",
-        "/images/uploads/NIK_0730_HDR.webp",
-        "/images/uploads/NIK_0014-Edit_HDR.webp",
-        "/images/uploads/NIK_2494-EDIT.webp",
-        "/images/uploads/NIK_2670-Edit.webp",
         "/images/uploads/NIK_2840-EDIT.webp",
-        "/images/uploads/NIK_3034.webp",
-        "/images/uploads/NIK_3286-Edit.webp",
-        "/images/uploads/NIK_4935-Edit-2.webp",
         "/images/uploads/NIK_5706-Edit.webp",
-        "/images/uploads/NIK_6341.webp",
-        "/images/uploads/NIK_6975-EDIT.webp",
-        "/images/uploads/NIK_7355-EDIT.webp",
-        "/images/uploads/NIK_7415.webp"
+        "/images/uploads/NIK_6341.webp"
       ],
       "caption": ""
     },
