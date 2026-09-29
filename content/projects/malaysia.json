@@ -1,0 +1,37 @@
+{
+  "title": "Malaysia",
+  "slug": "",
+  "redirect": false,
+  "redirectFrom": [],
+  "category": "Travel",
+  "year": 2012,
+  "yearTo": null,
+  "location": "South East Asia",
+  "description": "",
+  "coverImage": "/images/uploads/NIK_4292.webp",
+  "featured": true,
+  "order": null,
+  "tags": [],
+  "blocks": [
+    {
+      "layout": "offset",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_4292.webp",
+        "/images/uploads/NIK_5947.webp",
+        "/images/uploads/NIK_6014.webp",
+        "/images/uploads/NIK_6868.webp",
+        "/images/uploads/NIK_6770.webp",
+        "/images/uploads/NIK_6774.webp",
+        "/images/uploads/NIK_7251.webp",
+        "/images/uploads/NIK_7312.webp",
+        "/images/uploads/NIK_7462.webp",
+        "/images/uploads/NIK_7545.webp",
+        "/images/uploads/NIK_7533-2.webp",
+        "/images/uploads/NIK_8159.webp",
+        "/images/uploads/NIK_8078.webp"
+      ],
+      "caption": ""
+    }
+  ]
+}
