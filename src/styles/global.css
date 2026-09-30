@@ -711,16 +711,17 @@ button {
 .block--trio--right .block__item--2 { grid-column: 1; }
 
 /* Mosaic — a seamless wall of portrait tiles, edge-to-edge with no gutter.
-   auto-fill + minmax keeps tiles consistent while always filling the row;
-   every image is center-cropped to 2:3 so mixed orientations read as a
-   single pattern (doors, windows, textures…). */
+   Desktop: exactly 7 tiles per row, extras hidden. Mobile: fills row,
+   no partial rows. Every image center-cropped to 2:3. */
 .block--mosaic {
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(clamp(140px, 16vw, 260px), 1fr)
-  );
+  grid-template-columns: repeat(7, 1fr);
   gap: 0;
   margin-inline: calc(var(--gutter) * -1);
+}
+
+/* Hide tiles beyond the 7th per row */
+.block--mosaic .block__item:nth-child(n+8) {
+  display: none;
 }
 
 .block--mosaic .oi {
@@ -1477,6 +1478,17 @@ button {
   }
 }
 
+@media (max-width: 1023px) {
+  /* Tablet mosaic: 4 columns, hide items beyond last full row */
+  .block--mosaic {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .block--mosaic .block__item:nth-child(n+5) {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   :root {
     --nav-h: 72px;
@@ -1529,6 +1541,15 @@ button {
 
   .block--trio .block__item--0 .oi {
     aspect-ratio: 3 / 4 !important;
+  }
+
+  /* Mobile mosaic: 2 columns, hide items beyond last full row */
+  .block--mosaic {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .block--mosaic .block__item:nth-child(n+3) {
+    display: none;
   }
 
   .block--feature {
