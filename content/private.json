@@ -1,4 +1,27 @@
 {
   "title": "Private Galleries",
-  "galleries": []
+  "galleries": [
+    {
+      "title": "Lillian - Color",
+      "slug": "lillian-color",
+      "coverImage": "/images/uploads/NIK_6494.webp",
+      "description": "Color portraits of Lillian",
+      "images": [
+        "/images/uploads/NIK_6494.webp",
+        "/images/uploads/NIK_6499.webp",
+        "/images/uploads/NIK_6500.webp"
+      ]
+    },
+    {
+      "title": "Lillian - Black & White",
+      "slug": "lillian-black-and-white",
+      "coverImage": "/images/uploads/NIK_6540.webp",
+      "description": "Black and white portraits of Lillian",
+      "images": [
+        "/images/uploads/NIK_6540.webp",
+        "/images/uploads/NIK_6542.webp",
+        "/images/uploads/NIK_6563.webp"
+      ]
+    }
+  ]
 }
