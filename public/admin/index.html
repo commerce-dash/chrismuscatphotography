@@ -470,11 +470,22 @@
       const getUploadsDir = async () => {
         let h = await idbGet(HANDLE_KEY);
         if (h) {
-          if ((await h.queryPermission({ mode: 'read' })) === 'granted') return h;
-          if ((await h.requestPermission({ mode: 'read' })) === 'granted') return h;
+          try {
+            if ((await h.queryPermission({ mode: 'read' })) === 'granted') return h;
+            if ((await h.requestPermission({ mode: 'read' })) === 'granted') return h;
+          } catch (e) {
+            // Handle stale handle (folder moved/renamed) — clear and re-prompt
+            if (e.name === 'NotFoundError' || e.name === 'SecurityError') {
+              console.log('Folder handle stale, clearing...');
+              await idbDelete(HANDLE_KEY);
+              h = null;
+            } else {
+              throw e;
+            }
+          }
         }
         try {
-          h = await showDirectoryPicker({ id: 'uploads' });
+          h = await showDirectoryPicker();
         } catch (e) {
           throw new Error(
             `Folder picker failed (${e.name === 'AbortError' ? 'cancelled' : e.message})`
@@ -508,9 +519,15 @@
           setSyncStatus('Reading local folder…', true);
           const dir = await getUploadsDir();
           const files = [];
-          for await (const entry of dir.values()) {
-            if (entry.kind === 'file' && IMG_RE.test(entry.name))
-              files.push(entry);
+          try {
+            for await (const entry of dir.values()) {
+              if (entry.kind === 'file' && IMG_RE.test(entry.name))
+                files.push(entry);
+            }
+          } catch (e) {
+            throw new Error(
+              `Folder iteration failed (${e.name === 'NotFoundError' ? 'folder moved/deleted' : e.message}). Click Clear folder and select again.`
+            );
           }
           if (!files.length) {
             setSyncStatus('No image files found in that folder.', true);
@@ -984,8 +1001,12 @@
         document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
         document.getElementById('push-local-btn').addEventListener('click', uploadLocal);
         document.getElementById('clear-folder-btn').addEventListener('click', async () => {
-          await idbDelete(HANDLE_KEY);
-          setSyncStatus('Folder handle cleared — click Push local folder to select again.', true);
+          try {
+            await idbDelete(HANDLE_KEY);
+            setSyncStatus('Folder handle cleared. Click Push local folder to select the new location.', true);
+          } catch (e) {
+            setSyncStatus(`Failed to clear folder: ${e.message}`, true);
+          }
         });
 
         const hideToggle = document.getElementById('hide-assigned');
