@@ -1568,3 +1568,116 @@ button {
     border-radius: 50%;
   }
 }
+
+/* ============================================================
+   Private gallery login
+   ============================================================ */
+
+.private-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.private-login__container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.private-login__container h1 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 5vw, 36px);
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.private-login__container p {
+  color: var(--ink-dim);
+  margin-bottom: 24px;
+}
+
+.private-login__input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.private-login__input:focus {
+  outline: none;
+  border-color: var(--ink-dim);
+}
+
+.private-login__error {
+  color: #d9553c;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.private-login__button {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.private-login__button:hover {
+  background: var(--ink-dim);
+}
+
+.private-gallery {
+  padding: calc(var(--nav-h) + var(--gutter)) var(--gutter) var(--gutter);
+}
+
+.private-gallery h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 6vw, 48px);
+  margin-bottom: 12px;
+}
+
+.private-gallery p {
+  color: var(--ink-dim);
+  margin-bottom: 32px;
+}
+
+.private-gallery__empty {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.private-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.private-gallery__card {
+  cursor: pointer;
+}
+
+.private-gallery__card h2 {
+  font-family: var(--serif);
+  font-size: 18px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.private-gallery__card p {
+  font-size: 14px;
+  color: var(--ink-dim);
+  margin-bottom: 0;
+}

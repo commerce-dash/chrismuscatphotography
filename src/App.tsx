@@ -8,6 +8,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { Private } from './pages/Private';
 import { Project } from './pages/Project';
 import { Search } from './pages/Search';
 import { Work } from './pages/Work';
@@ -18,6 +19,7 @@ function renderRoute(path: string) {
   if (path === '/about') return <About />;
   if (path === '/search') return <Search />;
   if (path === '/contact') return <Contact />;
+  if (path === '/private') return <Private />;
 
   const m = path.match(/^\/work\/([\w-]+)$/);
   if (m) return <Project slug={m[1]} />;
