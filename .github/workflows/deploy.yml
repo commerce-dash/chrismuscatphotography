@@ -21,6 +21,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout private images repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.PRIVATE_IMAGES_REPO }}
+          token: ${{ secrets.PRIVATE_IMAGES_TOKEN }}
+          path: private-images
+
+      - name: Copy private images to public
+        run: |
+          if [ -d "private-images/public/images" ]; then
+            mkdir -p public/images
+            cp -r private-images/public/images/* public/images/
+            echo "Copied private images to public/images/"
+          else
+            echo "No private images found in private-images/public/images/"
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

@@ -5,3 +5,9 @@ dist-ssr
 .env
 .DS_Store
 Thumbs.db
+
+# Images are stored in private repository
+public/images/
+
+# Private images checkout (optional)
+private-images/
