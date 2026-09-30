@@ -112,6 +112,16 @@
         "/images/uploads/NIK_7236.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "offset",
+      "side": "left",
+      "images": [
+        "/images/uploads/dsc_2770.webp",
+        "/images/uploads/dsc_2824.webp",
+        "/images/uploads/dsc_2842.webp"
+      ],
+      "caption": "The Early November"
     }
   ]
 }
