@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alt Text Entry</title>
+  <style>
+    body { font-family: system-ui; padding: 20px; background: #1a1a1a; color: #eee; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: #2a2a2a; padding: 12px; border-radius: 8px; }
+    img { width: 100%; display: block; margin-bottom: 10px; aspect-ratio: 2/3; object-fit: cover; background: #333; }
+    label { display: block; font-size: 11px; margin-bottom: 5px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+    input { width: 100%; padding: 8px; background: #333; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 13px; }
+    input:focus { outline: none; border-color: #4a6cf7; }
+    button { margin-top: 20px; padding: 12px 24px; background: #4a6cf7; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; }
+    button:hover { background: #3a5ce7; }
+    .status { margin: 20px 0; padding: 15px; background: #333; border-radius: 8px; max-width: 600px; }
+    .info { color: #888; font-size: 13px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Alt Text Entry</h1>
+  <p class="status" id="status">Loading images...</p>
+  <div class="grid" id="grid"></div>
+  <button onclick="exportJSON()">Export JSON</button>
+  <script>
+    let images = [];
+    const grid = document.getElementById('grid');
+    const status = document.getElementById('status');
+
+    async function loadImages() {
+      try {
+        const res = await fetch('https://api.github.com/repos/commerce-dash/chrismuscatphotography/git/trees/main?recursive=1');
+        const tree = await res.json();
+        const uploads = (tree.tree || [])
+          .map((n) => n.path)
+          .filter((p) => p.startsWith('public/images/uploads/') && !p.includes('generated'))
+          .map((p) => p.split('/').pop());
+        
+        const altRes = await fetch('https://api.github.com/repos/commerce-dash/chrismuscatphotography/contents/content/image-alt.json?ref=main');
+        const altData = await altRes.json();
+        const alts = JSON.parse(atob(altData.content.replace(/\n/g, ''))).alts || {};
+        
+        images = uploads.filter(f => !alts[`uploads/${f.replace(/\.(webp|jpe?g|png|avif|gif)$/i, '')}`]);
+        
+        status.textContent = `${images.length} images missing alt text. Describe each one below (5-15 words each).`;
+        
+        images.forEach(f => {
+          const div = document.createElement('div');
+          div.className = 'card';
+          const cleanName = f.replace(/[^a-z0-9-]/gi, '-');
+          div.innerHTML = `
+            <img src="/images/uploads/${f}" alt="${f}" loading="lazy">
+            <label>${f}</label>
+            <input type="text" id="alt-${cleanName}" placeholder="Describe what you see (5-15 words)">
+          `;
+          grid.appendChild(div);
+        });
+      } catch (e) {
+        status.textContent = `Error loading images: ${e.message}`;
+      }
+    }
+
+    function exportJSON() {
+      const alts = {};
+      let filled = 0;
+      images.forEach(f => {
+        const cleanName = f.replace(/[^a-z0-9-]/gi, '-');
+        const input = document.getElementById(`alt-${cleanName}`);
+        if (input.value.trim()) {
+          alts[`uploads/${f.replace(/\.(webp|jpe?g|png|avif|gif)$/i, '')}`] = input.value.trim();
+          filled++;
+        }
+      });
+      if (filled === 0) {
+        alert('No alt text entered. Please describe at least one image.');
+        return;
+      }
+      const blob = new Blob([JSON.stringify({ alts }, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'alt-new.json';
+      a.click();
+      status.textContent = `Exported ${filled} alt texts. Share this file with Devin to merge into the site.`;
+    }
+
+    loadImages();
+  </script>
+</body>
+</html>

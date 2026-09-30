@@ -488,6 +488,37 @@
         return btoa(s);
       };
 
+      const checkAlt = async () => {
+        try {
+          const headers = { Accept: 'application/vnd.github+json' };
+          const token = await findGhToken();
+          if (!token) throw new Error('not signed in');
+          headers.Authorization = `Bearer ${token}`;
+          const data = await (
+            await fetch(
+              `https://api.github.com/repos/${SYNC_REPO}/contents/content/image-alt.json?ref=main`,
+              { headers }
+            )
+          ).json();
+          const alts = JSON.parse(atob(String(data.content).replace(/\n/g, ''))).alts || {};
+          const tree = await (
+            await fetch(
+              `https://api.github.com/repos/${SYNC_REPO}/git/trees/main?recursive=1`,
+              { headers }
+            )
+          ).json();
+          const images = (tree.tree || [])
+            .map((n) => n.path)
+            .filter((p) => p.startsWith('public/images/uploads/') && !p.includes('generated'))
+            .map((p) => p.split('/').pop().replace(/\.(webp|jpe?g|png|avif|gif)$/i, ''));
+          const altKeys = Object.keys(alts).map(k => k.replace('uploads/', '').replace(/\.(webp|jpe?g|png|avif|gif)$/i, ''));
+          const missing = images.filter((f) => !altKeys.includes(f));
+          setSyncStatus(`${images.length} total images, ${missing.length} missing alt text`, true);
+        } catch (e) {
+          setSyncStatus(`Alt check failed: ${e.message}`, true);
+        }
+      };
+
       const uploadLocal = async () => {
         const btn = document.getElementById('push-local-btn');
         btn.disabled = true;
@@ -707,6 +738,7 @@
           .replace(/-\d{3,4}$/, '');
 
       const inUse = new Set();
+      const altMap = new Set();
       // Images picked in the editor during this session — the committed
       // JSONs only update on save, so these are merged in on every refetch.
       const sessionAssigned = new Set();
@@ -733,7 +765,7 @@
             .map((n) => n.path)
             .filter(
               (p) =>
-                /^content\/(projects\/[^/]+|site|about)\.json$/.test(p)
+                /^content\/(projects\/[^/]+|site|about|image-alt)\.json$/.test(p)
             );
           // Contents API (not raw.githubusercontent) so post-save refetches
           // aren't served a stale cached copy.
@@ -747,10 +779,12 @@
                     { headers }
                   )
                 ).json();
-                collect(
-                  JSON.parse(atob(String(data.content).replace(/\n/g, ''))),
-                  fresh
-                );
+                const content = JSON.parse(atob(String(data.content).replace(/\n/g, '')));
+                if (p === 'content/image-alt.json') {
+                  Object.keys(content.alts || {}).forEach((k) => altMap.add(k.replace('uploads/', '').replace(/\.(webp|jpe?g|png|avif|gif)$/i, '')));
+                } else {
+                  collect(content, fresh);
+                }
               } catch {}
             })
           );
@@ -942,12 +976,13 @@
               font: 600 12px/1 'Segoe UI', system-ui, sans-serif;
               letter-spacing: 0.08em; text-transform: uppercase;
             }
-            #sync-media-btn { bottom: 20px; }
-            #push-local-btn { bottom: 64px; }
-            #sync-media-btn:hover, #push-local-btn:hover { background: #33302a; }
-            #sync-media-btn:disabled, #push-local-btn:disabled { opacity: 0.5; cursor: default; }
+            #sync-media-btn { bottom: 64px; }
+            #push-local-btn { bottom: 108px; }
+            #check-alt-btn { bottom: 20px; background: #5c3a2e; }
+            #sync-media-btn:hover, #push-local-btn:hover, #check-alt-btn:hover { background: #33302a; }
+            #sync-media-btn:disabled, #push-local-btn:disabled, #check-alt-btn:disabled { opacity: 0.5; cursor: default; }
             #sync-media-status {
-              position: fixed; right: 20px; bottom: 108px; z-index: 99999;
+              position: fixed; right: 20px; bottom: 152px; z-index: 99999;
               max-width: 280px; padding: 8px 14px; border-radius: 8px;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 12px/1.4 'Segoe UI', system-ui, sans-serif;
@@ -977,12 +1012,14 @@
           <label id="hide-assigned-wrap" title="Hide images already assigned to a gallery">
             <input type="checkbox" id="hide-assigned"> Hide assigned
           </label>
+          <button id="check-alt-btn" type="button" title="Check how many images are missing alt text">🔍 Check alt</button>
           <button id="push-local-btn" type="button" title="Commit new files from your local uploads folder to the repo, then sync">⇪ Push local folder</button>
           <button id="sync-media-btn" type="button" title="Optimize new uploads, regenerate image sizes, redeploy">↻ Sync media</button>
         `;
         document.body.appendChild(wrap);
         document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
         document.getElementById('push-local-btn').addEventListener('click', uploadLocal);
+        document.getElementById('check-alt-btn').addEventListener('click', checkAlt);
 
         const hideToggle = document.getElementById('hide-assigned');
         hideToggle.checked = localStorage.getItem('cmp-hide-assigned') === '1';
