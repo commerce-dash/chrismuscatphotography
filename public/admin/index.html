@@ -468,31 +468,16 @@
       };
 
       const getUploadsDir = async () => {
-        let h = await idbGet(HANDLE_KEY);
-        if (h) {
-          try {
-            if ((await h.queryPermission({ mode: 'read' })) === 'granted') return h;
-            if ((await h.requestPermission({ mode: 'read' })) === 'granted') return h;
-          } catch (e) {
-            // Handle stale handle (folder moved/renamed) — clear and re-prompt
-            if (e.name === 'NotFoundError' || e.name === 'SecurityError') {
-              console.log('Folder handle stale, clearing...');
-              await idbDelete(HANDLE_KEY);
-              h = null;
-            } else {
-              throw e;
-            }
-          }
-        }
+        // Always prompt fresh — don't remember the handle to avoid stale paths
         try {
-          h = await showDirectoryPicker();
+          const h = await showDirectoryPicker();
+          await idbSet(HANDLE_KEY, h);
+          return h;
         } catch (e) {
           throw new Error(
             `Folder picker failed (${e.name === 'AbortError' ? 'cancelled' : e.message})`
           );
         }
-        await idbSet(HANDLE_KEY, h);
-        return h;
       };
 
       const bufToBase64 = (buf) => {
@@ -950,20 +935,19 @@
         const wrap = document.createElement('div');
         wrap.innerHTML = `
           <style>
-            #sync-media-btn, #push-local-btn, #clear-folder-btn {
+            #sync-media-btn, #push-local-btn {
               position: fixed; right: 20px; z-index: 99999;
               padding: 10px 18px; border-radius: 999px; cursor: pointer;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 600 12px/1 'Segoe UI', system-ui, sans-serif;
               letter-spacing: 0.08em; text-transform: uppercase;
             }
-            #sync-media-btn { bottom: 108px; }
-            #push-local-btn { bottom: 152px; }
-            #clear-folder-btn { bottom: 196px; background: #444; }
-            #sync-media-btn:hover, #push-local-btn:hover, #clear-folder-btn:hover { background: #33302a; }
-            #sync-media-btn:disabled, #push-local-btn:disabled, #clear-folder-btn:disabled { opacity: 0.5; cursor: default; }
+            #sync-media-btn { bottom: 20px; }
+            #push-local-btn { bottom: 64px; }
+            #sync-media-btn:hover, #push-local-btn:hover { background: #33302a; }
+            #sync-media-btn:disabled, #push-local-btn:disabled { opacity: 0.5; cursor: default; }
             #sync-media-status {
-              position: fixed; right: 20px; bottom: 20px; z-index: 99999;
+              position: fixed; right: 20px; bottom: 108px; z-index: 99999;
               max-width: 280px; padding: 8px 14px; border-radius: 8px;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
               font: 12px/1.4 'Segoe UI', system-ui, sans-serif;
@@ -979,7 +963,7 @@
             }
             .cmp-hide-assigned .in-gallery-assigned { display: none !important; }
             #hide-assigned-wrap {
-              position: fixed; left: 20px; bottom: 64px; z-index: 99999;
+              position: fixed; left: 20px; bottom: 20px; z-index: 99999;
               display: flex; align-items: center; gap: 7px;
               padding: 10px 16px; border-radius: 999px; cursor: pointer;
               background: #26241f; color: #ece8e0; border: 1px solid #4a463e;
@@ -994,20 +978,11 @@
             <input type="checkbox" id="hide-assigned"> Hide assigned
           </label>
           <button id="push-local-btn" type="button" title="Commit new files from your local uploads folder to the repo, then sync">⇪ Push local folder</button>
-          <button id="clear-folder-btn" type="button" title="Clear saved folder handle (use after moving your uploads folder)">✕ Clear folder</button>
           <button id="sync-media-btn" type="button" title="Optimize new uploads, regenerate image sizes, redeploy">↻ Sync media</button>
         `;
         document.body.appendChild(wrap);
         document.getElementById('sync-media-btn').addEventListener('click', syncMedia);
         document.getElementById('push-local-btn').addEventListener('click', uploadLocal);
-        document.getElementById('clear-folder-btn').addEventListener('click', async () => {
-          try {
-            await idbDelete(HANDLE_KEY);
-            setSyncStatus('Folder handle cleared. Click Push local folder to select the new location.', true);
-          } catch (e) {
-            setSyncStatus(`Failed to clear folder: ${e.message}`, true);
-          }
-        });
 
         const hideToggle = document.getElementById('hide-assigned');
         hideToggle.checked = localStorage.getItem('cmp-hide-assigned') === '1';
