@@ -32,7 +32,7 @@ jobs:
         run: |
           if [ -d "private-images/public/images" ]; then
             mkdir -p public/images
-            cp -r private-images/public/images/* public/images/
+            rsync -av --delete private-images/public/images/ public/
             echo "Copied private images to public/images/"
           else
             echo "No private images found in private-images/public/images/"
