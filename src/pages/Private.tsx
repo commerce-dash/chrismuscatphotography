@@ -88,6 +88,30 @@ export function Private() {
 
   // If a gallery is selected, show its images
   if (selectedGallery) {
+    // Prevent right-click and drag on images
+    useEffect(() => {
+      const handleContextMenu = (e: MouseEvent) => {
+        e.preventDefault();
+      };
+
+      const handleDragStart = (e: DragEvent) => {
+        e.preventDefault();
+      };
+
+      const images = document.querySelectorAll('.private-gallery img');
+      images.forEach((img) => {
+        img.addEventListener('contextmenu', handleContextMenu);
+        img.addEventListener('dragstart', handleDragStart);
+      });
+
+      return () => {
+        images.forEach((img) => {
+          img.removeEventListener('contextmenu', handleContextMenu);
+          img.removeEventListener('dragstart', handleDragStart);
+        });
+      };
+    }, [selectedGallery]);
+
     return (
       <div className="private-gallery">
         <button
@@ -107,6 +131,7 @@ export function Private() {
                 alt={`${selectedGallery.title} ${index + 1}`}
                 width={600}
                 height={400}
+                style={{ pointerEvents: 'none' }}
               />
             </Reveal>
           ))}
