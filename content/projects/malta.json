@@ -140,6 +140,25 @@
         "/images/uploads/DSC_4893-Edit.webp"
       ],
       "caption": ""
+    },
+    {
+      "layout": "pair",
+      "side": "left",
+      "images": [
+        "/images/uploads/DSC_4774-Edit.webp",
+        "/images/uploads/DSC_4767-Edit.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "trio",
+      "side": "right",
+      "images": [
+        "/images/uploads/DSC_4834.webp",
+        "/images/uploads/DSC_4825.webp",
+        "/images/uploads/DSC_4800-Edit.webp"
+      ],
+      "caption": ""
     }
   ]
 }
