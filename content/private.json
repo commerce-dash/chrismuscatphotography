@@ -4,16 +4,20 @@
     {
       "title": "Lillian - Color",
       "slug": "lillian-color",
-      "coverImage": "/images/uploads/NIK_6494.webp",
+      "coverImage": "/images/uploads/DSC_2944.webp",
       "description": "Color portraits of Lillian",
-      "images": []
+      "images": [
+        "/images/uploads/DSC_2562.webp"
+      ]
     },
     {
       "title": "Lillian - Black & White",
       "slug": "lillian-black-and-white",
       "coverImage": "/images/uploads/NIK_6540.webp",
       "description": "Black and white portraits of Lillian",
-      "images": []
+      "images": [
+        "/images/uploads/NIK_3637.webp"
+      ]
     }
   ]
 }
