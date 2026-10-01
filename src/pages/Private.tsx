@@ -20,6 +20,7 @@ export function Private() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [data, setData] = useState<PrivateData | null>(null);
+  const [selectedGallery, setSelectedGallery] = useState<PrivateGallery | null>(null);
 
   // Prevent indexing and add security headers
   useEffect(() => {
@@ -85,6 +86,36 @@ export function Private() {
     );
   }
 
+  // If a gallery is selected, show its images
+  if (selectedGallery) {
+    return (
+      <div className="private-gallery">
+        <button
+          onClick={() => setSelectedGallery(null)}
+          className="private-gallery__back"
+          style={{ marginBottom: '24px', cursor: 'pointer', background: 'none', border: 'none', fontSize: '16px' }}
+        >
+          Back to galleries
+        </button>
+        <h1>{selectedGallery.title}</h1>
+        {selectedGallery.description && <p>{selectedGallery.description}</p>}
+        <div className="private-gallery__grid">
+          {selectedGallery.images.map((image, index) => (
+            <Reveal key={index} className="private-gallery__card">
+              <OptimizedImage
+                src={image}
+                alt={`${selectedGallery.title} ${index + 1}`}
+                width={600}
+                height={400}
+              />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Show gallery list
   return (
     <div className="private-gallery">
       <h1>{data.title}</h1>
@@ -94,7 +125,12 @@ export function Private() {
       ) : (
         <div className="private-gallery__grid">
           {data.galleries.map((gallery) => (
-            <Reveal key={gallery.slug} className="private-gallery__card">
+            <Reveal
+              key={gallery.slug}
+              className="private-gallery__card"
+              onClick={() => setSelectedGallery(gallery)}
+              style={{ cursor: 'pointer' }}
+            >
               <OptimizedImage
                 src={gallery.coverImage}
                 alt={gallery.title}
