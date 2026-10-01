@@ -127,7 +127,19 @@
       "side": "left",
       "images": [
         "/images/uploads/NIK_9511.webp",
-        "/images/uploads/NIK_9095.webp"
+        "/images/uploads/NIK_9095.webp",
+        "/images/uploads/NIK_7321.webp",
+        "/images/uploads/NIK_7407-Edit.webp",
+        "/images/uploads/NIK_7599.webp",
+        "/images/uploads/NIK_7659.webp"
+      ],
+      "caption": ""
+    },
+    {
+      "layout": "full",
+      "side": "left",
+      "images": [
+        "/images/uploads/NIK_1169.webp"
       ],
       "caption": ""
     },
