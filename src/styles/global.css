@@ -1681,3 +1681,16 @@ button {
   color: var(--ink-dim);
   margin-bottom: 0;
 }
+
+/* Prevent downloads on private gallery images */
+.private-gallery img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
